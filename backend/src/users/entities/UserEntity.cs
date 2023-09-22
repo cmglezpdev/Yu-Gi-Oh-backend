@@ -1,15 +1,11 @@
-using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-
+using backend.database;
+using backend.localization;
 namespace backend.users;
 
 [Table("users")]
-public class User
+public class User : PlatformModel
 {
-  [Key]
-  [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-  public required Guid Id { get; set; }
-
   [Column(TypeName = "varchar(100)")]
   public required string Name { get; set; }
 

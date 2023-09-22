@@ -15,7 +15,5 @@ public class AppDbContext : DbContext
   protected override void OnModelCreating(ModelBuilder modelBuilder)
   {
     base.OnModelCreating(modelBuilder);
-    modelBuilder.Entity<PlatformModel>().Property(p => p.CreatedAt).HasDefaultValueSql("NOW()");
-    modelBuilder.Entity<PlatformModel>().Property(p => p.UpdatedAt).HasDefaultValueSql("NOW()").ValueGeneratedOnAddOrUpdate();
   }
 }

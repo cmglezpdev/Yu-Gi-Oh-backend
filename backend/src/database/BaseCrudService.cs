@@ -1,3 +1,4 @@
+using System.Linq.Expressions;
 using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 namespace backend.database;
@@ -13,18 +14,30 @@ public abstract class BaseCrudService<Entity, ModelDto> where Entity : PlatformM
     _mapper = mapper;
   }
 
-  public async Task<IEnumerable<Entity>> GetAllAsync()
+  public virtual async Task<IEnumerable<Entity>> GetAllAsync(params Expression<Func<Entity, object>>[] relationships)
   {
-    return await _context.Set<Entity>().ToListAsync();
+    IQueryable<Entity> query = _context.Set<Entity>();
+    foreach (var relationship in relationships)
+    {
+      query = query.Include(relationship);
+    }
+
+    return await query.ToListAsync();
   }
 
-  public async Task<Entity> GetByIdAsync(Guid Id)
+  public virtual async Task<Entity> GetByIdAsync(Guid Id, params Expression<Func<Entity, object>>[] relationships)
   {
-    var item = await _context.Set<Entity>().FindAsync(Id) ?? throw new BadHttpRequestException($"Item with id {Id} not found.");
+    IQueryable<Entity> query = _context.Set<Entity>().Where(e => e.Id == Id);
+    foreach (var relationship in relationships)
+    {
+      query = query.Include(relationship);
+    }
+
+    var item = await query.FirstOrDefaultAsync() ?? throw new BadHttpRequestException($"Item with id {Id} not found.");
     return item;
   }
 
-  public async Task<Entity> CreateAsync(ModelDto createEntityDto)
+  public virtual async Task<Entity> CreateAsync(ModelDto createEntityDto)
   {
     Entity entity = _mapper.Map<Entity>(createEntityDto);
     _context.Set<Entity>().Add(entity);
@@ -32,7 +45,7 @@ public abstract class BaseCrudService<Entity, ModelDto> where Entity : PlatformM
     return entity;
   }
 
-  public async Task<Entity> UpdateAsync(Guid Id, ModelDto updateEntityDto)
+  public virtual async Task<Entity> UpdateAsync(Guid Id, ModelDto updateEntityDto)
   {
     Entity entity = await GetByIdAsync(Id);
     _mapper.Map(updateEntityDto, entity);
@@ -40,7 +53,7 @@ public abstract class BaseCrudService<Entity, ModelDto> where Entity : PlatformM
     return entity;
   }
 
-  public async Task<Entity> DeleteAsync(Guid Id)
+  public virtual async Task<Entity> DeleteAsync(Guid Id)
   {
     Entity entity = await GetByIdAsync(Id);
     _context.Set<Entity>().Remove(entity);

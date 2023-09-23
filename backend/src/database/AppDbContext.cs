@@ -15,5 +15,13 @@ public class AppDbContext : DbContext
   protected override void OnModelCreating(ModelBuilder modelBuilder)
   {
     base.OnModelCreating(modelBuilder);
+    foreach (var entityType in modelBuilder.Model.GetEntityTypes())
+    {
+      if (entityType.ClrType.IsSubclassOf(typeof(PlatformModel)))
+      {
+        modelBuilder.Entity(entityType.Name).Property<DateTime>("CreatedAt").HasDefaultValueSql("NOW()");
+        modelBuilder.Entity(entityType.Name).Property<DateTime>("UpdatedAt").HasDefaultValueSql("NOW()").ValueGeneratedOnAddOrUpdate();
+      }
+    }
   }
 }

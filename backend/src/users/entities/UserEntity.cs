@@ -1,9 +1,11 @@
 using System.ComponentModel.DataAnnotations.Schema;
 using backend.database;
 using backend.localization;
+using Microsoft.EntityFrameworkCore;
 namespace backend.users;
 
 [Table("users")]
+[Index(nameof(Email), IsUnique = true)]
 public class User : PlatformModel
 {
   [Column(TypeName = "varchar(100)")]

@@ -1,0 +1,79 @@
+{
+  "format": 1,
+  "restore": {
+    "/home/jorgito/MATCOM/Pro/Proyecto_Yu-Gi-Oh/Yu-Gi-Oh-tournaments/scraper/scraper.csproj": {}
+  },
+  "projects": {
+    "/home/jorgito/MATCOM/Pro/Proyecto_Yu-Gi-Oh/Yu-Gi-Oh-tournaments/scraper/scraper.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/home/jorgito/MATCOM/Pro/Proyecto_Yu-Gi-Oh/Yu-Gi-Oh-tournaments/scraper/scraper.csproj",
+        "projectName": "scraper",
+        "projectPath": "/home/jorgito/MATCOM/Pro/Proyecto_Yu-Gi-Oh/Yu-Gi-Oh-tournaments/scraper/scraper.csproj",
+        "packagesPath": "/home/jorgito/.nuget/packages/",
+        "outputPath": "/home/jorgito/MATCOM/Pro/Proyecto_Yu-Gi-Oh/Yu-Gi-Oh-tournaments/scraper/obj/",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "/home/jorgito/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net7.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net7.0": {
+            "targetAlias": "net7.0",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net7.0": {
+          "targetAlias": "net7.0",
+          "dependencies": {
+            "HtmlAgilityPack": {
+              "target": "Package",
+              "version": "[1.11.54, )"
+            },
+            "HtmlAgilityPack.CssSelectors": {
+              "target": "Package",
+              "version": "[1.0.2, )"
+            },
+            "Newtonsoft.Json": {
+              "target": "Package",
+              "version": "[13.0.3, )"
+            },
+            "ScrapySharp": {
+              "target": "Package",
+              "version": "[3.0.0, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "/usr/lib/dotnet/sdk/7.0.111/RuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}

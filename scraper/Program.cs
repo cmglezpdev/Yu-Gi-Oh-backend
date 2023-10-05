@@ -10,6 +10,8 @@ namespace Scraper
         {
             using (var client = new HttpClient())
             {
+                //string url = "https://db.ygoprodeck.com/api/v7/cardinfo.php?name=Dark Magician";
+
                 string url = "https://db.ygoprodeck.com/api/v7/cardinfo.php";
 
                 client.DefaultRequestHeaders.Clear();
@@ -40,8 +42,9 @@ namespace Scraper
 
                 var newJson = new JArray(listCardJson).ToString();
 
-                string path = "/";
-                File.WriteAllText(path,newJson);
+
+                string fileName = "Card.json"; 
+                File.WriteAllText(fileName, newJson);
             }
         }
     }

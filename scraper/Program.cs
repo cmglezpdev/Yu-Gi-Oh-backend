@@ -17,9 +17,31 @@ namespace Scraper
                 var response = client.GetAsync(url).Result;
 
                 var res = response.Content.ReadAsStringAsync().Result;
-                dynamic r = JObject.Parse(res);
+                var originalJson = JObject.Parse(res);
 
-                System.Console.WriteLine(r);
+                var listCardJson = new List<JObject>();
+
+                foreach(var card in originalJson["data"])
+                {
+                    var cardJson = new JObject();
+                    cardJson["name"] = card["name"];
+                    cardJson["type"] = card["type"];
+                    cardJson["frameType"] = card["frameType"];
+                    cardJson["desc"] = card["desc"];
+                    cardJson["atk"] = card["atk"];
+                    cardJson["def"] = card["def"];
+                    cardJson["level"] = card["level"];
+                    cardJson["race"] = card["race"];
+                    cardJson["attribute"] = card["attribute"];
+                    cardJson["card_images"] = card["card_images"];
+
+                    listCardJson.Add(cardJson);
+                }
+
+                var newJson = new JArray(listCardJson).ToString();
+
+                string path = "/";
+                File.WriteAllText(path,newJson);
             }
         }
     }

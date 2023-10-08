@@ -38,7 +38,6 @@ namespace Scraper
                     cardJson["level"] = card["level"];
                 }
                 cardJson["race"] = card["race"];
-                cardJson["arquetype"] = card["arquetype"];
                 if(if_monster)
                 {
                     cardJson["attribute"] = card["attribute"];

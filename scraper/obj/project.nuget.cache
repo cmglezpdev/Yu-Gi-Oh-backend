@@ -1,18 +1,18 @@
 {
   "version": 2,
-  "dgSpecHash": "I24UmQMpwySEykUKLzZ2OVhZAbBMdR9bnO7jjlzLQNdBIiXA8GEXbDoV2vFHR9vqpaAVQN1pWRHUoGx2WK6pPg==",
+  "dgSpecHash": "Oxex6gSE9LEpbm6ID8V9XwlI1zu5vuFRXuFumhbth5cKltogKS3Gg593vKKE2667OurQX3y83WydfmdGHzv85Q==",
   "success": true,
-  "projectFilePath": "/home/jorgito/MATCOM/Pro/Proyecto_Yu-Gi-Oh/Yu-Gi-Oh-tournaments/scraper/scraper.csproj",
+  "projectFilePath": "D:\\MATCOM\\IS Proyecto\\Yu-Gi-Oh-backend\\scraper\\scraper.csproj",
   "expectedPackageFiles": [
-    "/home/jorgito/.nuget/packages/fsharp.core/4.5.2/fsharp.core.4.5.2.nupkg.sha512",
-    "/home/jorgito/.nuget/packages/htmlagilitypack/1.11.54/htmlagilitypack.1.11.54.nupkg.sha512",
-    "/home/jorgito/.nuget/packages/htmlagilitypack.cssselectors/1.0.2/htmlagilitypack.cssselectors.1.0.2.nupkg.sha512",
-    "/home/jorgito/.nuget/packages/microsoft.netcore.platforms/2.0.0/microsoft.netcore.platforms.2.0.0.nupkg.sha512",
-    "/home/jorgito/.nuget/packages/newtonsoft.json/13.0.3/newtonsoft.json.13.0.3.nupkg.sha512",
-    "/home/jorgito/.nuget/packages/scrapysharp/3.0.0/scrapysharp.3.0.0.nupkg.sha512",
-    "/home/jorgito/.nuget/packages/system.configuration.configurationmanager/4.5.0-preview1-26216-02/system.configuration.configurationmanager.4.5.0-preview1-26216-02.nupkg.sha512",
-    "/home/jorgito/.nuget/packages/system.runtime.caching/4.5.0-preview1-26216-02/system.runtime.caching.4.5.0-preview1-26216-02.nupkg.sha512",
-    "/home/jorgito/.nuget/packages/system.security.cryptography.protecteddata/4.5.0-preview1-26216-02/system.security.cryptography.protecteddata.4.5.0-preview1-26216-02.nupkg.sha512"
+    "C:\\Users\\User\\.nuget\\packages\\fsharp.core\\4.5.2\\fsharp.core.4.5.2.nupkg.sha512",
+    "C:\\Users\\User\\.nuget\\packages\\htmlagilitypack\\1.11.54\\htmlagilitypack.1.11.54.nupkg.sha512",
+    "C:\\Users\\User\\.nuget\\packages\\htmlagilitypack.cssselectors\\1.0.2\\htmlagilitypack.cssselectors.1.0.2.nupkg.sha512",
+    "C:\\Users\\User\\.nuget\\packages\\microsoft.netcore.platforms\\2.0.0\\microsoft.netcore.platforms.2.0.0.nupkg.sha512",
+    "C:\\Users\\User\\.nuget\\packages\\newtonsoft.json\\13.0.3\\newtonsoft.json.13.0.3.nupkg.sha512",
+    "C:\\Users\\User\\.nuget\\packages\\scrapysharp\\3.0.0\\scrapysharp.3.0.0.nupkg.sha512",
+    "C:\\Users\\User\\.nuget\\packages\\system.configuration.configurationmanager\\4.5.0-preview1-26216-02\\system.configuration.configurationmanager.4.5.0-preview1-26216-02.nupkg.sha512",
+    "C:\\Users\\User\\.nuget\\packages\\system.runtime.caching\\4.5.0-preview1-26216-02\\system.runtime.caching.4.5.0-preview1-26216-02.nupkg.sha512",
+    "C:\\Users\\User\\.nuget\\packages\\system.security.cryptography.protecteddata\\4.5.0-preview1-26216-02\\system.security.cryptography.protecteddata.4.5.0-preview1-26216-02.nupkg.sha512"
   ],
   "logs": [
     {

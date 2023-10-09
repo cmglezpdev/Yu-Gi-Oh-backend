@@ -1,6 +1,5 @@
-﻿using System.Net.Http;
-using Newtonsoft.Json.Linq;
-using System.Text;
+﻿using Newtonsoft.Json.Linq;
+using HtmlAgilityPack;
 
 namespace Scraper
 {
@@ -56,6 +55,23 @@ namespace Scraper
 
             File.WriteAllText(fileName, newJson);
         }
+        public static List<string> obtain_arquetypes()
+        {
+            var web = new HtmlWeb();
+            var document = web.Load("https://www.yugiohcardguide.com/yugioh-archetypes.html");
+
+            List<string> listArquetype = new List<string>();
+
+            var HTMLElements = document.DocumentNode.QuerySelectorAll(".col-12 li");
+           
+            foreach(var item in HTMLElements)
+            {
+                var link = HtmlEntity.DeEntitize(item.QuerySelector("a").InnerText);
+                string arquetype = link;
+                listArquetype.Add(arquetype);
+            }
+            return listArquetype;
+        }       
         static void Main(string[] args)
         {
             string url = "https://db.ygoprodeck.com/api/v7/cardinfo.php?type=spell%20card";
@@ -72,6 +88,8 @@ namespace Scraper
             fileName = "Monsters.json";
 
             create_json(fileName,url,true);
+
+            List<string> list_arquetype = obtain_arquetypes();
         }
     }
 }

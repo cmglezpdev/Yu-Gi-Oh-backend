@@ -106,7 +106,7 @@
         "runtime": {
           "lib/netstandard2.0/ScrapySharp.Core.dll": {
             "assemblyVersion": "1.0.0.0",
-            "fileVersion": "1.0.0.0"
+            "fileVersion": "0.0.0.0"
           },
           "lib/netstandard2.0/ScrapySharp.dll": {
             "assemblyVersion": "1.0.0.0",

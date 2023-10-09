@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "/home/jorgito/MATCOM/Pro/Proyecto_Yu-Gi-Oh/Yu-Gi-Oh-tournaments/scraper/scraper.csproj": {}
+    "D:\\MATCOM\\IS Proyecto\\Yu-Gi-Oh-backend\\scraper\\scraper.csproj": {}
   },
   "projects": {
-    "/home/jorgito/MATCOM/Pro/Proyecto_Yu-Gi-Oh/Yu-Gi-Oh-tournaments/scraper/scraper.csproj": {
+    "D:\\MATCOM\\IS Proyecto\\Yu-Gi-Oh-backend\\scraper\\scraper.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/home/jorgito/MATCOM/Pro/Proyecto_Yu-Gi-Oh/Yu-Gi-Oh-tournaments/scraper/scraper.csproj",
+        "projectUniqueName": "D:\\MATCOM\\IS Proyecto\\Yu-Gi-Oh-backend\\scraper\\scraper.csproj",
         "projectName": "scraper",
-        "projectPath": "/home/jorgito/MATCOM/Pro/Proyecto_Yu-Gi-Oh/Yu-Gi-Oh-tournaments/scraper/scraper.csproj",
-        "packagesPath": "/home/jorgito/.nuget/packages/",
-        "outputPath": "/home/jorgito/MATCOM/Pro/Proyecto_Yu-Gi-Oh/Yu-Gi-Oh-tournaments/scraper/obj/",
+        "projectPath": "D:\\MATCOM\\IS Proyecto\\Yu-Gi-Oh-backend\\scraper\\scraper.csproj",
+        "packagesPath": "C:\\Users\\User\\.nuget\\packages\\",
+        "outputPath": "D:\\MATCOM\\IS Proyecto\\Yu-Gi-Oh-backend\\scraper\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "/home/jorgito/.nuget/NuGet/NuGet.Config"
+          "C:\\Users\\User\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net7.0"
@@ -71,7 +71,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/lib/dotnet/sdk/7.0.111/RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.401\\RuntimeIdentifierGraph.json"
         }
       }
     }

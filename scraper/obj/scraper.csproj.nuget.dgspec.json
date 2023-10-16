@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\MATCOM\\IS Proyecto\\Yu-Gi-Oh-backend\\scraper\\scraper.csproj": {}
+    "D:\\MATCOM\\IS\\IS Proyecto\\Yu-Gi-Oh-backend\\scraper\\scraper.csproj": {}
   },
   "projects": {
-    "D:\\MATCOM\\IS Proyecto\\Yu-Gi-Oh-backend\\scraper\\scraper.csproj": {
+    "D:\\MATCOM\\IS\\IS Proyecto\\Yu-Gi-Oh-backend\\scraper\\scraper.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\MATCOM\\IS Proyecto\\Yu-Gi-Oh-backend\\scraper\\scraper.csproj",
+        "projectUniqueName": "D:\\MATCOM\\IS\\IS Proyecto\\Yu-Gi-Oh-backend\\scraper\\scraper.csproj",
         "projectName": "scraper",
-        "projectPath": "D:\\MATCOM\\IS Proyecto\\Yu-Gi-Oh-backend\\scraper\\scraper.csproj",
+        "projectPath": "D:\\MATCOM\\IS\\IS Proyecto\\Yu-Gi-Oh-backend\\scraper\\scraper.csproj",
         "packagesPath": "C:\\Users\\User\\.nuget\\packages\\",
-        "outputPath": "D:\\MATCOM\\IS Proyecto\\Yu-Gi-Oh-backend\\scraper\\obj\\",
+        "outputPath": "D:\\MATCOM\\IS\\IS Proyecto\\Yu-Gi-Oh-backend\\scraper\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\User\\AppData\\Roaming\\NuGet\\NuGet.Config"

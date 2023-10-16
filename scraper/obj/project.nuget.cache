@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "Oxex6gSE9LEpbm6ID8V9XwlI1zu5vuFRXuFumhbth5cKltogKS3Gg593vKKE2667OurQX3y83WydfmdGHzv85Q==",
+  "dgSpecHash": "rF2GOQANMj/K6PJBZ6+IN3KNJLK9foLt95bDxYKntWfo8X1n2gMaO1Wwv1FK9AhmJrR6JtVptBlddinNF7fq5A==",
   "success": true,
-  "projectFilePath": "D:\\MATCOM\\IS Proyecto\\Yu-Gi-Oh-backend\\scraper\\scraper.csproj",
+  "projectFilePath": "D:\\MATCOM\\IS\\IS Proyecto\\Yu-Gi-Oh-backend\\scraper\\scraper.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\User\\.nuget\\packages\\fsharp.core\\4.5.2\\fsharp.core.4.5.2.nupkg.sha512",
     "C:\\Users\\User\\.nuget\\packages\\htmlagilitypack\\1.11.54\\htmlagilitypack.1.11.54.nupkg.sha512",

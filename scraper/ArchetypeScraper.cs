@@ -7,16 +7,23 @@ namespace Scraper
     {
         public static List<JObject> cards(string url)
         {
-            var listCardJson = CardScraper.obtain_json(url);
-            
-            List<JObject> cards = new List<JObject>();
-            foreach(var card in listCardJson["data"])
+            try 
             {
-                var cardJson = new JObject();
-                cardJson["name"] = card["name"];
-                cards.Add(cardJson);
+                var listCardJson = CardScraper.obtain_json(url);
+                
+                List<JObject> cards = new List<JObject>();
+                foreach(var card in listCardJson["data"])
+                {
+                    var cardJson = new JObject();
+                    cardJson["name"] = card["name"];
+                    cards.Add(cardJson);
+                }
+                return cards;
             }
-            return cards;
+            catch
+            {
+                return new List<JObject>();
+            }
         }
         public static JObject arquetype_json(Dictionary<string,List<JObject>> cards)
         {

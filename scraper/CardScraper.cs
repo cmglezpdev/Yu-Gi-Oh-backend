@@ -72,7 +72,7 @@ namespace Scraper
             create_json(fileName,url,true);
             
             var arq = ArchetypeScraper.obtain_archetypes();
-            File.WriteAllText("Arquetype.json", ArchetypeScraper.arquetype_json(arq).ToString());
+            File.WriteAllText("Archetype.json", ArchetypeScraper.arquetype_json(arq).ToString());
         }
     }
 }

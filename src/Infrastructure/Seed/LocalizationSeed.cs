@@ -1,20 +1,28 @@
 using System.Text.Json;
+using AutoMapper;
+using backend.Domain.Entities;
 using backend.Infrastructure.Entities;
+using Microsoft.EntityFrameworkCore;
 namespace backend.Infrastructure.Seed;
 
 
 public class LocalizationSeed : ISeedCommand
 {
   private readonly AppDbContext context;
+  private readonly IMapper mapper;
 
-  public LocalizationSeed(AppDbContext context)
+  public LocalizationSeed(AppDbContext context, IMapper mapper)
   {
     this.context = context;
+    this.mapper = mapper;
   }
 
 
   public async Task<bool> Execute()
   {
+    var atLeastAProvince = await context.Provinces.FirstOrDefaultAsync();
+    if (atLeastAProvince != null) return true;
+
     try
     {
       string provinces = await File.ReadAllTextAsync(Path.Combine(Directory.GetCurrentDirectory(), "src", "Infrastructure", "Seed", "StaticData", "localizations.json"));
@@ -22,18 +30,13 @@ public class LocalizationSeed : ISeedCommand
 
       foreach (var localization in localizations)
       {
-        Province province = new Province()
+        ProvinceDomain province = new ProvinceDomain(localization.nombre);
+        foreach (var name in localization.municipios)
         {
-          Name = localization.nombre,
-          Municipalities = new List<Municipality>()
-        };
-
-        foreach (var municipality in localization.municipios)
-        {
-          province.Municipalities.Add(new Municipality() { Name = municipality });
+          province.AddMuncipality(new MunicipalityDomain(name));
         }
 
-        context.Provinces.Add(province);
+        context.Provinces.Add(mapper.Map<Province>(province));
         await context.SaveChangesAsync();
       }
       return true;

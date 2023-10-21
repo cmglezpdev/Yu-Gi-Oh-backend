@@ -1,0 +1,23 @@
+using System.ComponentModel.DataAnnotations.Schema;
+using backend.Infrastructure.Interfaces;
+using Microsoft.EntityFrameworkCore;
+namespace backend.Infrastructure.Entities;
+
+#pragma warning disable CS8618 // Non-nullable field is uninitialized. Consider declaring as nullable.
+[Table("users")]
+[Index(nameof(Email), IsUnique = true)]
+public class User : PlatformModel
+{
+  [Column(TypeName = "varchar(100)")]
+  public required string Name { get; set; }
+
+  [Column(TypeName = "varchar(100)")]
+  public required string Email { get; set; }
+
+  [Column(TypeName = "varchar(200)")]
+  public required string Password { get; set; }
+
+  [ForeignKey("MunicipalityId")]
+  public required Municipality Municipality { get; set; }
+  // municipality, role, deckId
+}

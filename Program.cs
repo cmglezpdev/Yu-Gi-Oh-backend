@@ -1,6 +1,9 @@
 using System.Text.Json.Serialization;
-using backend.database;
-using backend.localization;
+using backend.Application.Repositories;
+using backend.Application.Services;
+using backend.Infrastructure;
+using backend.Infrastructure.Repositories;
+using backend.Infrastructure.Seed;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -18,10 +21,16 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<AppDbContext>(options => options.UseNpgsql(builder.Configuration.GetConnectionString("yu-gi-oh-postgres-database")));
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
+// seeders
 builder.Services.AddScoped<ISeedCommand, LocalizationSeed>();
 
-builder.Services.AddScoped(typeof(ProvinceController));
-builder.Services.AddScoped(typeof(ProvinceService));
+// services
+builder.Services.AddScoped<ProvinceService>();
+builder.Services.AddScoped<MunicipalityService>();
+
+// repositories
+builder.Services.AddScoped<IProvinceRepository, ProvinceRepository>();
+builder.Services.AddScoped<IMunicipalityRepository, MunicipalityRepository>();
 
 
 var app = builder.Build();

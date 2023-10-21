@@ -1,6 +1,8 @@
 using Microsoft.AspNetCore.Mvc;
+using AutoMapper;
 using backend.Infrastructure.Entities;
 using backend.Application.Services;
+using backend.Presentation.DTOs;
 namespace backend.Presentation.Controllers;
 
 [ApiController]
@@ -8,22 +10,24 @@ namespace backend.Presentation.Controllers;
 public class ProvinceController : ControllerBase
 {
   private readonly ProvinceService _service;
-  public ProvinceController(ProvinceService service)
+  private readonly IMapper _mapper;
+  public ProvinceController(ProvinceService service, IMapper mapper)
   {
     _service = service;
+    _mapper = mapper;
   }
 
   [HttpGet]
   public async Task<ActionResult<IEnumerable<Province>>> GetAll()
   {
     var provinces = await _service.GetProvincesAsync();
-    return Ok(provinces);
+    return Ok(_mapper.Map<IEnumerable<ProvinceOutputDto>>(provinces));
   }
 
   [HttpGet("{id:Guid}")]
   public async Task<ActionResult<Province>> GetById(Guid Id)
   {
     var province = await _service.GetProvinceByIdAsync(Id);
-    return Ok(province);
+    return Ok(_mapper.Map<ProvinceOutputDto>(province));
   }
 }

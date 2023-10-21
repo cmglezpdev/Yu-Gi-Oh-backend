@@ -1,6 +1,6 @@
 using AutoMapper;
-using backend.localization;
-namespace backend.database;
+using backend.database;
+namespace backend.localization;
 
 public class ProvinceService : BaseCrudService<Province, ProvinceCreationDto>
 {

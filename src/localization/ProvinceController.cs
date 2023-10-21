@@ -1,6 +1,6 @@
-using backend.localization;
 using Microsoft.AspNetCore.Mvc;
-namespace backend.database;
+using backend.database;
+namespace backend.localization;
 
 public class ProvinceController : BaseCrudController<Province, ProvinceCreationDto>
 {

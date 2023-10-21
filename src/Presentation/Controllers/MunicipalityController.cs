@@ -1,6 +1,8 @@
-using Microsoft.AspNetCore.Mvc;
-using backend.database;
-namespace backend.localization;
+using backend.Presentation.Interfaces;
+using backend.Infraestructure.Entities;
+using backend.Presentation.DTOs;
+using backend.Application.Services;
+namespace backend.Presentation.Controllers;
 
 public class MunicipalityController : BaseCrudController<Municipality, MunicipalityCreationDto>
 {

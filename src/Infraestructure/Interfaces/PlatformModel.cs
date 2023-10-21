@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-namespace backend.database;
+namespace backend.Infraestructure.Interfaces;
 
 public abstract class PlatformModel
 {

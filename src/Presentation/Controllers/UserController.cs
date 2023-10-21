@@ -1,6 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
-namespace backend.users;
-
+namespace backend.Presentation.Controllers;
 
 [ApiController]
 [Route("/api/users")]

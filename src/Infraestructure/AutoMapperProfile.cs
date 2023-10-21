@@ -1,7 +1,7 @@
 using AutoMapper;
-using backend.localization;
-namespace backend.database;
-
+using backend.Infraestructure.Entities;
+using backend.Presentation.DTOs;
+namespace backend.Infraestructure;
 public class AutoMapperProfiles : Profile
 {
   public AutoMapperProfiles()

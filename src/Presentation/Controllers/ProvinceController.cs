@@ -1,6 +1,9 @@
 using Microsoft.AspNetCore.Mvc;
-using backend.database;
-namespace backend.localization;
+using backend.Infraestructure.Entities;
+using backend.Presentation.DTOs;
+using backend.Presentation.Interfaces;
+using backend.Application.Services;
+namespace backend.Presentation.Controllers;
 
 public class ProvinceController : BaseCrudController<Province, ProvinceCreationDto>
 {

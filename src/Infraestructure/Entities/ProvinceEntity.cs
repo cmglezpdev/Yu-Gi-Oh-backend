@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations.Schema;
-using backend.database;
-namespace backend.localization;
+using backend.Infraestructure.Interfaces;
+namespace backend.Infraestructure.Entities;
 
 [Table("provinces")]
 public class Province : PlatformModel

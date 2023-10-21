@@ -1,8 +1,8 @@
-using backend.localization;
-using backend.users;
 using Microsoft.EntityFrameworkCore;
+using backend.Infraestructure.Entities;
+using backend.Infraestructure.Interfaces;
 
-namespace backend.database;
+namespace backend.Infraestructure;
 
 public class AppDbContext : DbContext
 {

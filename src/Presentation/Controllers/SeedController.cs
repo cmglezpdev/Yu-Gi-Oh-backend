@@ -1,5 +1,6 @@
+using backend.Infraestructure.Seed;
 using Microsoft.AspNetCore.Mvc;
-namespace backend.database;
+namespace backend.Presentation.Controllers;
 
 
 [ApiController]

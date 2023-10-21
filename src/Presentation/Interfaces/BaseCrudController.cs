@@ -1,5 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
-namespace backend.database;
+using backend.Application.Interfaces;
+using backend.Infraestructure.Interfaces;
+namespace backend.Presentation.Interfaces;
 
 [ApiController]
 [Route("api/[controller]")]

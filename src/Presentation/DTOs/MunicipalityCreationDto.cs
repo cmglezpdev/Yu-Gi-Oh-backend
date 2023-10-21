@@ -1,6 +1,6 @@
-
 using System.ComponentModel.DataAnnotations;
-using backend.localization;
+using backend.Infraestructure.Entities;
+namespace backend.Presentation.DTOs;
 
 public class MunicipalityCreationDto
 {

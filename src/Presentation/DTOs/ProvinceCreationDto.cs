@@ -1,5 +1,5 @@
 using System.ComponentModel.DataAnnotations;
-namespace backend.localization;
+namespace backend.Presentation.DTOs;
 
 public class ProvinceCreationDto
 {

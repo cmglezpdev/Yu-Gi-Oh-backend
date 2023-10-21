@@ -1,6 +1,9 @@
 using AutoMapper;
-using backend.database;
-namespace backend.localization;
+using backend.Application.Interfaces;
+using backend.Infraestructure;
+using backend.Infraestructure.Entities;
+using backend.Presentation.DTOs;
+namespace backend.Application.Services;
 
 public class MunicipalityService : BaseCrudService<Municipality, MunicipalityCreationDto>
 {

@@ -56,20 +56,20 @@ namespace Scraper
         }  
         static void Main(string[] args)
         {
-            string url = "https://db.ygoprodeck.com/api/v7/cardinfo.php?type=spell%20card";
-            string fileName = "Spells.json"; 
+            // string url = "https://db.ygoprodeck.com/api/v7/cardinfo.php?type=spell%20card";
+            // string fileName = "Spells.json"; 
 
-            create_json(fileName,url,false);
+            // create_json(fileName,url,false);
 
-            url = "https://db.ygoprodeck.com/api/v7/cardinfo.php?type=trap%20card";
-            fileName = "Traps.json";
+            // url = "https://db.ygoprodeck.com/api/v7/cardinfo.php?type=trap%20card";
+            // fileName = "Traps.json";
 
-            create_json(fileName,url,false);
+            // create_json(fileName,url,false);
 
-            url = "https://db.ygoprodeck.com/api/v7/cardinfo.php?type=normal%20monster,effect%20monster,normal%20tuner%20monster,tuner%20monster,flip%20monster,flip%20effect%20monster,spirit%20monster,flip%20tuner%20effect%20monster,union%20effect%20monster,gemini%20monster,pendulum%20effect%20monster,pendulum%20normal%20monster,pendulum%20tuner%20effect%20monster,ritual%20monster,ritual%20effect%20monster,toon%20monster,fusion%20monster,synchro%20monster,synchro%20tuner%20monster,synchro%20pendulum%20effect%20monster,xyz%20monster,xyz%20pendulum%20effect%20monster,link%20monster,pendulum%20flip%20effect%20monster,pendulum%20effect%20fusion%20monster";   
-            fileName = "Monsters.json";
+            // url = "https://db.ygoprodeck.com/api/v7/cardinfo.php?type=normal%20monster,effect%20monster,normal%20tuner%20monster,tuner%20monster,flip%20monster,flip%20effect%20monster,spirit%20monster,flip%20tuner%20effect%20monster,union%20effect%20monster,gemini%20monster,pendulum%20effect%20monster,pendulum%20normal%20monster,pendulum%20tuner%20effect%20monster,ritual%20monster,ritual%20effect%20monster,toon%20monster,fusion%20monster,synchro%20monster,synchro%20tuner%20monster,synchro%20pendulum%20effect%20monster,xyz%20monster,xyz%20pendulum%20effect%20monster,link%20monster,pendulum%20flip%20effect%20monster,pendulum%20effect%20fusion%20monster";   
+            // fileName = "Monsters.json";
 
-            create_json(fileName,url,true);
+            // create_json(fileName,url,true);
             
             var arq = ArchetypeScraper.obtain_archetypes();
             File.WriteAllText("Archetype.json", ArchetypeScraper.arquetype_json(arq).ToString());

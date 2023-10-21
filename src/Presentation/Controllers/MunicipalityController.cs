@@ -1,16 +1,22 @@
-using backend.Presentation.Interfaces;
-using backend.Infrastructure.Entities;
-using backend.Presentation.DTOs;
+using Microsoft.AspNetCore.Mvc;
 using backend.Application.Services;
+using backend.Infrastructure.Entities;
 namespace backend.Presentation.Controllers;
 
-public class MunicipalityController : BaseCrudController<Municipality, MunicipalityCreationDto>
+[ApiController]
+[Route("api/[controller]")]
+public class MunicipalityController : ControllerBase
 {
-  public MunicipalityController(MunicipalityService crudService) : base(crudService) { }
+  private readonly MunicipalityService _service;
+  public MunicipalityController(MunicipalityService service)
+  {
+    _service = service;
+  }
 
-  // public override async Task<ActionResult<IEnumerable<Municipality>>> GetAll()
-  // {
-  // var items = await _service.GetAllAsync(e => e.Municipalities);
-  // return Ok(items);
-  // }
+  [HttpGet("{id:Guid}")]
+  public async Task<ActionResult<Municipality>> GetById(Guid Id)
+  {
+    var municipality = await _service.GetMunicipalityByIdAsync(Id);
+    return Ok(municipality);
+  }
 }

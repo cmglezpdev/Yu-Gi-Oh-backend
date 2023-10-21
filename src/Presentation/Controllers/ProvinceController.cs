@@ -1,23 +1,29 @@
 using Microsoft.AspNetCore.Mvc;
 using backend.Infrastructure.Entities;
-using backend.Presentation.DTOs;
-using backend.Presentation.Interfaces;
 using backend.Application.Services;
 namespace backend.Presentation.Controllers;
 
-public class ProvinceController : BaseCrudController<Province, ProvinceCreationDto>
+[ApiController]
+[Route("api/[controller]")]
+public class ProvinceController : ControllerBase
 {
-  public ProvinceController(ProvinceService crudService) : base(crudService) { }
-
-  public override async Task<ActionResult<IEnumerable<Province>>> GetAll()
+  private readonly ProvinceService _service;
+  public ProvinceController(ProvinceService service)
   {
-    var items = await _service.GetAllAsync(e => e.Municipalities);
-    return Ok(items);
+    _service = service;
   }
 
-  public override async Task<ActionResult<Province>> GetById(Guid Id)
+  [HttpGet]
+  public async Task<ActionResult<IEnumerable<Province>>> GetAll()
   {
-    var item = await _service.GetByIdAsync(Id, e => e.Municipalities);
-    return Ok(item);
+    var provinces = await _service.GetProvincesAsync();
+    return Ok(provinces);
+  }
+
+  [HttpGet("{id:Guid}")]
+  public async Task<ActionResult<Province>> GetById(Guid Id)
+  {
+    var province = await _service.GetProvinceByIdAsync(Id);
+    return Ok(province);
   }
 }

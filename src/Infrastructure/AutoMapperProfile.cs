@@ -1,4 +1,5 @@
 using AutoMapper;
+using backend.Domain.Entities;
 using backend.Infrastructure.Entities;
 using backend.Presentation.DTOs;
 namespace backend.Infrastructure;
@@ -15,5 +16,20 @@ public class AutoMapperProfiles : Profile
       .ForMember(dto => dto.Id, ent => ent.MapFrom(src => src.Id))
       .ForMember(dto => dto.Name, ent => ent.MapFrom(src => src.Name))
       .ForMember(dto => dto.Municipalities, ent => ent.MapFrom(src => src.Municipalities));
+
+    CreateMap<MunicipalityDomain, Municipality>()
+      .ForMember(dto => dto.Id, ent => ent.MapFrom(src => src.Id))
+      .ForMember(dto => dto.Name, ent => ent.MapFrom(src => src.Name));
+
+    CreateMap<ProvinceDomain, Province>()
+      .ForMember(dto => dto.Id, ent => ent.MapFrom(src => src.Id))
+      .ForMember(dto => dto.Name, ent => ent.MapFrom(src => src.Name))
+      .ForMember(dto => dto.Municipalities, ent => ent.MapFrom(src => src.Municipalities));
   }
 }
+
+// Mapping Flow
+// Se recibe inputDto y se crea un objeto de dominio
+// el objeto de dominio se mapea a una entidad
+// la entidad se guarda en la base de datos
+// se mapea la entidad a un outputDto

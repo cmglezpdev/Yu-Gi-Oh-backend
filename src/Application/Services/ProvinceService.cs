@@ -1,11 +1,23 @@
-using AutoMapper;
-using backend.Application.Interfaces;
-using backend.Infrastructure;
+using backend.Application.Repositories;
 using backend.Infrastructure.Entities;
-using backend.Presentation.DTOs;
+
 namespace backend.Application.Services;
 
-public class ProvinceService : BaseCrudService<Province, ProvinceCreationDto>
+public class ProvinceService
 {
-  public ProvinceService(AppDbContext context, IMapper mapper) : base(context, mapper) { }
+  private readonly IProvinceRepository _provinceRepository;
+  public ProvinceService(IProvinceRepository provinceRepository)
+  {
+    _provinceRepository = provinceRepository;
+  }
+
+  public async Task<IEnumerable<Province>> GetProvincesAsync()
+  {
+    return await _provinceRepository.GetProvincesAsync();
+  }
+
+  public async Task<Province> GetProvinceByIdAsync(Guid Id)
+  {
+    return await _provinceRepository.GetProvinceByIdAsync(Id);
+  }
 }

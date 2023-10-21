@@ -1,11 +1,18 @@
-using AutoMapper;
-using backend.Application.Interfaces;
-using backend.Infrastructure;
+using backend.Application.Repositories;
 using backend.Infrastructure.Entities;
-using backend.Presentation.DTOs;
+
 namespace backend.Application.Services;
 
-public class MunicipalityService : BaseCrudService<Municipality, MunicipalityCreationDto>
+public class MunicipalityService
 {
-  public MunicipalityService(AppDbContext context, IMapper mapper) : base(context, mapper) { }
+  private readonly IMunicipalityRepository _municipalityRepository;
+  public MunicipalityService(IMunicipalityRepository municipalityRepository)
+  {
+    _municipalityRepository = municipalityRepository;
+  }
+
+  public async Task<Municipality> GetMunicipalityByIdAsync(Guid Id)
+  {
+    return await _municipalityRepository.GetMunicipalityByIdAsync(Id);
+  }
 }

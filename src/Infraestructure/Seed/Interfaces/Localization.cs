@@ -1,4 +1,4 @@
-namespace backend.Infraestructure.Seed;
+namespace backend.Infrastructure.Seed;
 
 public class StaticLocalization
 {

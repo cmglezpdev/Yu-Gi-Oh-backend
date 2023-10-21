@@ -1,6 +1,6 @@
 using System.Linq.Expressions;
 using AutoMapper;
-using backend.Infraestructure.Interfaces;
+using backend.Infrastructure.Interfaces;
 using Microsoft.EntityFrameworkCore;
 namespace backend.Application.Interfaces;
 

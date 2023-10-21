@@ -1,6 +1,6 @@
 using System.Text.Json;
-using backend.Infraestructure.Entities;
-namespace backend.Infraestructure.Seed;
+using backend.Infrastructure.Entities;
+namespace backend.Infrastructure.Seed;
 
 
 public class LocalizationSeed : ISeedCommand
@@ -17,7 +17,7 @@ public class LocalizationSeed : ISeedCommand
   {
     try
     {
-      string provinces = await File.ReadAllTextAsync(Path.Combine(Directory.GetCurrentDirectory(), "src", "Infraestructure", "Seed", "StaticData", "localizations.json"));
+      string provinces = await File.ReadAllTextAsync(Path.Combine(Directory.GetCurrentDirectory(), "src", "Infrastructure", "Seed", "StaticData", "localizations.json"));
       List<StaticLocalization> localizations = JsonSerializer.Deserialize<List<StaticLocalization>>(provinces)!;
 
       foreach (var localization in localizations)

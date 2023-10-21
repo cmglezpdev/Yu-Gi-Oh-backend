@@ -1,7 +1,7 @@
 using System.ComponentModel.DataAnnotations.Schema;
-using backend.Infraestructure.Interfaces;
+using backend.Infrastructure.Interfaces;
 using Microsoft.EntityFrameworkCore;
-namespace backend.Infraestructure.Entities;
+namespace backend.Infrastructure.Entities;
 
 [Table("users")]
 [Index(nameof(Email), IsUnique = true)]

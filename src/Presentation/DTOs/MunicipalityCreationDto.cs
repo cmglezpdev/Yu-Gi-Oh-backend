@@ -1,5 +1,5 @@
 using System.ComponentModel.DataAnnotations;
-using backend.Infraestructure.Entities;
+using backend.Infrastructure.Entities;
 namespace backend.Presentation.DTOs;
 
 public class MunicipalityCreationDto

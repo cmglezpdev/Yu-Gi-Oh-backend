@@ -1,8 +1,8 @@
 using Microsoft.EntityFrameworkCore;
-using backend.Infraestructure.Entities;
-using backend.Infraestructure.Interfaces;
+using backend.Infrastructure.Entities;
+using backend.Infrastructure.Interfaces;
 
-namespace backend.Infraestructure;
+namespace backend.Infrastructure;
 
 public class AppDbContext : DbContext
 {

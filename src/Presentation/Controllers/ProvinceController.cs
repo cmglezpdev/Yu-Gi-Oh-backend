@@ -1,5 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
-using backend.Infraestructure.Entities;
+using backend.Infrastructure.Entities;
 using backend.Presentation.DTOs;
 using backend.Presentation.Interfaces;
 using backend.Application.Services;

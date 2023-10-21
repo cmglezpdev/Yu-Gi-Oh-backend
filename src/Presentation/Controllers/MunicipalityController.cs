@@ -1,5 +1,5 @@
 using backend.Presentation.Interfaces;
-using backend.Infraestructure.Entities;
+using backend.Infrastructure.Entities;
 using backend.Presentation.DTOs;
 using backend.Application.Services;
 namespace backend.Presentation.Controllers;

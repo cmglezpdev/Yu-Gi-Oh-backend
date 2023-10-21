@@ -1,7 +1,7 @@
 using System.Text.Json.Serialization;
 using backend.Application.Services;
-using backend.Infraestructure;
-using backend.Infraestructure.Seed;
+using backend.Infrastructure;
+using backend.Infrastructure.Seed;
 using backend.Presentation.Controllers;
 using Microsoft.EntityFrameworkCore;
 

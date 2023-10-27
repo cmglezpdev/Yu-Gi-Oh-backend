@@ -5,7 +5,7 @@ namespace backend.Infrastructure.Entities;
 
 #pragma warning disable CS8618
 [Table("cards")]
-public class Cards : PlatformModel
+public class Card : PlatformModel
 {
     [Column(TypeName = "varchar(100)")]
     public string Name { get; set; }
@@ -25,4 +25,6 @@ public class Cards : PlatformModel
     [Column(TypeName = "varchar(255)")]
     public string ImageUrlCropped { get; set; }
 
+     [ForeignKey("ArchetypeId")]
+    public Archetype Archetype { get; set; } 
 }

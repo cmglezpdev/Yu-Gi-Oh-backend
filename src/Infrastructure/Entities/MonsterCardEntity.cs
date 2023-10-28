@@ -1,9 +1,11 @@
 using System.ComponentModel.DataAnnotations.Schema;
+using backend.Infrastructure.Interfaces;
 
 namespace backend.Infrastructure.Entities;
 
 #pragma warning disable CS8618
-public class MonsterCard : Card 
+[Table("monsters")]
+public class MonsterCard : PlatformModel
 {
     [Column(TypeName = "varchar(100)")]
     public string Rice { get; set; }
@@ -16,4 +18,8 @@ public class MonsterCard : Card
 
     [Column]
     public int Def { get; set; } 
+
+    [ForeignKey("CardId")]
+    public Card Card { get; set; }
+
 }

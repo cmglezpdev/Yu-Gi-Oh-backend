@@ -4,6 +4,7 @@ using backend.Infrastructure.Interfaces;
 namespace backend.Infrastructure.Entities;
 
 #pragma warning disable CS8618
+[Table("archetypes")]
 public class Archetype : PlatformModel 
 {
     [Column(TypeName = "varchar(100)")]

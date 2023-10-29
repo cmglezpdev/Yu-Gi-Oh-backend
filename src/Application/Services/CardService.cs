@@ -5,13 +5,19 @@ namespace backend.Application.Services;
 
 public class CardService
 {
-    private readonly ICardRepository _cardepository;
-    public CardService(ICardRepository cardRepository)
+    private readonly ICardRepository _cardRepository;
+    private readonly IMonsterCardRepository _monsterCardRepository;
+    public CardService(ICardRepository cardRepository, IMonsterCardRepository monsterCardRepository)
     {
-        _cardepository = cardRepository;
+        _cardRepository = cardRepository;
+        _monsterCardRepository = monsterCardRepository;
     }
     public async Task<Card> GetCardByIdAsync(Guid Id)
     {
-        return await _cardepository.GetCardByIsAsync(Id);
+        return await _cardRepository.GetCardByIsAsync(Id);
+    }
+    public async Task<MonsterCard> GetMonsterCardByIdAsync(Guid Id)
+    {
+        return await _monsterCardRepository.GetMonsterCardByIdAsync(Id);
     }
 }

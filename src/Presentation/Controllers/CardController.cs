@@ -23,4 +23,10 @@ public class CardController : ControllerBase
         var card = await _service.GetCardByIdAsync(Id);
         return Ok(_mapper.Map<CardOutputDto>(card));
     }
+    [HttpGet("{id:Guid}")]
+    public async Task<ActionResult<MonsterCard>> GetMonsterByID(Guid Id)
+    {
+        var card = await _service.GetMonsterCardByIdAsync(Id);
+        return Ok(_mapper.Map<MonsterCardOutputDto>(card));
+    }
 }

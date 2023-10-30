@@ -27,4 +27,5 @@ public class Card : PlatformModel
 
     [ForeignKey("ArchetypeId")]
     public Archetype? Archetype { get; set; } 
+    public MonsterCard Monster { get; set; }
 }

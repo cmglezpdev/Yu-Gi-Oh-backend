@@ -23,15 +23,19 @@ builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
 // seeders
 builder.Services.AddScoped<ISeedCommand, LocalizationSeed>();
+builder.Services.AddScoped<ISeedCommand, CardSeed>();
 
 // services
 builder.Services.AddScoped<ProvinceService>();
 builder.Services.AddScoped<MunicipalityService>();
+builder.Services.AddScoped<CardService>();
+builder.Services.AddScoped<ArchetypeService>();
 
 // repositories
 builder.Services.AddScoped<IProvinceRepository, ProvinceRepository>();
 builder.Services.AddScoped<IMunicipalityRepository, MunicipalityRepository>();
-
+builder.Services.AddScoped<ICardRepository,CardRepository>();
+builder.Services.AddScoped<IArchetypeRepository, ArchetypeRepository>();
 
 var app = builder.Build();
 

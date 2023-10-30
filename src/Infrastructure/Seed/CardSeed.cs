@@ -51,9 +51,8 @@ public class CardSeed : ISeedCommand
                             if(!(monster is default(StaticMonster)))
                             {
                                 CardDomain card = new CardDomain(monster.name, monster.type, monster.desc, monster.card_images[0].image_url, monster.card_images[0].image_url_small, monster.card_images[0].image_url_cropped);
+                                card.AddMonster(monster.race, monster.level, monster.atk, monster.def);
                                 archetype.AddCards(card);
-                                //MonsterDomain monsterCard = new MonsterDomain(monster.race, monster.level, monster.atk, monster.def, card);
-                                //context.MonsterCards.Add(mapper.Map<MonsterCard>(monsterCard));
                                 await context.SaveChangesAsync();
                                 monsterList.Remove(monster);
                             }
@@ -74,9 +73,8 @@ public class CardSeed : ISeedCommand
             foreach(var monster in monsterList)
             {
                 CardDomain card = new CardDomain(monster.name, monster.type, monster.desc, monster.card_images[0].image_url, monster.card_images[0].image_url_small, monster.card_images[0].image_url_cropped);
+                card.AddMonster(monster.race, monster.level, monster.atk, monster.def);
                 context.Cards.Add(mapper.Map<Card>(card));
-                //MonsterDomain monsterCard = new MonsterDomain(monster.race, monster.level, monster.atk, monster.def, card);
-                //context.MonsterCards.Add(mapper.Map<MonsterCard>(monsterCard));
                 await context.SaveChangesAsync();
             }
             foreach(var spell in spellList)

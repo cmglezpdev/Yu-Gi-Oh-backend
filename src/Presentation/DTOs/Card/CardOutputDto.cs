@@ -1,3 +1,5 @@
+using backend.Infrastructure.Entities;
+
 namespace backend.Presentation.DTOs;
 
 #pragma warning disable CS8618
@@ -11,4 +13,5 @@ public class CardOutputDto
     public string ImageUrlSmall { get; set; }
     public string ImageUrlCropped { get; set; }
     public Guid ArchetypeId { get; set; }
+    public MonsterCard Monster { get; set; }
 }

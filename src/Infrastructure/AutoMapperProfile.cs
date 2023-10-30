@@ -25,7 +25,8 @@ public class AutoMapperProfiles : Profile
       .ForMember(dto => dto.ImageUrl, ent => ent.MapFrom(src => src.ImageUrl))
       .ForMember(dto => dto.ImageUrlSmall, ent => ent.MapFrom(src => src.ImageUrlSmall))
       .ForMember(dto => dto.ImageUrlCropped, ent => ent.MapFrom(src => src.ImageUrlCropped))
-      .ForMember(dto => dto.ArchetypeId, ent => ent.MapFrom(src => src.Archetype.Id));
+      .ForMember(dto => dto.ArchetypeId, ent => ent.MapFrom(src => src.Archetype.Id))
+      .ForMember(dto => dto.Monster, ent => ent.MapFrom(src => src.Monster));;
 
     CreateMap<MonsterCard, MonsterCardOutputDto>()
       .ForMember(dto => dto.Id, ent => ent.MapFrom(src => src.Id))
@@ -56,15 +57,15 @@ public class AutoMapperProfiles : Profile
       .ForMember(dto => dto.Desc, ent => ent.MapFrom(src => src.Desc))
       .ForMember(dto => dto.ImageUrl, ent => ent.MapFrom(src => src.ImageUrl))
       .ForMember(dto => dto.ImageUrlSmall, ent => ent.MapFrom(src => src.ImageUrlSmall))
-      .ForMember(dto => dto.ImageUrlCropped, ent => ent.MapFrom(src => src.ImageUrlCropped));
+      .ForMember(dto => dto.ImageUrlCropped, ent => ent.MapFrom(src => src.ImageUrlCropped))
+      .ForMember(dto => dto.Monster, ent => ent.MapFrom(src => src.Monster));
 
     CreateMap<MonsterDomain, MonsterCard>()
       .ForMember(dto => dto.Id, ent => ent.MapFrom(src => src.Id))
       .ForMember(dto => dto.Race, ent => ent.MapFrom(src => src.Race))
       .ForMember(dto => dto.Level, ent => ent.MapFrom(src => src.Level))
       .ForMember(dto => dto.Atk, ent => ent.MapFrom(src => src.Atk))
-      .ForMember(dto => dto.Def, ent => ent.MapFrom(src => src.Def))
-      .ForMember(dto => dto.Card, ent => ent.MapFrom(src => src.Card));
+      .ForMember(dto => dto.Def, ent => ent.MapFrom(src => src.Def));
 
     CreateMap<ArchetypeDomain, Archetype>()
       .ForMember(dto => dto.Id, ent => ent.MapFrom(src => src.Id))

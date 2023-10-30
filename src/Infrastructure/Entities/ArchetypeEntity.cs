@@ -9,4 +9,5 @@ public class Archetype : PlatformModel
 {
     [Column(TypeName = "varchar(100)")]
     public string Name { get; set; }
+    public List<Card> Cards { get; set; }
 }

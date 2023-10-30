@@ -8,7 +8,7 @@ namespace backend.Infrastructure.Entities;
 public class MonsterCard : PlatformModel
 {
     [Column(TypeName = "varchar(100)")]
-    public string Rice { get; set; }
+    public string Race { get; set; }
 
     [Column]
     public int Level { get; set; }
@@ -20,6 +20,6 @@ public class MonsterCard : PlatformModel
     public int Def { get; set; } 
 
     [ForeignKey("CardId")]
-    public Card Card { get; set; }
+    public Card CardId { get; set; }
 
 }

@@ -4,5 +4,6 @@ namespace backend.Application.Repositories;
 
 public interface ICardRepository : IRepository
 {
-    Task<Card> GetCardByIsAsync(Guid Id);
+    Task<Card> GetCardByIdAsync(Guid Id);
+    Task<MonsterCard> GetMonsterCardByIdAsync(Guid Id);
 }

@@ -33,7 +33,7 @@ public class AutoMapperProfiles : Profile
       .ForMember(dto => dto.Level, ent => ent.MapFrom(src => src.Level))
       .ForMember(dto => dto.Atk, ent => ent.MapFrom(src => src.Atk))
       .ForMember(dto => dto.Def, ent => ent.MapFrom(src => src.Def))
-      .ForMember(dto => dto.CardId, ent => ent.MapFrom(src => src.CardId));
+      .ForMember(dto => dto.CardId, ent => ent.MapFrom(src => src.Card));
 
     CreateMap<Archetype, ArchetypeOutputDto>()
       .ForMember(dto => dto.Id, ent => ent.MapFrom(src => src.Id))
@@ -64,7 +64,7 @@ public class AutoMapperProfiles : Profile
       .ForMember(dto => dto.Level, ent => ent.MapFrom(src => src.Level))
       .ForMember(dto => dto.Atk, ent => ent.MapFrom(src => src.Atk))
       .ForMember(dto => dto.Def, ent => ent.MapFrom(src => src.Def))
-      .ForMember(dto => dto.CardId, ent => ent.MapFrom(src => src.CardId));
+      .ForMember(dto => dto.Card, ent => ent.MapFrom(src => src.Card));
 
     CreateMap<ArchetypeDomain, Archetype>()
       .ForMember(dto => dto.Id, ent => ent.MapFrom(src => src.Id))

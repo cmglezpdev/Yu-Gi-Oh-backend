@@ -35,32 +35,35 @@ public class CardSeed : ISeedCommand
             foreach(var arche in archetypeList.Keys)
             {   
                 ArchetypeDomain archetype = new ArchetypeDomain(arche);
-                foreach(var archetypeCard in archetypeList[arche])
-                {  
-                    //Busco la carta tanto en las magias como las trampas sino esta, busco en los monstruos
-                    var cardWithArchetype = spellList.Find(card => card.name == archetypeCard["name"]);
-                    if(cardWithArchetype is default(StaticCard))
-                    {
-                        cardWithArchetype = trapList.Find( card => card.name == archetypeCard["name"]);
-                    }
-                    if(cardWithArchetype is default(StaticCard))
-                    {
-                        var monster = monsterList.Find(card => card.name == archetypeCard["name"]);
-                        CardDomain card = new CardDomain(monster.name, monster.type, monster.desc, monster.card_images[0].image_url, monster.card_images[0].image_url_small, monster.card_images[0].image_url_cropped);
-                        archetype.AddCards(card);
-                        MonsterDomain monsterCard = new MonsterDomain(monster.race, monster.level, monster.atk, monster.def, card.Id);
-                        //agrego el monstruo pq la carta la agrega el arquetipo
-                        context.MonsterCards.Add(mapper.Map<MonsterCard>(monsterCard));
-                        await context.SaveChangesAsync();
-                        monsterList.Remove(monster);
-                    }
-                    else
-                    {
-                        CardDomain card = new CardDomain(cardWithArchetype.name, cardWithArchetype.type, cardWithArchetype.desc, cardWithArchetype.card_images[0].image_url, cardWithArchetype.card_images[0].image_url_small, cardWithArchetype.card_images[0].image_url_cropped);
-                        archetype.AddCards(card);
-                        //elimino en los dos pq no se donde esta
-                        spellList.Remove(cardWithArchetype);
-                        trapList.Remove(cardWithArchetype);
+                if(!(archetypeList[arche].Count == 0))
+                {   
+                    foreach(var archetypeCard in archetypeList[arche])
+                    {  
+                        //Busco la carta tanto en las magias como las trampas sino esta, busco en los monstruos
+                        var cardWithArchetype = spellList.Find(card => card.name == archetypeCard["name"]);
+                        if(cardWithArchetype is default(StaticCard))
+                        {
+                            cardWithArchetype = trapList.Find( card => card.name == archetypeCard["name"]);
+                        }
+                        if(cardWithArchetype is default(StaticCard))
+                        {
+                            var monster = monsterList.Find(card => card.name == archetypeCard["name"]);
+                            if(!(monster is default(StaticMonster)))
+                            {
+                                CardDomain card = new CardDomain(monster.name, monster.type, monster.desc, monster.card_images[0].image_url, monster.card_images[0].image_url_small, monster.card_images[0].image_url_cropped);
+                                archetype.AddCards(card);
+                                await context.SaveChangesAsync();
+                                monsterList.Remove(monster);
+                            }
+                        }
+                        else
+                        {
+                            CardDomain card = new CardDomain(cardWithArchetype.name, cardWithArchetype.type, cardWithArchetype.desc, cardWithArchetype.card_images[0].image_url, cardWithArchetype.card_images[0].image_url_small, cardWithArchetype.card_images[0].image_url_cropped);
+                            archetype.AddCards(card);
+                            //elimino en los dos pq no se donde esta
+                            spellList.Remove(cardWithArchetype);
+                            trapList.Remove(cardWithArchetype);
+                        }
                     }
                 }
                 context.Archetypes.Add(mapper.Map<Archetype>(archetype));
@@ -69,9 +72,6 @@ public class CardSeed : ISeedCommand
             foreach(var monster in monsterList)
             {
                 CardDomain card = new CardDomain(monster.name, monster.type, monster.desc, monster.card_images[0].image_url, monster.card_images[0].image_url_small, monster.card_images[0].image_url_cropped);
-                MonsterDomain monsterCard = new MonsterDomain(monster.race, monster.level, monster.atk, monster.def, card.Id);
-                context.MonsterCards.Add(mapper.Map<MonsterCard>(monsterCard));
-                await context.SaveChangesAsync();
                 context.Cards.Add(mapper.Map<Card>(card));
                 await context.SaveChangesAsync();
             }

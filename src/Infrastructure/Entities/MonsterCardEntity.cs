@@ -20,6 +20,6 @@ public class MonsterCard : PlatformModel
     public int Def { get; set; } 
 
     [ForeignKey("CardId")]
-    public Card CardId { get; set; }
+    public Card Card { get; set; }
 
 }

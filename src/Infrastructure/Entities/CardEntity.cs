@@ -25,6 +25,6 @@ public class Card : PlatformModel
     [Column(TypeName = "varchar(255)")]
     public string ImageUrlCropped { get; set; }
 
-     [ForeignKey("ArchetypeId")]
-    public Archetype Archetype { get; set; } 
+    [ForeignKey("ArchetypeId")]
+    public Archetype? Archetype { get; set; } 
 }

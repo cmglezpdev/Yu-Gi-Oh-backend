@@ -53,7 +53,7 @@ namespace backend.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
-                    b.Property<Guid>("ArchetypeId")
+                    b.Property<Guid?>("ArchetypeId")
                         .HasColumnType("uuid");
 
                     b.Property<DateTime>("CreatedAt")
@@ -120,7 +120,7 @@ namespace backend.Migrations
                     b.Property<int>("Level")
                         .HasColumnType("integer");
 
-                    b.Property<string>("Rice")
+                    b.Property<string>("Race")
                         .IsRequired()
                         .HasColumnType("varchar(100)");
 
@@ -235,10 +235,8 @@ namespace backend.Migrations
             modelBuilder.Entity("backend.Infrastructure.Entities.Card", b =>
                 {
                     b.HasOne("backend.Infrastructure.Entities.Archetype", "Archetype")
-                        .WithMany()
-                        .HasForeignKey("ArchetypeId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .WithMany("Cards")
+                        .HasForeignKey("ArchetypeId");
 
                     b.Navigation("Archetype");
                 });
@@ -274,6 +272,11 @@ namespace backend.Migrations
                         .IsRequired();
 
                     b.Navigation("Municipality");
+                });
+
+            modelBuilder.Entity("backend.Infrastructure.Entities.Archetype", b =>
+                {
+                    b.Navigation("Cards");
                 });
 
             modelBuilder.Entity("backend.Infrastructure.Entities.Province", b =>

@@ -998,6 +998,9 @@
       "name": "Beast of Talwar"
     },
     {
+      "name": "Berserk Archfiend"
+    },
+    {
       "name": "Black Skull Dragon"
     },
     {
@@ -7479,6 +7482,23 @@
       "name": "Hieratic Sun Dragon Overlord of Heliopolis"
     }
   ],
+  "Horus": [
+    {
+      "name": "Duamutef, Blessing of Horus"
+    },
+    {
+      "name": "Hapi, Guidance of Horus"
+    },
+    {
+      "name": "Horus the Black Flame Deity"
+    },
+    {
+      "name": "Imsety, Glory of Horus"
+    },
+    {
+      "name": "Qebehsenuef, Protection of Horus"
+    }
+  ],
   "Ice Barrier": [
     {
       "name": "Blizzed, Defender of the Ice Barrier"
@@ -12920,13 +12940,22 @@
       "name": "Raidraptor - Avenge Vulture"
     },
     {
+      "name": "Raidraptor - Barrage"
+    },
+    {
       "name": "Raidraptor - Blade Burner Falcon"
     },
     {
       "name": "Raidraptor - Blaze Falcon"
     },
     {
+      "name": "Raidraptor - Bloom Vulture"
+    },
+    {
       "name": "Raidraptor - Booster Strix"
+    },
+    {
+      "name": "Raidraptor - Brave Strix"
     },
     {
       "name": "Raidraptor - Call"
@@ -12962,6 +12991,9 @@
       "name": "Raidraptor - Nest"
     },
     {
+      "name": "Raidraptor - Noir Lanius"
+    },
+    {
       "name": "Raidraptor - Pain Lanius"
     },
     {
@@ -12978,6 +13010,12 @@
     },
     {
       "name": "Raidraptor - Rise Falcon"
+    },
+    {
+      "name": "Raidraptor - Rising Rebellion Falcon"
+    },
+    {
+      "name": "Raidraptor - Roost"
     },
     {
       "name": "Raidraptor - Rudder Strix"
@@ -13044,6 +13082,9 @@
     },
     {
       "name": "Raptor's Ultimate Mace"
+    },
+    {
+      "name": "Rise-Rank-Up-Magic Raidraptor's Force"
     }
   ],
   "Red-Eyes": [
@@ -14252,53 +14293,6 @@
       "name": "Shinobird's Calling"
     }
   ],
-  "Simorgh": [
-    {
-      "name": "Dark Simorgh"
-    },
-    {
-      "name": "Elborz, the Sacred Lands of Simorgh"
-    },
-    {
-      "name": "Simorgh of Darkness"
-    },
-    {
-      "name": "Simorgh Onslaught"
-    },
-    {
-      "name": "Simorgh Repulsion"
-    },
-    {
-      "name": "Simorgh Sky Battle"
-    },
-    {
-      "name": "Simorgh, Bird of Ancestry"
-    },
-    {
-      "name": "Simorgh, Bird of Beginning"
-    },
-    {
-      "name": "Simorgh, Bird of Bringing"
-    },
-    {
-      "name": "Simorgh, Bird of Calamity"
-    },
-    {
-      "name": "Simorgh, Bird of Divinity"
-    },
-    {
-      "name": "Simorgh, Bird of Perfection"
-    },
-    {
-      "name": "Simorgh, Bird of Protection"
-    },
-    {
-      "name": "Simorgh, Bird of Sovereignty"
-    },
-    {
-      "name": "Simorgh, Lord of the Storm"
-    }
-  ],
   "Shiranui": [
     {
       "name": "Fateful Hour"
@@ -14396,6 +14390,64 @@
     },
     {
       "name": "Silent Swordsman LV7"
+    }
+  ],
+  "Simorgh": [
+    {
+      "name": "Dark Simorgh"
+    },
+    {
+      "name": "Elborz, the Sacred Lands of Simorgh"
+    },
+    {
+      "name": "Simorgh of Darkness"
+    },
+    {
+      "name": "Simorgh Onslaught"
+    },
+    {
+      "name": "Simorgh Repulsion"
+    },
+    {
+      "name": "Simorgh Sky Battle"
+    },
+    {
+      "name": "Simorgh, Bird of Ancestry"
+    },
+    {
+      "name": "Simorgh, Bird of Beginning"
+    },
+    {
+      "name": "Simorgh, Bird of Bringing"
+    },
+    {
+      "name": "Simorgh, Bird of Calamity"
+    },
+    {
+      "name": "Simorgh, Bird of Divinity"
+    },
+    {
+      "name": "Simorgh, Bird of Perfection"
+    },
+    {
+      "name": "Simorgh, Bird of Protection"
+    },
+    {
+      "name": "Simorgh, Bird of Sovereignty"
+    },
+    {
+      "name": "Simorgh, Lord of the Storm"
+    }
+  ],
+  "Sinful Spoils": [
+    {
+      "name": "Sinful Spoils of Betrayal - Silvera"
+    },
+    {
+      "name": "Sinful Spoils of Doom - Rciela"
+    },
+    {
+      "name": "WANTED: Seeker of Sinful Spoils"
     }
   ],
   "Six Samurai": [
@@ -14651,6 +14703,35 @@
     },
     {
       "name": "Surgical Striker - H.A.M.P."
+    }
+  ],
+  "Snake-Eye": [
+    {
+      "name": "Divine Temple of the Snake-Eye"
+    },
+    {
+      "name": "Original Sinful Spoils - Snake-Eye"
+    },
+    {
+      "name": "Snake-Eye Ash"
+    },
+    {
+      "name": "Snake-Eye Birch"
+    },
+    {
+      "name": "Snake-Eye Dramatic Chase"
+    },
+    {
+      "name": "Snake-Eye Oak"
+    },
+    {
+      "name": "Snake-Eyes Flamberge Dragon"
+    },
+    {
+      "name": "Snake-Eyes Populus"
+    },
+    {
+      "name": "Startling Stare of the Snake-Eyes"
     }
   ],
   "Solfachord": [

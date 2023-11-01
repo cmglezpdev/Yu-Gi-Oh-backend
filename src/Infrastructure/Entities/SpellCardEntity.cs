@@ -4,9 +4,11 @@ using backend.Infrastructure.Interfaces;
 namespace backend.Infrastructure.Entities;
 
 #pragma warning disable CS8618
-[Table("archetypes")]
-public class Archetype : PlatformModel
+
+[Table("spell_cards")]
+public class SpellCard : PlatformModel
 {
-    [Column(TypeName = "varchar(100)")]
-    public string Name { get; set; }
+  [ForeignKey("CardId")]
+  public Card Card { get; set; }
+  public Guid CardId { get; set; }
 }

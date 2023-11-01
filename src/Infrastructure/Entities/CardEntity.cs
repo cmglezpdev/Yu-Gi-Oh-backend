@@ -10,6 +10,9 @@ public class Card : PlatformModel
     [Column(TypeName = "varchar(100)")]
     public string Name { get; set; }
 
+    [Column(TypeName = "varchar(100)")]
+    public string CardType { get; set; }
+
     [Column(TypeName = "varchar(50)")]
     public string Type { get; set; }
 
@@ -26,6 +29,7 @@ public class Card : PlatformModel
     public string ImageUrlCropped { get; set; }
 
     [ForeignKey("ArchetypeId")]
-    public Archetype? Archetype { get; set; } 
-    public MonsterCard? Monster { get; set; }
+    public Archetype? Archetype { get; set; }
+
+    public Guid? ArchetypeId { get; set; }
 }

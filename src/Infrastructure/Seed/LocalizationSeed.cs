@@ -36,7 +36,7 @@ public class LocalizationSeed : ISeedCommand
           province.AddMuncipality(new MunicipalityDomain(name));
         }
 
-        context.Provinces.Add(mapper.Map<Province>(province));
+        await context.Provinces.AddAsync(mapper.Map<Province>(province));
         await context.SaveChangesAsync();
       }
       return true;

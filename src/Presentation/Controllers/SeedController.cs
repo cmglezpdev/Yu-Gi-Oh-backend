@@ -7,7 +7,7 @@ namespace backend.Presentation.Controllers;
 [Route("api/seed")]
 public class SeedController : ControllerBase
 {
-  private readonly IEnumerable<ISeedCommand> seedCommands;
+  private IEnumerable<ISeedCommand> seedCommands;
   public SeedController(IEnumerable<ISeedCommand> seedCommands)
   {
     this.seedCommands = seedCommands;
@@ -16,7 +16,6 @@ public class SeedController : ControllerBase
   [HttpPost]
   public async Task<ActionResult> ExecuteSeed()
   {
-    // TODO: Clear database before seeding
     foreach (var seedCommand in seedCommands)
     {
       await seedCommand.Execute();

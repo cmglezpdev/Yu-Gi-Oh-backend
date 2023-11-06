@@ -1,14 +1,18 @@
+using AutoMapper;
+using backend.Application.Interfaces;
 using backend.Application.Repositories;
+using backend.Domain.Entities;
 using backend.Infrastructure.Entities;
+using Microsoft.EntityFrameworkCore;
 
 namespace backend.Application.Services;
 
-public class ArchetypeService
+public class ArchetypeService : BaseCrudService<Archetype,ArchetypeDomain>
 {
     private readonly IArchetypeRepository _archetypeRepository;
-    public ArchetypeService(IArchetypeRepository archetypeRepository)
+    public ArchetypeService(DbContext context,IMapper mapper):base(context,mapper)
     {
-        _archetypeRepository = archetypeRepository;
+        // _archetypeRepository = archetypeRepository;
     }
     public async Task<Archetype> GetArchetypeByIdAsync(Guid Id)
     {

@@ -4,7 +4,7 @@ using backend.Infrastructure.Interfaces;
 namespace backend.Presentation.Interfaces;
 
 [ApiController]
-[Route("api/[controller]")]
+// [Route("api/[controller]")]
 public abstract class BaseCrudController<Entity, ModelDto> : ControllerBase where Entity : PlatformModel where ModelDto : class
 {
   protected readonly BaseCrudService<Entity, ModelDto> _service;

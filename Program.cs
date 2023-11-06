@@ -30,8 +30,9 @@ builder.Services.AddScoped<ProvinceService>();
 builder.Services.AddScoped<MunicipalityService>();
 builder.Services.AddScoped<CardService>();
 builder.Services.AddScoped<ArchetypeService>();
-
+builder.Services.AddScoped<DeckService>();
 // repositories
+builder.Services.AddScoped<DbContext,AppDbContext>();
 builder.Services.AddScoped<IProvinceRepository, ProvinceRepository>();
 builder.Services.AddScoped<IMunicipalityRepository, MunicipalityRepository>();
 builder.Services.AddScoped<ICardRepository,CardRepository>();

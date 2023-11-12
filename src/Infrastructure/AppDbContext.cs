@@ -16,6 +16,8 @@ public class AppDbContext : DbContext
   public DbSet<SpellCard> SpellCards { get; set; }
   public DbSet<TrapCard> TrapCards { get; set; }
   public DbSet<Archetype> Archetypes { get; set; }
+  public DbSet<Deck> Decks { get; set; }
+  public DbSet<DecksComponentCards> DeckCards{get; set;}
 
   protected override void OnModelCreating(ModelBuilder modelBuilder)
   {

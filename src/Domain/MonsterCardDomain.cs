@@ -4,7 +4,7 @@ using backend.Infrastructure.Entities;
 namespace backend.Domain.Entities;
 
 
-public class MonsterCardDomain
+public class MonsterCardDomain : ICard
 {
   public Guid Id { get; set; }
   public string Name { get; set; }

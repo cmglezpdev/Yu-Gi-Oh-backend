@@ -2,7 +2,7 @@ using backend.Domain.Interfaces;
 
 namespace backend.Domain.Entities;
 
-public class TrapCardDomain
+public class TrapCardDomain : ICard
 {
   public Guid Id { get; set; }
   public string Name { get; set; }

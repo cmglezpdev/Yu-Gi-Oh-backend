@@ -32,4 +32,5 @@ public class Card : PlatformModel
     public Archetype? Archetype { get; set; }
 
     public Guid? ArchetypeId { get; set; }
+    
 }

@@ -29,14 +29,14 @@ public class DeckService
         return await deckRepository.GetDeckByIdAsync(Id);
     }
 
-    public async Task<Deck> PostDeck(DeckInputDto deck)
+    public async Task<Deck> CreateDeckAsync(DeckInputDto deck)
     {
         return await deckRepository.CreateDeckAsync(deck);
     }
 
-    public async Task<Deck> PutDeckById(Guid Id)
+    public async Task<Deck> UpdateDeckAsync(Guid Id, DeckInputDto dto)
     {
-        return await deckRepository.UpdateDeckAsync(Id);
+        return await deckRepository.UpdateDeckAsync(Id, dto);
     }
 }
 

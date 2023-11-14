@@ -35,10 +35,17 @@ public class DecksController : ControllerBase
   }
 
   [HttpPost]
-  public async Task<ActionResult<Deck>> PostDeck(DeckInputDto dto)
+  public async Task<ActionResult<Deck>> CreateDeckAsync(DeckInputDto dto)
   {
-    var deck = await _service.PostDeck(dto);
+    var deck = await _service.CreateDeckAsync(dto);
     return Ok(_mapper.Map<DeckOutputDto>(deck));
+  }
+
+  [HttpPut("{id:Guid}")]
+  public async Task<ActionResult<Deck>> UpdateDeckAsync(Guid Id, DeckInputDto dto)
+  {
+      var deck = await _service.UpdateDeckAsync(Id, dto);
+      return Ok(_mapper.Map<DeckOutputDto>(deck));
   }
 
   [HttpDelete("{id:Guid}")]

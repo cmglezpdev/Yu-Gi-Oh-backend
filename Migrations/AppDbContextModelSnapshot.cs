@@ -44,7 +44,7 @@ namespace backend.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("archetypes");
+                    b.ToTable("archetypes", (string)null);
                 });
 
             modelBuilder.Entity("backend.Infrastructure.Entities.Card", b =>
@@ -98,7 +98,7 @@ namespace backend.Migrations
 
                     b.HasIndex("ArchetypeId");
 
-                    b.ToTable("cards");
+                    b.ToTable("cards", (string)null);
                 });
 
             modelBuilder.Entity("backend.Infrastructure.Entities.Deck", b =>
@@ -142,7 +142,7 @@ namespace backend.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("decks");
+                    b.ToTable("decks", (string)null);
                 });
 
             modelBuilder.Entity("backend.Infrastructure.Entities.MonsterCard", b =>
@@ -181,7 +181,7 @@ namespace backend.Migrations
 
                     b.HasIndex("CardId");
 
-                    b.ToTable("monster_cards");
+                    b.ToTable("monster_cards", (string)null);
                 });
 
             modelBuilder.Entity("backend.Infrastructure.Entities.Municipality", b =>
@@ -211,7 +211,7 @@ namespace backend.Migrations
 
                     b.HasIndex("ProvinceId");
 
-                    b.ToTable("municipalities");
+                    b.ToTable("municipalities", (string)null);
                 });
 
             modelBuilder.Entity("backend.Infrastructure.Entities.Province", b =>
@@ -236,7 +236,7 @@ namespace backend.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("provinces");
+                    b.ToTable("provinces", (string)null);
                 });
 
             modelBuilder.Entity("backend.Infrastructure.Entities.SpellCard", b =>
@@ -262,7 +262,7 @@ namespace backend.Migrations
 
                     b.HasIndex("CardId");
 
-                    b.ToTable("spell_cards");
+                    b.ToTable("spell_cards", (string)null);
                 });
 
             modelBuilder.Entity("backend.Infrastructure.Entities.TrapCard", b =>
@@ -288,7 +288,7 @@ namespace backend.Migrations
 
                     b.HasIndex("CardId");
 
-                    b.ToTable("trap_cards");
+                    b.ToTable("trap_cards", (string)null);
                 });
 
             modelBuilder.Entity("backend.Infrastructure.Entities.User", b =>
@@ -329,7 +329,7 @@ namespace backend.Migrations
 
                     b.HasIndex("MunicipalityId");
 
-                    b.ToTable("users");
+                    b.ToTable("users", (string)null);
                 });
 
             modelBuilder.Entity("backend.Infrastructure.Entities.Card", b =>

@@ -6,7 +6,7 @@ namespace backend.Application.Repositories{
       Task<IEnumerable<Deck>> GetAllDecksAsync();
       Task<Deck> GetDeckByIdAsync(Guid Id);
       Task<Deck> CreateDeckAsync(DeckInputDto deck);
-      Task<Deck> UpdateDeckAsync(Guid Id);
+      Task<Deck> UpdateDeckAsync(Guid Id, DeckInputDto deck);
       Task<Deck> DeleteDeckByIdAsync(Guid Id);
 
     }

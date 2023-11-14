@@ -60,8 +60,19 @@ public class DeckRepository : IDeckRepository
         return await GetDeckByIdAsync(newDeck.Id);
     }
 
-    public async Task<Deck> UpdateDeckAsync(Guid Id)
+    public async Task<Deck> UpdateDeckAsync(Guid Id, DeckInputDto dto)
     {
-        return await GetDeckByIdAsync(Id);
+        var deck = await GetDeckByIdAsync(Id);
+
+        deck.Name = dto.Name;
+        deck.ArchetypeId = dto.ArchetypeId;
+        deck.MainDeck = dto.MainDeck;
+        deck.ExtraDeck = dto.ExtraDeck;
+        deck.SideDeck = dto.SideDeck;
+
+        context.Update(deck);
+
+        await context.SaveChangesAsync();
+        return deck;
     }
 }

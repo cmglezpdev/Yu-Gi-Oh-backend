@@ -1,13 +1,7 @@
-
-
-
-
-using System.Xml.Linq;
+using AutoMapper;
 using backend.Application.Repositories;
 using backend.Domain.Entities;
-using backend.Domain.Interfaces;
 using backend.Infrastructure.Entities;
-using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.EntityFrameworkCore;
 
 namespace backend.Infrastructure.Repositories;
@@ -15,12 +9,16 @@ namespace backend.Infrastructure.Repositories;
 public class DeckRepository : IDeckRepository
 {
     private readonly AppDbContext context;
-    private readonly ICardRepository cardRepository;
 
-    public DeckRepository(AppDbContext context, ICardRepository cardRepository)
+    private readonly IArchetypeRepository archetypeRepository;
+
+    private readonly IMapper mapper;
+
+    public DeckRepository(AppDbContext context, IArchetypeRepository archetypeRepository, IMapper mapper)
     {
         this.context = context;
-        this.cardRepository = cardRepository;
+        this.archetypeRepository = archetypeRepository;
+        this.mapper = mapper;
     }
 
     public async Task<Deck> DeleteDeckById(Guid Id)
@@ -39,22 +37,27 @@ public class DeckRepository : IDeckRepository
         return await query.FirstOrDefaultAsync() ?? throw new BadHttpRequestException("No existe ese id") ;
     }
 
-    public async Task<Deck> PostDeck(DeckDto deck)
-    {
-        // var mainDeck = new List<ICard>();
-        // foreach(var cardId in deck.MainDeck) {
-        //    mainDeck.Add( await cardRepository.GetCardByIdAsync(cardId));
-        // }
+    public async Task<Deck> PostDeck(DeckInputDto deck)
+    {   
+        DeckDomain newDeck;
+        if(!(deck.ArchetypeId is null))
+        {
+            Archetype archetype = await archetypeRepository.GetArchetypeByIdAsync((Guid)deck.ArchetypeId);
+            newDeck = new DeckDomain(deck.Name, deck.MainDeck, deck.SideDeck, deck.ExtraDeck, archetype.Id, true);
+        }
+        else
+        {
+            newDeck = new DeckDomain(deck.Name, deck.MainDeck, deck.SideDeck, deck.ExtraDeck, null, true);
+        }
+        
+        await context.AddAsync(mapper.Map<Deck>(newDeck));
+        await context.SaveChangesAsync();
 
-        throw new NotImplementedException();
-
-        // var x = await Task.WaitAll(tasks.ToArray());
-        // var x = new DeckDomain(deck.Name, )
-    //    context.Decks.AddAsync(nw);
+        return await GetDeckById(newDeck.Id);
     }
 
-    public Task<Deck> PutDeckById(Guid Id)
+    public async Task<Deck> PutDeckById(Guid Id)
     {
-        throw new NotImplementedException();
+        return await GetDeckById(Id);
     }
 }

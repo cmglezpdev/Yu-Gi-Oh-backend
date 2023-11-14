@@ -37,6 +37,7 @@ builder.Services.AddScoped<IProvinceRepository, ProvinceRepository>();
 builder.Services.AddScoped<IMunicipalityRepository, MunicipalityRepository>();
 builder.Services.AddScoped<ICardRepository,CardRepository>();
 builder.Services.AddScoped<IArchetypeRepository, ArchetypeRepository>();
+builder.Services.AddScoped<IDeckRepository, DeckRepository>();
 
 var app = builder.Build();
 

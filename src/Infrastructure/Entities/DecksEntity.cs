@@ -15,5 +15,14 @@ public class Deck : PlatformModel
 
     public Guid? ArchetypeId { get; set; }
     [Column]
-    public bool IsActive {get; set;}
+    public bool IsActive {get; set; }
+
+    [Column]
+    public int MainDeck { get; set; }
+
+    [Column]
+    public int ExtraDeck { get; set; }
+
+    [Column]
+    public int SideDeck { get; set; }
 }

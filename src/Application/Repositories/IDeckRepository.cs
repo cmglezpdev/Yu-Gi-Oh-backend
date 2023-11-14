@@ -1,14 +1,13 @@
-
-
 using backend.Infrastructure.Entities;
 
 namespace backend.Application.Repositories{
 
     public interface IDeckRepository:IRepository{
-      Task<Deck> GetDeckById(Guid Id);
-      Task<Deck> PostDeck(DeckInputDto deck);
-      Task<Deck> PutDeckById(Guid Id);
-      Task<Deck> DeleteDeckById(Guid Id);
+      Task<IEnumerable<Deck>> GetAllDecksAsync();
+      Task<Deck> GetDeckByIdAsync(Guid Id);
+      Task<Deck> CreateDeckAsync(DeckInputDto deck);
+      Task<Deck> UpdateDeckAsync(Guid Id);
+      Task<Deck> DeleteDeckByIdAsync(Guid Id);
 
     }
 }

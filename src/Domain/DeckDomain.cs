@@ -11,8 +11,8 @@ public class DeckDomain
     public int MainDeck { get; set; }
     public int SideDeck { get; set; }
     public int ExtraDeck { get; set; }
-    public bool IsActive { get; set; }
-    public DeckDomain(string name, int mainCards, int sideCards, int extraCards, Guid? archetype, bool isActive)
+    public Guid UserId { get; set; }
+    public DeckDomain(string name, int mainCards, int sideCards, int extraCards, Guid? archetype, Guid userId)
     {
         Id = Guid.NewGuid();
         Name = name;
@@ -20,6 +20,6 @@ public class DeckDomain
         SideDeck = sideCards;
         ExtraDeck = extraCards;
         ArchetypeId = archetype;
-        IsActive = isActive;
+        UserId = userId;
     }
 }

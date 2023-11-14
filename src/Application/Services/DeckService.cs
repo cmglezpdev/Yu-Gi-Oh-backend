@@ -5,34 +5,38 @@ using backend.Infrastructure.Entities;
 using Microsoft.EntityFrameworkCore;
 
 namespace backend.Application.Services;
-public class DeckService : BaseCrudService<Deck,DeckInputDto>
+public class DeckService
 {
     private readonly DbContext context;
     private readonly IDeckRepository deckRepository;
 
-    public DeckService(DbContext _context,IMapper _mapper,IDeckRepository deckRepository): base (_context,_mapper)
+    public DeckService(DbContext _context,IMapper _mapper,IDeckRepository deckRepository)
     {
         context = _context;
         this.deckRepository = deckRepository;
     }
+    public async Task<IEnumerable<Deck>> GetAllDecksAsync()
+    {
+        return await deckRepository.GetAllDecksAsync();
+    }
     public async Task<Deck> DeleteDeckById(Guid Id)
     {
-        return await deckRepository.DeleteDeckById(Id);
+        return await deckRepository.DeleteDeckByIdAsync(Id);
     }
 
-    public async Task<Deck> GetDeckById(Guid Id)
+    public async Task<Deck> GetDeckByIdAsync(Guid Id)
     {
-    return await deckRepository.GetDeckById(Id);
+        return await deckRepository.GetDeckByIdAsync(Id);
     }
 
     public async Task<Deck> PostDeck(DeckInputDto deck)
     {
-        return await deckRepository.PostDeck(deck);
+        return await deckRepository.CreateDeckAsync(deck);
     }
 
     public async Task<Deck> PutDeckById(Guid Id)
     {
-        return await deckRepository.PutDeckById(Id);
+        return await deckRepository.UpdateDeckAsync(Id);
     }
 }
 

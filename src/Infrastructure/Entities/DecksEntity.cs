@@ -12,11 +12,8 @@ public class Deck : PlatformModel
     
     [ForeignKey("ArchetypeId")]
     public Archetype? Archetype { get; set; }
-
     public Guid? ArchetypeId { get; set; }
-    [Column]
-    public bool IsActive {get; set; }
-
+    
     [Column]
     public int MainDeck { get; set; }
 
@@ -25,4 +22,8 @@ public class Deck : PlatformModel
 
     [Column]
     public int SideDeck { get; set; }
+
+    [ForeignKey("UserId")]
+    public User User { get; set; }
+    public Guid UserId { get; set; }
 }

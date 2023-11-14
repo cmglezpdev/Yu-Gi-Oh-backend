@@ -27,7 +27,8 @@ public class AutoMapperProfiles : Profile
       .ForMember(dto => dto.MainDeck, ent => ent.MapFrom(src => src.MainDeck))
       .ForMember(dto => dto.SideDeck, ent => ent.MapFrom(src => src.SideDeck))
       .ForMember(dto => dto.ExtraDeck, ent => ent.MapFrom(src => src.ExtraDeck))
-      .ForMember(dto => dto.ArchetypeId, ent => ent.MapFrom(src => src.ArchetypeId));
+      .ForMember(dto => dto.ArchetypeId, ent => ent.MapFrom(src => src.ArchetypeId))
+      .ForMember(dto => dto.UserId, ent => ent.MapFrom(src => src.UserId));
       
     CreateMap<MunicipalityDomain, Municipality>()
       .ForMember(dto => dto.Id, ent => ent.MapFrom(src => src.Id))
@@ -48,7 +49,8 @@ public class AutoMapperProfiles : Profile
       .ForMember(dto => dto.MainDeck, ent => ent.MapFrom(src => src.MainDeck))
       .ForMember(dto => dto.SideDeck, ent => ent.MapFrom(src => src.SideDeck))
       .ForMember(dto => dto.ExtraDeck, ent => ent.MapFrom(src => src.ExtraDeck))
-      .ForMember(dto => dto.ArchetypeId, ent => ent.MapFrom(src => src.ArchetypeId));
+      .ForMember(dto => dto.ArchetypeId, ent => ent.MapFrom(src => src.ArchetypeId))
+      .ForMember(dto => dto.UserId, ent => ent.MapFrom(src => src.UserId));
 
     // CreateMap<Card, CardOutputDto>()
     //   .ForMember(dto => dto.Id, ent => ent.MapFrom(src => src.Id))

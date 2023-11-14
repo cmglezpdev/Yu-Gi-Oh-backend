@@ -7,4 +7,5 @@ public class DeckInputDto {
    public int MainDeck { get; set; }
    public int SideDeck { get; set; }
    public int ExtraDeck { get; set; }
+   public Guid UserId { get; set; }
 }

@@ -21,43 +21,47 @@ public class DeckRepository : IDeckRepository
         this.mapper = mapper;
     }
 
-    public async Task<Deck> DeleteDeckById(Guid Id)
+    public async Task<IEnumerable<Deck>> GetAllDecksAsync()
     {
-        var deck = await GetDeckById(Id);
-        deck.IsActive = false;
-        context.Decks.Update(deck);
+        return await context.Decks.ToListAsync();
+    }
+
+    public async Task<Deck> DeleteDeckByIdAsync(Guid Id)
+    {
+        var deck = await GetDeckByIdAsync(Id);
+        context.Decks.Remove(deck);
         await context.SaveChangesAsync();
         return deck;
     }
 
-    public async Task<Deck> GetDeckById(Guid Id)
+    public async Task<Deck> GetDeckByIdAsync(Guid Id)
     {
         IQueryable<Deck> query = context.Set<Deck>()
-        .Where(m => m.Id == Id && m.IsActive);
+        .Where(m => m.Id == Id);
         return await query.FirstOrDefaultAsync() ?? throw new BadHttpRequestException("No existe ese id") ;
     }
 
-    public async Task<Deck> PostDeck(DeckInputDto deck)
+    public async Task<Deck> CreateDeckAsync(DeckInputDto deck)
     {   
         DeckDomain newDeck;
         if(!(deck.ArchetypeId is null))
         {
             Archetype archetype = await archetypeRepository.GetArchetypeByIdAsync((Guid)deck.ArchetypeId);
-            newDeck = new DeckDomain(deck.Name, deck.MainDeck, deck.SideDeck, deck.ExtraDeck, archetype.Id, true);
+            newDeck = new DeckDomain(deck.Name, deck.MainDeck, deck.SideDeck, deck.ExtraDeck, archetype.Id, deck.UserId);
         }
         else
         {
-            newDeck = new DeckDomain(deck.Name, deck.MainDeck, deck.SideDeck, deck.ExtraDeck, null, true);
+            newDeck = new DeckDomain(deck.Name, deck.MainDeck, deck.SideDeck, deck.ExtraDeck, null, deck.UserId);
         }
         
         await context.AddAsync(mapper.Map<Deck>(newDeck));
         await context.SaveChangesAsync();
 
-        return await GetDeckById(newDeck.Id);
+        return await GetDeckByIdAsync(newDeck.Id);
     }
 
-    public async Task<Deck> PutDeckById(Guid Id)
+    public async Task<Deck> UpdateDeckAsync(Guid Id)
     {
-        return await GetDeckById(Id);
+        return await GetDeckByIdAsync(Id);
     }
 }

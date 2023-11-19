@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations.Schema;
 using backend.Domain.Interfaces;
-using backend.Infrastructure.Interfaces;
+using backend.Infrastructure.Common;
 
 namespace backend.Infrastructure.Entities;
 

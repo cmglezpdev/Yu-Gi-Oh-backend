@@ -1,11 +1,10 @@
-using backend.Presentation.DTOs;
-using backend.Infrastructure.Entities;
-using backend.Application.Services;
-using Microsoft.AspNetCore.Mvc;
 using AutoMapper;
-using backend.Application.Repositories;
+using backend.Application.Services;
+using backend.Infrastructure.Entities;
+using backend.Presentation.DTOs.Deck;
+using Microsoft.AspNetCore.Mvc;
 
-namespace backend.Application.Controllers;
+namespace backend.Presentation.Controllers;
 
 [ApiController]    
 [Route("api/[controller]")]

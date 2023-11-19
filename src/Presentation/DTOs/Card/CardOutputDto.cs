@@ -1,9 +1,9 @@
 using backend.Infrastructure.Entities;
 
-namespace backend.Presentation.DTOs;
+namespace backend.Presentation.DTOs.Card;
 
-#pragma warning disable CS8618
-public class CardOutputDto
+    #pragma warning disable CS8618
+public record CardOutputDto
 {
     public Guid Id { get; set; }
     public string Name { get; set; }

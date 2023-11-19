@@ -1,6 +1,7 @@
 using AutoMapper;
-using backend.Application.Interfaces;
+using backend.Application.Interface;
 using backend.Application.Repositories;
+using backend.Domain;
 using backend.Domain.Entities;
 using backend.Infrastructure.Entities;
 using Microsoft.EntityFrameworkCore;

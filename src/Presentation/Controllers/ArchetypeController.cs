@@ -1,5 +1,6 @@
 using AutoMapper;
 using backend.Application.Services;
+using backend.Domain;
 using backend.Domain.Entities;
 using backend.Infrastructure.Entities;
 using backend.Presentation.DTOs;

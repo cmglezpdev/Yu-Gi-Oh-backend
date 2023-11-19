@@ -1,7 +1,8 @@
 using AutoMapper;
 using backend.Application.Repositories;
-using backend.Domain.Entities;
+using backend.Domain;
 using backend.Infrastructure.Entities;
+using backend.Presentation.DTOs.Deck;
 using Microsoft.EntityFrameworkCore;
 
 namespace backend.Infrastructure.Repositories;

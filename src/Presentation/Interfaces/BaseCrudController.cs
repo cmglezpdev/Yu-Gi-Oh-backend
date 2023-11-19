@@ -1,6 +1,7 @@
+using backend.Application.Interface;
+using backend.Infrastructure.Common;
 using Microsoft.AspNetCore.Mvc;
-using backend.Application.Interfaces;
-using backend.Infrastructure.Interfaces;
+
 namespace backend.Presentation.Interfaces;
 
 [ApiController]

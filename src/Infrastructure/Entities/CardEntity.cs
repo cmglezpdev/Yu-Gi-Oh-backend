@@ -1,5 +1,5 @@
 using System.ComponentModel.DataAnnotations.Schema;
-using backend.Infrastructure.Interfaces;
+using backend.Infrastructure.Common;
 
 namespace backend.Infrastructure.Entities;
 

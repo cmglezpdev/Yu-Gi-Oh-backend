@@ -1,6 +1,7 @@
+using backend.Domain.Entities;
 using backend.Domain.Interfaces;
 
-namespace backend.Domain.Entities;
+namespace backend.Domain;
 
 public class SpellCardDomain : ICard
 {

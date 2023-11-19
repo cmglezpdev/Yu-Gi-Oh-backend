@@ -1,26 +1,27 @@
 using System.Text.Json;
 using AutoMapper;
-using backend.Domain.Entities;
+using backend.Domain;
 using backend.Infrastructure.Entities;
+using backend.Infrastructure.Seed.Interfaces;
 using Microsoft.EntityFrameworkCore;
 namespace backend.Infrastructure.Seed;
 
 
 public class LocalizationSeed : ISeedCommand
 {
-  private readonly AppDbContext context;
-  private readonly IMapper mapper;
+  private readonly AppDbContext _context;
+  private readonly IMapper _mapper;
 
   public LocalizationSeed(AppDbContext context, IMapper mapper)
   {
-    this.context = context;
-    this.mapper = mapper;
+    _context = context;
+    _mapper = mapper;
   }
 
 
   public async Task<bool> Execute()
   {
-    var atLeastAProvince = await context.Provinces.FirstOrDefaultAsync();
+    var atLeastAProvince = await _context.Provinces.FirstOrDefaultAsync();
     if (atLeastAProvince != null) return true;
 
     try
@@ -33,11 +34,11 @@ public class LocalizationSeed : ISeedCommand
         ProvinceDomain province = new ProvinceDomain(localization.nombre);
         foreach (var name in localization.municipios)
         {
-          province.AddMuncipality(new MunicipalityDomain(name));
+          province.AddMuncipality(new MunicipalityDomain(name, null));
         }
 
-        await context.Provinces.AddAsync(mapper.Map<Province>(province));
-        await context.SaveChangesAsync();
+        await _context.Provinces.AddAsync(_mapper.Map<Province>(province));
+        await _context.SaveChangesAsync();
       }
       return true;
     }

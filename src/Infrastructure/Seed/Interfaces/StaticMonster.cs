@@ -1,4 +1,4 @@
-namespace backend.Infrastructure.Seed;
+namespace backend.Infrastructure.Seed.Interfaces;
 
 #pragma warning disable CS8618
 public class StaticMonster

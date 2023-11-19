@@ -1,4 +1,4 @@
-namespace backend.Presentation.DTOs;
+namespace backend.Presentation.DTOs.Deck;
 
 
 #pragma warning disable CS8618

@@ -1,4 +1,4 @@
-namespace backend.Infrastructure.Seed;
+namespace backend.Infrastructure.Seed.Interfaces;
 
 public interface ISeedCommand
 {

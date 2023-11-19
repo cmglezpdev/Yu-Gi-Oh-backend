@@ -1,10 +1,9 @@
+using backend.Domain.Entities;
 using backend.Domain.Interfaces;
-using backend.Infrastructure.Entities;
 
-namespace backend.Domain.Entities;
+namespace backend.Domain;
 
-
-public class MonsterCardDomain : ICard
+public class TrapCardDomain : ICard
 {
   public Guid Id { get; set; }
   public string Name { get; set; }
@@ -14,31 +13,18 @@ public class MonsterCardDomain : ICard
   public string ImageUrl { get; set; }
   public string ImageUrlSmall { get; set; }
   public string ImageUrlCropped { get; set; }
-  public string Race { get; set; }
-  public int? Level { get; set; }
-  public int? Atk { get; set; }
-  public int? Def { get; set; }
   public ArchetypeDomain? Archetype { get; set; }
 
-  public MonsterCardDomain(
-    string name, string type, string desc,
-    string imageUrl, string imageUrlSmall,
-    string imageUrlCropped, string race,
-    int? level, int? atk, int? def, ArchetypeDomain? archetype
-  )
+  public TrapCardDomain(string name, string type, string desc, string imageUrl, string imageUrlSmall, string imageUrlCropped, ArchetypeDomain? archetype)
   {
     Id = new Guid();
     Name = name;
     Type = type;
     Desc = desc;
-    TypeCard = TypeCards.Monster;
+    TypeCard = TypeCards.Trap;
     ImageUrl = imageUrl;
     ImageUrlSmall = imageUrlSmall;
     ImageUrlCropped = imageUrlCropped;
-    Race = race;
-    Level = level;
-    Atk = atk;
-    Def = def;
     Archetype = archetype;
   }
 }

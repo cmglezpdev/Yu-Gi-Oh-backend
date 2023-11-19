@@ -11,7 +11,7 @@ public class MunicipalityService
     _municipalityRepository = municipalityRepository;
   }
 
-  public async Task<Municipality> GetMunicipalityByIdAsync(Guid Id)
+  public async Task<Municipality?> GetMunicipalityByIdAsync(Guid Id)
   {
     return await _municipalityRepository.GetMunicipalityByIdAsync(Id);
   }

@@ -3,6 +3,9 @@ using AutoMapper;
 using backend.Infrastructure.Entities;
 using backend.Application.Services;
 using backend.Presentation.DTOs;
+using backend.Presentation.DTOs.Province;
+using Microsoft.AspNetCore.Authorization;
+
 namespace backend.Presentation.Controllers;
 
 [ApiController]

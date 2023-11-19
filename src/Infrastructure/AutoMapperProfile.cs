@@ -1,7 +1,14 @@
 using AutoMapper;
+using backend.Domain;
 using backend.Domain.Entities;
 using backend.Infrastructure.Entities;
 using backend.Presentation.DTOs;
+using backend.Presentation.DTOs.Archetype;
+using backend.Presentation.DTOs.Deck;
+using backend.Presentation.DTOs.Municipality;
+using backend.Presentation.DTOs.Province;
+using backend.Presentation.DTOs.User;
+
 namespace backend.Infrastructure;
 public class AutoMapperProfiles : Profile
 {
@@ -33,7 +40,7 @@ public class AutoMapperProfiles : Profile
     CreateMap<MunicipalityDomain, Municipality>()
       .ForMember(dto => dto.Id, ent => ent.MapFrom(src => src.Id))
       .ForMember(dto => dto.Name, ent => ent.MapFrom(src => src.Name));
-
+    
     CreateMap<ProvinceDomain, Province>()
       .ForMember(dto => dto.Id, ent => ent.MapFrom(src => src.Id))
       .ForMember(dto => dto.Name, ent => ent.MapFrom(src => src.Name))
@@ -51,50 +58,13 @@ public class AutoMapperProfiles : Profile
       .ForMember(dto => dto.ExtraDeck, ent => ent.MapFrom(src => src.ExtraDeck))
       .ForMember(dto => dto.ArchetypeId, ent => ent.MapFrom(src => src.ArchetypeId))
       .ForMember(dto => dto.UserId, ent => ent.MapFrom(src => src.UserId));
-
-    // CreateMap<Card, CardOutputDto>()
+    
+    // CreateMap<User, UserOutputDto>()
     //   .ForMember(dto => dto.Id, ent => ent.MapFrom(src => src.Id))
+    //   .ForMember(dto => dto.UserName, ent => ent.MapFrom(src => src.UserName))
+    //   .ForMember(dto => dto.Email, ent => ent.MapFrom(src => src.Email))
     //   .ForMember(dto => dto.Name, ent => ent.MapFrom(src => src.Name))
-    //   .ForMember(dto => dto.Type, ent => ent.MapFrom(src => src.Type))
-    //   .ForMember(dto => dto.Desc, ent => ent.MapFrom(src => src.Desc))
-    //   .ForMember(dto => dto.ImageUrl, ent => ent.MapFrom(src => src.ImageUrl))
-    //   .ForMember(dto => dto.ImageUrlSmall, ent => ent.MapFrom(src => src.ImageUrlSmall))
-    //   .ForMember(dto => dto.ImageUrlCropped, ent => ent.MapFrom(src => src.ImageUrlCropped));
-    // .ForMember(dto => dto.ArchetypeId, ent => ent.MapFrom(src => src.Archetype.Id))
-    // .ForMember(dto => dto.Monster, ent => ent.MapFrom(src => src.Monster)); ;
-
-    // CreateMap<MonsterCard, MonsterCardOutputDto>()
-    //   .ForMember(dto => dto.Id, ent => ent.MapFrom(src => src.Id))
-    //   .ForMember(dto => dto.Race, ent => ent.MapFrom(src => src.Race))
-    //   .ForMember(dto => dto.Level, ent => ent.MapFrom(src => src.Level))
-    //   .ForMember(dto => dto.Atk, ent => ent.MapFrom(src => src.Atk))
-    //   .ForMember(dto => dto.Def, ent => ent.MapFrom(src => src.Def))
-    //   .ForMember(dto => dto.CardId, ent => ent.MapFrom(src => src.Card));
-
-
-
-    // CreateMap<CardDomain, Card>()
-    //   .ForMember(dto => dto.Id, ent => ent.MapFrom(src => src.Id))
-    //   .ForMember(dto => dto.Name, ent => ent.MapFrom(src => src.Name))
-    //   .ForMember(dto => dto.Type, ent => ent.MapFrom(src => src.Type))
-    //   .ForMember(dto => dto.Desc, ent => ent.MapFrom(src => src.Desc))
-    //   .ForMember(dto => dto.ImageUrl, ent => ent.MapFrom(src => src.ImageUrl))
-    //   .ForMember(dto => dto.ImageUrlSmall, ent => ent.MapFrom(src => src.ImageUrlSmall))
-    //   .ForMember(dto => dto.ImageUrlCropped, ent => ent.MapFrom(src => src.ImageUrlCropped));
-    // .ForMember(dto => dto.Monster, ent => ent.MapFrom(src => src.Monster));
-
-    // CreateMap<MonsterDomain, MonsterCard>()
-    //   .ForMember(dto => dto.Id, ent => ent.MapFrom(src => src.Id))
-    //   .ForMember(dto => dto.Race, ent => ent.MapFrom(src => src.Race))
-    //   .ForMember(dto => dto.Level, ent => ent.MapFrom(src => src.Level))
-    //   .ForMember(dto => dto.Atk, ent => ent.MapFrom(src => src.Atk))
-    //   .ForMember(dto => dto.Def, ent => ent.MapFrom(src => src.Def));
-
+    //   .ForMember(dto => dto.Municipality.Id, ent.MapFrom(src => src.Municipality.Id))
+    //   .ForMember(dto => dto.Municipality.Name, ent => ent.MapFrom(src => src.Municipality.Name))
   }
 }
-
-// Mapping Flow
-// Se recibe inputDto y se crea un objeto de dominio
-// el objeto de dominio se mapea a una entidad
-// la entidad se guarda en la base de datos
-// se mapea la entidad a un outputDto

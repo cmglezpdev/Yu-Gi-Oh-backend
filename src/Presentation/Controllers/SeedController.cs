@@ -1,4 +1,5 @@
 using backend.Infrastructure.Seed;
+using backend.Infrastructure.Seed.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 namespace backend.Presentation.Controllers;
 

@@ -4,6 +4,8 @@ using Microsoft.AspNetCore.Mvc;
 using backend.Infrastructure.Entities;
 using backend.Application.Services;
 using backend.Presentation.DTOs;
+using backend.Presentation.DTOs.Card;
+
 namespace backend.Presentation.Controllers;
 
 [ApiController]

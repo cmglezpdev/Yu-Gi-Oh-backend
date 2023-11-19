@@ -1,8 +1,8 @@
 using System.Text.Json;
 using AutoMapper;
-using backend.Domain.Entities;
 using backend.Domain.Interfaces;
 using backend.Infrastructure.Entities;
+using backend.Infrastructure.Seed.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
 namespace backend.Infrastructure.Seed;

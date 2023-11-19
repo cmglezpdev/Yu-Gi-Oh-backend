@@ -1,8 +1,9 @@
 using System.Linq.Expressions;
 using AutoMapper;
-using backend.Infrastructure.Interfaces;
+using backend.Infrastructure.Common;
 using Microsoft.EntityFrameworkCore;
-namespace backend.Application.Interfaces;
+
+namespace backend.Application.Interface;
 
 public abstract class BaseCrudService<Entity, ModelDto> where Entity : PlatformModel where ModelDto : class
 {

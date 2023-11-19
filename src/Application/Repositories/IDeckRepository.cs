@@ -1,4 +1,5 @@
 using backend.Infrastructure.Entities;
+using backend.Presentation.DTOs.Deck;
 
 namespace backend.Application.Repositories{
 

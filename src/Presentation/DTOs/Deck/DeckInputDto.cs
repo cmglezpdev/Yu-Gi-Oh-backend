@@ -1,4 +1,4 @@
-namespace backend.Application.Repositories;
+namespace backend.Presentation.DTOs.Deck;
 
 #pragma warning disable CS8618
 public class DeckInputDto {

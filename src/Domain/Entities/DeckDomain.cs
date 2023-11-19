@@ -1,8 +1,4 @@
-
-using backend.Domain.Interfaces;
-using backend.Infrastructure.Entities;
-
-namespace backend.Domain.Entities;
+namespace backend.Domain;
 public class DeckDomain
 {
     public Guid Id { get; set; }

@@ -3,5 +3,5 @@ namespace backend.Application.Repositories;
 
 public interface IMunicipalityRepository : IRepository
 {
-  Task<Municipality> GetMunicipalityByIdAsync(Guid Id);
+  Task<Municipality?> GetMunicipalityByIdAsync(Guid id);
 }

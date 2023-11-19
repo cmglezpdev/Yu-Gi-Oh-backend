@@ -11,11 +11,11 @@ public class MunicipalityRepository : IMunicipalityRepository
     _context = context;
   }
 
-  public async Task<Municipality> GetMunicipalityByIdAsync(Guid Id)
+  public async Task<Municipality?> GetMunicipalityByIdAsync(Guid id)
   {
-    IQueryable<Municipality> query = _context.Set<Municipality>()
-      .Where(m => m.Id == Id)
+    IQueryable<Municipality?> query = _context.Set<Municipality>()
+      .Where(m => m.Id == id)
       .Include(m => m.Province);
-    return await query.FirstOrDefaultAsync() ?? throw new BadHttpRequestException($"Municipality with id {Id} not found.");
+    return await query.FirstOrDefaultAsync();
   }
 }

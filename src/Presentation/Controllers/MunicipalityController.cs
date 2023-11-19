@@ -4,6 +4,8 @@ using AutoMapper;
 using backend.Application.Services;
 using backend.Infrastructure.Entities;
 using backend.Presentation.DTOs;
+using backend.Presentation.DTOs.Municipality;
+
 namespace backend.Presentation.Controllers;
 
 [ApiController]

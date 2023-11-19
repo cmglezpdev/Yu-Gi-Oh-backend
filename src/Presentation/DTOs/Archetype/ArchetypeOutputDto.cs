@@ -1,6 +1,4 @@
-using backend.Infrastructure.Entities;
-
-namespace backend.Presentation.DTOs;
+namespace backend.Presentation.DTOs.Archetype;
 
 #pragma warning disable CS8618
 public class ArchetypeOutputDto

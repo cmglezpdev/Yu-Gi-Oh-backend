@@ -1,7 +1,7 @@
 using AutoMapper;
-using backend.Application.Interfaces;
 using backend.Application.Repositories;
 using backend.Infrastructure.Entities;
+using backend.Presentation.DTOs.Deck;
 using Microsoft.EntityFrameworkCore;
 
 namespace backend.Application.Services;

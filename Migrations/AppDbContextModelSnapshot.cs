@@ -44,7 +44,7 @@ namespace backend.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("archetypes", (string)null);
+                    b.ToTable("archetypes");
                 });
 
             modelBuilder.Entity("backend.Infrastructure.Entities.Card", b =>
@@ -98,7 +98,7 @@ namespace backend.Migrations
 
                     b.HasIndex("ArchetypeId");
 
-                    b.ToTable("cards", (string)null);
+                    b.ToTable("cards");
                 });
 
             modelBuilder.Entity("backend.Infrastructure.Entities.Deck", b =>
@@ -142,7 +142,7 @@ namespace backend.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("decks", (string)null);
+                    b.ToTable("decks");
                 });
 
             modelBuilder.Entity("backend.Infrastructure.Entities.MonsterCard", b =>
@@ -181,7 +181,7 @@ namespace backend.Migrations
 
                     b.HasIndex("CardId");
 
-                    b.ToTable("monster_cards", (string)null);
+                    b.ToTable("monster_cards");
                 });
 
             modelBuilder.Entity("backend.Infrastructure.Entities.Municipality", b =>
@@ -211,7 +211,7 @@ namespace backend.Migrations
 
                     b.HasIndex("ProvinceId");
 
-                    b.ToTable("municipalities", (string)null);
+                    b.ToTable("municipalities");
                 });
 
             modelBuilder.Entity("backend.Infrastructure.Entities.Province", b =>
@@ -236,7 +236,7 @@ namespace backend.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("provinces", (string)null);
+                    b.ToTable("provinces");
                 });
 
             modelBuilder.Entity("backend.Infrastructure.Entities.SpellCard", b =>
@@ -262,7 +262,7 @@ namespace backend.Migrations
 
                     b.HasIndex("CardId");
 
-                    b.ToTable("spell_cards", (string)null);
+                    b.ToTable("spell_cards");
                 });
 
             modelBuilder.Entity("backend.Infrastructure.Entities.TrapCard", b =>
@@ -288,7 +288,7 @@ namespace backend.Migrations
 
                     b.HasIndex("CardId");
 
-                    b.ToTable("trap_cards", (string)null);
+                    b.ToTable("trap_cards");
                 });
 
             modelBuilder.Entity("backend.Infrastructure.Entities.User", b =>
@@ -322,6 +322,10 @@ namespace backend.Migrations
                         .HasColumnType("timestamp with time zone")
                         .HasDefaultValueSql("NOW()");
 
+                    b.Property<string>("UserName")
+                        .IsRequired()
+                        .HasColumnType("varchar(100)");
+
                     b.HasKey("Id");
 
                     b.HasIndex("Email")
@@ -329,7 +333,10 @@ namespace backend.Migrations
 
                     b.HasIndex("MunicipalityId");
 
-                    b.ToTable("users", (string)null);
+                    b.HasIndex("UserName")
+                        .IsUnique();
+
+                    b.ToTable("users");
                 });
 
             modelBuilder.Entity("backend.Infrastructure.Entities.Card", b =>

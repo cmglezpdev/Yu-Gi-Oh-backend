@@ -1,7 +1,7 @@
 version: "3"
 services:
   db:
-    container_name: yu-gi-oh-databse
+    container_name: yu-gi-oh-database
     image: postgres
     restart: always
     environment:
@@ -9,6 +9,6 @@ services:
       POSTGRES_USER: postgres
       POSTGRES_DB: yu_gi_oh
     ports:
-      - "5432:5432"
+      - "5469:5432"
     volumes:
       - ./db:/var/lib/postgresql/data

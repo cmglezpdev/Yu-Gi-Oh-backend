@@ -1,7 +1,9 @@
 using AutoMapper;
 using backend.Application.Services;
+using backend.Infrastructure.Common;
 using backend.Infrastructure.Entities;
 using backend.Presentation.DTOs.Deck;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace backend.Presentation.Controllers;
@@ -11,8 +13,8 @@ namespace backend.Presentation.Controllers;
 public class DecksController : ControllerBase 
 {
   private readonly DeckService _service;
-
   private readonly IMapper _mapper;
+  
   public DecksController(DeckService deckService, IMapper mapper)
   {
       _service = deckService;
@@ -20,17 +22,21 @@ public class DecksController : ControllerBase
   }
   
   [HttpGet]
-  public async Task<ActionResult<Deck>> GetDeckAll()
+  public async Task<ActionResult> GetDeckAll()
   {
     var decks = await _service.GetAllDecksAsync();
-    return Ok(decks);
+    return Ok(McResult<IEnumerable<DeckOutputDto>>.Succeed(
+      _mapper.Map<IEnumerable<DeckOutputDto>>(decks))
+    );
   }
 
   [HttpGet("{id:Guid}")]
-  public async Task<ActionResult<Deck>> GetDeckByIdAsync(Guid Id)
+  public async Task<ActionResult> GetDeckByIdAsync(Guid id)
   {
-    var deck = await _service.GetDeckByIdAsync(Id);
-    return Ok(_mapper.Map<DeckOutputDto>(deck));
+    var deck = await _service.GetDeckByIdAsync(id);
+    return Ok(McResult<DeckOutputDto>.Succeed(
+      _mapper.Map<DeckOutputDto>(deck))
+    );
   }
 
   [HttpPost]
@@ -41,16 +47,16 @@ public class DecksController : ControllerBase
   }
 
   [HttpPut("{id:Guid}")]
-  public async Task<ActionResult<Deck>> UpdateDeckAsync(Guid Id, DeckInputDto dto)
+  public async Task<ActionResult<Deck>> UpdateDeckAsync(Guid id, DeckInputDto dto)
   {
-      var deck = await _service.UpdateDeckAsync(Id, dto);
+      var deck = await _service.UpdateDeckAsync(id, dto);
       return Ok(_mapper.Map<DeckOutputDto>(deck));
   }
 
   [HttpDelete("{id:Guid}")]
-  public async Task<ActionResult<Deck>> DeleteDeck(Guid Id)
+  public async Task<ActionResult<Deck>> DeleteDeck(Guid id)
   {
-    var deck = await _service.DeleteDeckById(Id);
+    var deck = await _service.DeleteDeckById(id);
     return Ok(_mapper.Map<DeckOutputDto>(deck));
   }
 }

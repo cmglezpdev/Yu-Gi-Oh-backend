@@ -4,7 +4,7 @@ using backend.Presentation.DTOs.Deck;
 namespace backend.Application.Repositories{
 
     public interface IDeckRepository:IRepository{
-      Task<IEnumerable<Deck>> GetAllDecksAsync();
+      Task<IEnumerable<Deck>> GetDecksByUserAsync(Guid Id);
       Task<Deck> GetDeckByIdAsync(Guid Id);
       Task<Deck> CreateDeckAsync(DeckInputDto deck);
       Task<Deck> UpdateDeckAsync(Guid Id, DeckInputDto deck);

@@ -22,9 +22,11 @@ public class DeckRepository : IDeckRepository
         _mapper = mapper;
     }
 
-    public async Task<IEnumerable<Deck>> GetAllDecksAsync()
+    public async Task<IEnumerable<Deck>> GetDecksByUserAsync(Guid Id)
     {
-        return await _context.Decks.ToListAsync();
+        IQueryable<Deck> query = _context.Set<Deck>()
+            .Where(d => d.UserId == Id);
+        return await query.ToListAsync() ?? throw new BadHttpRequestException("No existe ese id") ;
     }
 
     public async Task<Deck> DeleteDeckByIdAsync(Guid Id)

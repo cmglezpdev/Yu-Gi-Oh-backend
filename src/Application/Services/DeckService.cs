@@ -15,9 +15,9 @@ public class DeckService
         context = _context;
         this.deckRepository = deckRepository;
     }
-    public async Task<IEnumerable<Deck>> GetAllDecksAsync()
+    public async Task<IEnumerable<Deck>> GetDecksByUserAsync(Guid id)
     {
-        return await deckRepository.GetAllDecksAsync();
+        return await deckRepository.GetDecksByUserAsync(id);
     }
     public async Task<Deck> DeleteDeckById(Guid Id)
     {

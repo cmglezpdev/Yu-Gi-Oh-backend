@@ -9,6 +9,6 @@ services:
       POSTGRES_USER: postgres
       POSTGRES_DB: yu_gi_oh
     ports:
-      - "5469:5432"
+      - "5432:5432"
     volumes:
       - ./db:/var/lib/postgresql/data

@@ -14,13 +14,9 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddCors(options =>
 {
-    options.AddDefaultPolicy(
-        policy =>
-        {
-            policy.WithOrigins("http://localhost:5173")
-                                    .AllowAnyHeader()
-                                    .AllowAnyMethod();
-        });
+    var frontEndUrl = builder.Configuration.GetSection("AppSettings:FrontEndUrl").Value;
+    if (frontEndUrl is null) throw new Exception("AppSettings:FrontEndUrl is not set in appSettings.json");
+    options.AddDefaultPolicy(policy => policy.WithOrigins(frontEndUrl).AllowAnyHeader().AllowAnyMethod());
 });
 
 builder.Services.AddControllers().AddJsonOptions(options =>

@@ -1,7 +1,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using backend.Infrastructure.Common;
-using Microsoft.EntityFrameworkCore;
+using backend.Infrastructure.Common.Enums;
 
 namespace backend.Infrastructure.Entities;
 
@@ -11,5 +11,5 @@ public class TournamentInscriptions : PlatformModel
     public Guid TournamentId { get; set; }
     public Guid UserId { get; set; }
     public Guid DeckId { get; set; }
-    public bool IsApproved { get; set; } = false;
+    public InscriptionStatus Status { get; set; } = InscriptionStatus.PENDING_TO_APPROVAL;
 }

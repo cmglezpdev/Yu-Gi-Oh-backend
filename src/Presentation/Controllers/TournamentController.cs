@@ -45,12 +45,4 @@ public class TournamentController : ControllerBase
         if(response.IsFailure) return BadRequest(response);
         return Ok(response);
     }
-    
-    [HttpPost("{tournamentId:Guid}/inscribe")]
-    public async Task<ActionResult> InscribePlayer(Guid tournamentId, [FromBody] InscribeDto input)
-    {
-        var response = await _tournamentsService.InscribePlayer(tournamentId, input);
-        if(response.IsFailure) return BadRequest(response);
-        return Ok(response);
-    }
 }

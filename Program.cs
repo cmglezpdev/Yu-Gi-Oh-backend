@@ -47,6 +47,7 @@ builder.Services.AddScoped<CardService>();
 builder.Services.AddScoped<ArchetypeService>();
 builder.Services.AddScoped<DeckService>();
 builder.Services.AddScoped<TournamentsService>();
+builder.Services.AddScoped<InscriptionService>();
 
 // repositories
 builder.Services.AddScoped<DbContext,AppDbContext>();

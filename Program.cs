@@ -29,6 +29,7 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddDbContext<AppDbContext>(options => options.UseNpgsql(builder.Configuration.GetConnectionString("yu-gi-oh-postgres-database")));
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+builder.Services.AddLogging(configure => configure.AddConsole());
 
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer();
 builder.Services.ConfigureOptions<JwtOptionsSetup>();
@@ -48,6 +49,7 @@ builder.Services.AddScoped<ArchetypeService>();
 builder.Services.AddScoped<DeckService>();
 builder.Services.AddScoped<TournamentsService>();
 builder.Services.AddScoped<InscriptionService>();
+builder.Services.AddScoped<DuelsService>();
 
 // repositories
 builder.Services.AddScoped<DbContext,AppDbContext>();

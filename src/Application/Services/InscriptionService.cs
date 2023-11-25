@@ -3,6 +3,7 @@ using backend.Infrastructure;
 using backend.Infrastructure.Common;
 using backend.Infrastructure.Common.Enums;
 using backend.Infrastructure.Entities;
+using backend.Presentation.DTOs.Inscriptions;
 using backend.Presentation.DTOs.Tournament;
 using Microsoft.EntityFrameworkCore;
 
@@ -17,9 +18,13 @@ public class InscriptionService
         _context = context;
     }
 
-    public async Task<McResult<IEnumerable<TournamentInscriptions>>> FindAllInscriptions()
+    public async Task<McResult<IEnumerable<TournamentInscriptions>>> FindAllInscriptions(InscriptionFilterDto filter)
     {
-        var inscriptions = await _context.TournamentInscriptions.ToListAsync();
+        var query = _context.TournamentInscriptions.AsQueryable();
+        if(filter.TournamentId is not null) query = query.Where(ti => ti.TournamentId == filter.TournamentId);
+        if(filter.Status is not null) query = query.Where(ti => ti.Status == filter.Status);
+        
+        var inscriptions = await query.ToListAsync();
         return McResult<IEnumerable<TournamentInscriptions>>.Succeed(inscriptions);
     }
     

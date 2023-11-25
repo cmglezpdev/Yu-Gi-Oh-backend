@@ -17,9 +17,9 @@ public class InscriptionController : ControllerBase
     }
     
     [HttpGet]
-    public async Task<ActionResult> FindAllInscriptions()
+    public async Task<ActionResult> FindAllInscriptions([FromQuery]InscriptionFilterDto filter)
     {
-        var response = await _service.FindAllInscriptions();
+        var response = await _service.FindAllInscriptions(filter);
         if(response.IsFailure) return BadRequest(response);
         return Ok(response);
     }

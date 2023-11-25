@@ -16,8 +16,6 @@ public class DuelsEntity : PlatformModel
     public int Round { get; set; }
     public int DuelNumber { get; set; } = 0;
     
-    public DuelsEntity() {}
-    
     public DuelsEntity(Guid tournamentId, Guid playerAId, Guid playerBId, int round = 0)
     {
         TournamentId = tournamentId;
@@ -31,11 +29,14 @@ public class DuelsEntity : PlatformModel
         if(winner != 'A' && winner != 'B')
             return McResult<string>.Failure("Invalid winner. Must be A or B", ErrorCodes.InvalidInput);
 
+        if(PlayerWinner is not null)
+            return McResult<string>.Failure("The duel has already been played", ErrorCodes.OperationError);
+        
         DuelNumber++;
         if(winner == 'A') PlayerAScore++;
         else PlayerBScore++;
 
-        if (DuelNumber == 3)
+        if (DuelNumber == 3 || (DuelNumber == 2 && PlayerAScore != PlayerBScore))
         {
             PlayerWinner = PlayerAScore > PlayerBScore ? PlayerAId : PlayerBId;
         }

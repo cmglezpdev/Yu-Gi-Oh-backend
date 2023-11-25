@@ -31,10 +31,18 @@ public class DuelsController : ControllerBase
         return Ok(response);
     }
     
-    [HttpPost("make-next-round")]
-    public async Task<ActionResult> MakeNextRound([FromBody] MakeNextRoundDto dto)
+    [HttpPost("make-round-after-mixin")]
+    public async Task<ActionResult> MakeNextRound([FromBody] MakeRoundAfterMixinDto afterMixinDto)
     {
-        var response = await _service.MakeNextRound(dto.TournamentId, dto.CurrentRound, dto.AmountOfPlayers);
+        var response = await _service.MakeRoundAfterMixin(afterMixinDto.TournamentId, afterMixinDto.AmountOfPlayers);
+        if (response.IsFailure) return BadRequest(response);
+        return Ok(response);
+    }
+    
+    [HttpPost("make-next-round")]
+    public async Task<ActionResult> MakeNextRound([FromBody] MakeNextRoundDto nextRoundDto)
+    {
+        var response = await _service.MakeNextRound(nextRoundDto.TournamentId);
         if (response.IsFailure) return BadRequest(response);
         return Ok(response);
     }

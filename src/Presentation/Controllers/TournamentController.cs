@@ -30,6 +30,15 @@ public class TournamentController : ControllerBase
         return Ok(response);
     }
     
+    
+    [HttpGet("{id:Guid}/winner")]
+    public async Task<ActionResult> FindTournamentWinner(Guid id)
+    {   
+        var response = await _tournamentsService.FindTournamentWinner(id);
+        if(response.IsFailure) return BadRequest(response);
+        return Ok(response);
+    }
+    
     [HttpGet("{id:Guid}")]
     public async Task<ActionResult> FindTournamentById(Guid id)
     {

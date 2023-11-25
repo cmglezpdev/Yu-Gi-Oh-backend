@@ -30,6 +30,8 @@ public class TournamentsService
             : McResult<Tournament>.Succeed(tournament);
     } 
     
+    
+    
     public async Task<McResult<string>> CreateTournament(TournamentInputDto input)
     {
         var Id = Guid.NewGuid();
@@ -45,5 +47,29 @@ public class TournamentsService
         await _context.SaveChangesAsync();
 
         return McResult<string>.Succeed("Tournament created successfully");
+    }
+
+    public async Task<McResult<User>> FindTournamentWinner(Guid tournamentId)
+    {
+        var exitsTournament = await _context.Tournaments
+            .Where(t => t.Id == tournamentId)
+            .AnyAsync();
+        
+        if(exitsTournament == false) return McResult<User>.Failure("The tournament not exits");
+        
+        // Get current round
+        var currentRound = await _context.Duels
+            .Where(d => d.TournamentId == tournamentId)
+            .MaxAsync(d => d.Round);
+
+        var duels = await _context.Duels
+            .Where(d => d.TournamentId == tournamentId && d.Round == currentRound)
+            .ToListAsync();
+
+        if(duels.Count > 1 || duels[0].PlayerWinner is null) 
+            return McResult<User>.Failure("The tournament has not finished yet");
+        
+        var user = await _context.Users.FirstAsync(u => u.Id == duels[0].PlayerWinner);
+        return McResult<User>.Succeed(user);
     }
 }

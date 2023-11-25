@@ -20,6 +20,7 @@ public class AppDbContext : DbContext
   public DbSet<Archetype> Archetypes { get; set; }
   public DbSet<Deck> Decks { get; set; }
   public DbSet<Tournament> Tournaments { get; set; }
+  public DbSet<DuelsEntity> Duels { get; set; }
   
   public DbSet<TournamentInscriptions> TournamentInscriptions { get; set; }
 

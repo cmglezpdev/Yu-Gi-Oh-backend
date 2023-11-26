@@ -36,15 +36,16 @@ public class AuthController : ControllerBase
     public async Task<ActionResult> SignUp([FromBody] SignUpInputDto input)
     {
         var userByEmail = await _userRepository.GetUserByEmailAsync(input.Email);
-        Console.WriteLine(userByEmail.IsFailure);
-        Console.WriteLine(userByEmail.IsSuccess);
-        if (userByEmail.IsSuccess) return BadRequest(userByEmail);
+        if (userByEmail.IsSuccess) 
+            return BadRequest(McResult<string>.Failure("The user already exists"));
         
         var userByUserName = await _userRepository.GetUserByUserNameAsync(input.UserName);
-        if (userByUserName.IsSuccess) return BadRequest(userByUserName);
+        if (userByUserName.IsSuccess) 
+            return BadRequest(McResult<string>.Failure("The user already exists"));
         
         var municipality = await _municipalityRepository.GetMunicipalityByIdAsync(input.MunicipalityId);
-        if(municipality is null) return BadRequest(McResult<Municipality>.Failure($"Municipality with id {input.MunicipalityId} not found", ErrorCodes.NotFound));
+        if(municipality is null) 
+            return BadRequest(McResult<string>.Failure($"Municipality with id {input.MunicipalityId} not found", ErrorCodes.NotFound));
 
         var userDomain = new UserDomain(input.Email, input.UserName, input.Password, input.Name, new MunicipalityDomain(municipality.Name, municipality.Id));
         var userPersistent = await _userRepository.CreateUserAsync(new UserInputDto()
@@ -78,7 +79,7 @@ public class AuthController : ControllerBase
             ? await _userRepository.GetUserByEmailAsync(input.Email!)
             : await _userRepository.GetUserByUserNameAsync(input.UserName!);
         
-        if (user.IsFailure) return BadRequest(user);
+        if (user.IsFailure) return BadRequest(McResult<string>.Failure("Error to signup user"));
         if (BCrypt.Net.BCrypt.Verify(input.Password, user.Result.Password) == false) 
             return BadRequest(McResult<string>.Failure("Invalid password", ErrorCodes.InvalidInput));
 

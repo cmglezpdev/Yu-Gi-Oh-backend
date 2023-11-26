@@ -16,7 +16,7 @@ builder.Services.AddCors(options =>
 {
     var frontEndUrl = builder.Configuration.GetSection("AppSettings:FrontEndUrl").Value;
     if (frontEndUrl is null) throw new Exception("AppSettings:FrontEndUrl is not set in appSettings.json");
-    options.AddDefaultPolicy(policy => policy.WithOrigins(frontEndUrl).AllowAnyHeader().AllowAnyMethod());
+    options.AddDefaultPolicy(policy => policy.WithOrigins("*").AllowAnyHeader().AllowAnyMethod());
 });
 
 builder.Services.AddControllers().AddJsonOptions(options =>

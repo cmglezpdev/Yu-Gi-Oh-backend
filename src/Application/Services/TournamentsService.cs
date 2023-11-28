@@ -18,7 +18,10 @@ public class TournamentsService
 
     public async Task<McResult<IEnumerable<Tournament>>> FindAllTournaments()
     {
-        var tournaments = await _context.Tournaments.ToListAsync();
+        var tournaments = await _context.Tournaments
+            .Include(t => t.User)
+            .Include(t => t.Municipality)
+            .ToListAsync();
         return McResult<IEnumerable<Tournament>>.Succeed(tournaments);
     }
     
@@ -40,6 +43,7 @@ public class TournamentsService
             Id = Id,
             Name = input.Name,
             Description = input.Description,
+            UserId = input.UserId,
             MunicipalityId = input.MunicipalityId,
             StartDate = input.StartDate,
             EndDate = input.EndDate
@@ -66,10 +70,10 @@ public class TournamentsService
             .Where(d => d.TournamentId == tournamentId && d.Round == currentRound)
             .ToListAsync();
 
-        if(duels.Count > 1 || duels[0].PlayerWinner is null) 
+        if(duels.Count > 1 || duels[0].PlayerWinnerId is null) 
             return McResult<User>.Failure("The tournament has not finished yet");
         
-        var user = await _context.Users.FirstAsync(u => u.Id == duels[0].PlayerWinner);
+        var user = await _context.Users.FirstAsync(u => u.Id == duels[0].PlayerWinnerId);
         return McResult<User>.Succeed(user);
     }
 }

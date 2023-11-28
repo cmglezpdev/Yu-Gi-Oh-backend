@@ -15,6 +15,12 @@ public class DuelsController : ControllerBase
         _service = service;
     }
 
+    [HttpGet]
+    public async Task<ActionResult> GetDuels([FromQuery] FilterDuelDto filter)
+    {
+        return Ok(await _service.GetDuels(filter));
+    }
+    
     [HttpPost("set-initial-duels")]
     public async Task<ActionResult> SetInitialDuels([FromBody] SetInitialDuelsDto dto)
     {

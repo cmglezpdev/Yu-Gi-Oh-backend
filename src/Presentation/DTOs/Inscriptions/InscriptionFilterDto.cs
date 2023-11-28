@@ -6,4 +6,5 @@ public class InscriptionFilterDto
 {   
     public Guid? TournamentId { get; set; }
     public InscriptionStatus? Status { get; set; }
+    public Guid? UserId { get; set;}
 }

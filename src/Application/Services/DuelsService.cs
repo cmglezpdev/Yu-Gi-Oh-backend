@@ -3,6 +3,7 @@ using backend.Infrastructure;
 using backend.Infrastructure.Common;
 using backend.Infrastructure.Common.Enums;
 using backend.Infrastructure.Entities;
+using backend.Presentation.DTOs.Duels;
 using backend.Presentation.DTOs.Inscriptions;
 using Microsoft.EntityFrameworkCore;
 
@@ -23,6 +24,22 @@ public class DuelsService
     }
 
 
+    public async Task<McResult<List<DuelsEntity>>> GetDuels(FilterDuelDto filter)
+    {
+        var query = _context.Duels
+            .Include(d => d.Tournament)
+            .Include(d => d.PlayerA)
+            .Include(d => d.PlayerB)
+            .Include(d => d.PlayerWinner)
+            .AsQueryable();
+
+        if (filter.TournamentId is not null) query = query.Where(d => d.TournamentId == filter.TournamentId);
+        if (filter.Round is not null) query = query.Where(d => d.Round == filter.Round);
+            
+        var duels = await query.ToListAsync();
+        return McResult<List<DuelsEntity>>.Succeed(duels);
+    }
+    
     public async Task<McResult<string>> SetInitialDuels(Guid tournamentId)
     {
         var playersResponse = await _inscriptionService.FindAllInscriptions(new InscriptionFilterDto()
@@ -76,7 +93,7 @@ public class DuelsService
         
         // There are no incomplete duels
         var incompleteDuels = await _context.Duels
-            .Where(d => d.PlayerWinner == null && d.TournamentId == tournamentId && d.Round == 0)
+            .Where(d => d.PlayerWinnerId == null && d.TournamentId == tournamentId && d.Round == 0)
             .FirstOrDefaultAsync();
 
         if (incompleteDuels is not null)
@@ -91,8 +108,8 @@ public class DuelsService
         
         // Get the must winners players with at least one win 
         var winnerPlayers = await _context.Duels
-            .Where(d => d.PlayerWinner != null && d.TournamentId == tournamentId && d.Round == 0)
-            .GroupBy(d => d.PlayerWinner)
+            .Where(d => d.PlayerWinnerId != null && d.TournamentId == tournamentId && d.Round == 0)
+            .GroupBy(d => d.PlayerWinnerId)
             .Select(group => new
             {
                 PlayerId = group.Key,
@@ -150,7 +167,7 @@ public class DuelsService
             .Where(d => d.TournamentId == tournamentId && d.Round == currentRound)
             .ToListAsync();
 
-        if (duelsInLastRound.Any(d => d.PlayerWinner is null) == true)
+        if (duelsInLastRound.Any(d => d.PlayerWinnerId is null) == true)
         {
             _logger.Log(LogLevel.Error, "The current round is not finished");
             return McResult<string>.Failure("The current round is not finished", ErrorCodes.OperationError);
@@ -165,7 +182,7 @@ public class DuelsService
         var players = new List<Guid>();
         foreach (var duel in duelsInLastRound)
         {
-            players.Add((Guid)duel.PlayerWinner!);
+            players.Add((Guid)duel.PlayerWinnerId!);
         }
         
         _logger.Log(LogLevel.Information, "Assigning duels randomly");

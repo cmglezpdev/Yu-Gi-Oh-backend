@@ -9,7 +9,10 @@ namespace backend.Infrastructure.Entities;
 public class TournamentInscriptions : PlatformModel
 {
     public Guid TournamentId { get; set; }
+    public Tournament Tournament { get; set; }
     public Guid UserId { get; set; }
+    public User User { get; set; }
     public Guid DeckId { get; set; }
+    public Deck Deck { get; set; }
     public InscriptionStatus Status { get; set; } = InscriptionStatus.PENDING_TO_APPROVAL;
 }

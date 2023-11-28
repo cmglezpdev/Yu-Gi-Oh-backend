@@ -13,4 +13,7 @@ public class Tournament: PlatformModel
     public DateTime EndDate { get; set; }
     public Guid MunicipalityId { get; set; }
     public Municipality Municipality { get; set; }
+
+    public Guid? UserId { get; set; }
+    public User? User { get; set; }
 }

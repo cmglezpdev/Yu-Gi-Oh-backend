@@ -1,4 +1,5 @@
 using System.ComponentModel.DataAnnotations.Schema;
+using backend.Application.Services;
 using backend.Common.Enums;
 using backend.Infrastructure.Common;
 
@@ -8,11 +9,15 @@ namespace backend.Infrastructure.Entities;
 public class DuelsEntity : PlatformModel
 {
     public Guid PlayerAId { get; set; }
+    public User PlayerA { get; set; }
     public Guid PlayerBId { get; set; }
+    public User PlayerB { get; set; }
     public int PlayerAScore { get; set; } = 0;
     public int PlayerBScore { get; set; } = 0;
-    public Guid? PlayerWinner { get; set; }
+    public Guid? PlayerWinnerId { get; set; }
+    public User? PlayerWinner { get; set; }
     public Guid TournamentId { get; set; }
+    public Tournament Tournament { get; set; }
     public int Round { get; set; }
     public int DuelNumber { get; set; } = 0;
     
@@ -29,7 +34,7 @@ public class DuelsEntity : PlatformModel
         if(winner != 'A' && winner != 'B')
             return McResult<string>.Failure("Invalid winner. Must be A or B", ErrorCodes.InvalidInput);
 
-        if(PlayerWinner is not null)
+        if(PlayerWinnerId is not null)
             return McResult<string>.Failure("The duel has already been played", ErrorCodes.OperationError);
         
         DuelNumber++;
@@ -38,7 +43,7 @@ public class DuelsEntity : PlatformModel
 
         if (DuelNumber == 3 || (DuelNumber == 2 && PlayerAScore != PlayerBScore))
         {
-            PlayerWinner = PlayerAScore > PlayerBScore ? PlayerAId : PlayerBId;
+            PlayerWinnerId = PlayerAScore > PlayerBScore ? PlayerAId : PlayerBId;
         }
         
         return McResult<string>.Succeed("");

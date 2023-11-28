@@ -20,19 +20,29 @@ public class InscriptionService
 
     public async Task<McResult<IEnumerable<TournamentInscriptions>>> FindAllInscriptions(InscriptionFilterDto filter)
     {
-        var query = _context.TournamentInscriptions.AsQueryable();
+        var query = _context.TournamentInscriptions
+            .Include(i => i.Tournament)
+            .Include(t => t.User)
+            .Include(t => t.Deck)
+            .AsQueryable();
+        
         if(filter.TournamentId is not null) query = query.Where(ti => ti.TournamentId == filter.TournamentId);
         if(filter.Status is not null) query = query.Where(ti => ti.Status == filter.Status);
-        
+        if(filter.UserId is not null) query = query.Where(ti => ti.UserId == filter.UserId);
+            
         var inscriptions = await query.ToListAsync();
         return McResult<IEnumerable<TournamentInscriptions>>.Succeed(inscriptions);
     }
     
-    public async Task<McResult<TournamentInscriptions>> FindInscriptionById(Guid Id)
+    public async Task<McResult<TournamentInscriptions>> FindInscriptionById(Guid id)
     {
-        var inscription = await _context.TournamentInscriptions.FirstOrDefaultAsync(t => t.Id == Id);
+        var inscription = await _context.TournamentInscriptions
+            .Include(i => i.User)
+            .Include(i => i.Deck)
+            .Include(i => i.Tournament)
+            .FirstOrDefaultAsync(t => t.Id == id);
         return inscription is null 
-            ? McResult<TournamentInscriptions>.Failure($"Inscription with id {Id} not found", ErrorCodes.NotFound) 
+            ? McResult<TournamentInscriptions>.Failure($"Inscription with id {id} not found", ErrorCodes.NotFound) 
             : McResult<TournamentInscriptions>.Succeed(inscription);
     } 
   

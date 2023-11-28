@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using backend.Infrastructure;
@@ -11,9 +12,11 @@ using backend.Infrastructure;
 namespace backend.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20231128014016_AddUserTournamentCreator")]
+    partial class AddUserTournamentCreator
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -171,7 +174,7 @@ namespace backend.Migrations
                     b.Property<int>("PlayerBScore")
                         .HasColumnType("integer");
 
-                    b.Property<Guid?>("PlayerWinnerId")
+                    b.Property<Guid?>("PlayerWinner")
                         .HasColumnType("uuid");
 
                     b.Property<int>("Round")
@@ -186,14 +189,6 @@ namespace backend.Migrations
                         .HasDefaultValueSql("NOW()");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("PlayerAId");
-
-                    b.HasIndex("PlayerBId");
-
-                    b.HasIndex("PlayerWinnerId");
-
-                    b.HasIndex("TournamentId");
 
                     b.ToTable("duels");
                 });
@@ -393,12 +388,6 @@ namespace backend.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("DeckId");
-
-                    b.HasIndex("TournamentId");
-
-                    b.HasIndex("UserId");
-
                     b.ToTable("tournament_inscriptions");
                 });
 
@@ -502,39 +491,6 @@ namespace backend.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("backend.Infrastructure.Entities.DuelsEntity", b =>
-                {
-                    b.HasOne("backend.Infrastructure.Entities.User", "PlayerA")
-                        .WithMany()
-                        .HasForeignKey("PlayerAId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("backend.Infrastructure.Entities.User", "PlayerB")
-                        .WithMany()
-                        .HasForeignKey("PlayerBId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("backend.Infrastructure.Entities.User", "PlayerWinner")
-                        .WithMany()
-                        .HasForeignKey("PlayerWinnerId");
-
-                    b.HasOne("backend.Infrastructure.Entities.Tournament", "Tournament")
-                        .WithMany()
-                        .HasForeignKey("TournamentId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("PlayerA");
-
-                    b.Navigation("PlayerB");
-
-                    b.Navigation("PlayerWinner");
-
-                    b.Navigation("Tournament");
-                });
-
             modelBuilder.Entity("backend.Infrastructure.Entities.MonsterCard", b =>
                 {
                     b.HasOne("backend.Infrastructure.Entities.Card", "Card")
@@ -581,33 +537,6 @@ namespace backend.Migrations
                         .HasForeignKey("UserId");
 
                     b.Navigation("Municipality");
-
-                    b.Navigation("User");
-                });
-
-            modelBuilder.Entity("backend.Infrastructure.Entities.TournamentInscriptions", b =>
-                {
-                    b.HasOne("backend.Infrastructure.Entities.Deck", "Deck")
-                        .WithMany()
-                        .HasForeignKey("DeckId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("backend.Infrastructure.Entities.Tournament", "Tournament")
-                        .WithMany()
-                        .HasForeignKey("TournamentId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("backend.Infrastructure.Entities.User", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Deck");
-
-                    b.Navigation("Tournament");
 
                     b.Navigation("User");
                 });

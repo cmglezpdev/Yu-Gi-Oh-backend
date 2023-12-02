@@ -24,6 +24,7 @@ public class InscriptionService
             .Include(i => i.Tournament)
             .Include(t => t.User)
             .Include(t => t.Deck)
+            .Include(i =>  i.Tournament.Municipality)
             .AsQueryable();
         
         if(filter.TournamentId is not null) query = query.Where(ti => ti.TournamentId == filter.TournamentId);

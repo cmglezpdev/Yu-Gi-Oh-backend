@@ -22,22 +22,13 @@ public class DecksController : ControllerBase
   }
   
   [HttpGet("{id:Guid}")]
-  public async Task<ActionResult> GetDeckByUser(Guid id)
+  public async Task<ActionResult> GetDeckByIdAsync(Guid id)
   {
-    var decks = await _service.GetDecksByUserAsync(id);
-    return Ok(McResult<IEnumerable<DeckOutputDto>>.Succeed(
-      _mapper.Map<IEnumerable<DeckOutputDto>>(decks))
+    var deck = await _service.GetDeckByIdAsync(id);
+    return Ok(McResult<DeckOutputDto>.Succeed(
+      _mapper.Map<DeckOutputDto>(deck))
     );
   }
-
-  // [HttpGet("{id:Guid}")]
-  // public async Task<ActionResult> GetDeckByIdAsync(Guid id)
-  // {
-  //   var deck = await _service.GetDeckByIdAsync(id);
-  //   return Ok(McResult<DeckOutputDto>.Succeed(
-  //     _mapper.Map<DeckOutputDto>(deck))
-  //   );
-  // }
 
   [HttpPost]
   public async Task<ActionResult<Deck>> CreateDeckAsync(DeckInputDto dto)

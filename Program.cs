@@ -50,6 +50,7 @@ builder.Services.AddScoped<DeckService>();
 builder.Services.AddScoped<TournamentsService>();
 builder.Services.AddScoped<InscriptionService>();
 builder.Services.AddScoped<DuelsService>();
+builder.Services.AddScoped<UserService>();
 
 // repositories
 builder.Services.AddScoped<DbContext,AppDbContext>();

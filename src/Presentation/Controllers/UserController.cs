@@ -18,6 +18,23 @@ public class UserController : ControllerBase
         _service = userService;
         _mapper = mapper;
     }
+
+    [HttpGet]
+    public async Task<ActionResult> GetAllUsers()
+    {
+        var users = await _service.GetAllUsersAsync();
+        if(users.IsFailure) return BadRequest(users);
+        return Ok(users);
+    }
+    
+    [HttpGet("{id:Guid}")]
+    public async Task<ActionResult> GetUserById(Guid id)
+    {
+        var user = await _service.GetUserByIdAsync(id);
+        if(user.IsFailure) return BadRequest(user);
+        return Ok(user);
+    }
+    
     [HttpGet("decks/{id:Guid}")]
     public async Task<ActionResult> GetDeckByUser(Guid id)
     {

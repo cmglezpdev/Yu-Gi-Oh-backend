@@ -118,4 +118,49 @@ public class UserRepository : IUserRepository
             .FirstAsync(u => u.Id == user.Id);
         return McResult<User>.Succeed(userPersistent);
     }
+
+    public async Task<McResult<IEnumerable<Deck>>> GetDecksByUserAsync(Guid id)
+    {
+        IQueryable<Deck> query = _context.Set<Deck>()
+            .Where(d => d.UserId == id);
+        
+        var decks = await query.ToListAsync();
+        return McResult<IEnumerable<Deck>>.Succeed(decks);
+    }
+
+    public async Task<McResult<IEnumerable<Tournament>>> GetTournamentsByUserAsync(Guid id)
+    {
+        var query = _context.Tournaments
+            .Include(m => m.Municipality)
+            .Where(t => t.UserId == id)
+            .AsQueryable();
+
+        var tournaments = await query.ToListAsync();
+        return McResult<IEnumerable<Tournament>>.Succeed(tournaments);
+    }
+
+    public async Task<McResult<IEnumerable<User>>> GetAllUserAsync()
+    {
+        var query = _context.Users
+            .Include(m => m.Municipality);
+
+        var users = await query.ToListAsync();
+        return McResult<IEnumerable<User>>.Succeed(users);
+    }
+
+    public async Task<McResult<int>> GetWinsByUserAsync(Guid id)
+    {
+        var query = _context.Duels
+            .Count(w => w.PlayerWinnerId == id);
+
+        return McResult<int>.Succeed(query);
+    }
+
+    public async Task<McResult<int>> GetLosesByUserAsync(Guid id)
+    {
+        var query = _context.Duels
+            .Count(w => (w.PlayerAId == id || w.PlayerBId == id) && (w.PlayerWinnerId != id));
+
+        return McResult<int>.Succeed(query);
+    }
 }

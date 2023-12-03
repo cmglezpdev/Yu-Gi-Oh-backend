@@ -28,9 +28,7 @@ public class DecksController : ControllerBase
   public async Task<ActionResult> GetDeckByIdAsync(Guid id)
   {
     var deck = await _service.GetDeckByIdAsync(id);
-    return Ok(McResult<DeckOutputDto>.Succeed(
-      _mapper.Map<DeckOutputDto>(deck))
-    );
+    return Ok(McResult<Deck>.Succeed(deck));
   }
 
   [HttpPost]

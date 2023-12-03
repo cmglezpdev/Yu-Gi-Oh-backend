@@ -45,9 +45,8 @@ public class UserController : ControllerBase
     public async Task<ActionResult> GetDeckByUser(Guid id)
     {
         var decks = await _service.GetDecksByUserAsync(id);
-        return Ok(McResult<IEnumerable<DeckOutputDto>>.Succeed(
-            _mapper.Map<IEnumerable<DeckOutputDto>>(decks))
-        );
+        if(decks.IsFailure) return BadRequest(decks);
+        return Ok((decks));
     }
 
     [HttpGet("tournaments/{id:Guid}")]
@@ -66,5 +65,23 @@ public class UserController : ControllerBase
         var response = await _service.UpdateUserRole(userId, dto);
         if(response.IsFailure) return BadRequest(response);
         return Ok(response);
+    }
+
+    [HttpGet("wins/{id:Guid}")]
+    [HasPermission(Permission.ReadTournament)]
+    public async Task<ActionResult> GetWinsByUser(Guid id)
+    {
+        var wins = await _service.GetWinsByUserAsync(id);
+        if(wins.IsFailure) return BadRequest(wins);
+        return Ok(wins);
+    }
+
+    [HttpGet("loses/{id:Guid}")]
+    [HasPermission(Permission.ReadTournament)]
+    public async Task<ActionResult> GetLosesByUser(Guid id)
+    {
+        var loses = await _service.GetLosesByUserAsync(id);
+        if(loses.IsFailure) return BadRequest(loses);
+        return Ok(loses);
     }
 }

@@ -21,14 +21,6 @@ public class DeckRepository : IDeckRepository
         _archetypeRepository = archetypeRepository;
         _mapper = mapper;
     }
-
-    public async Task<IEnumerable<Deck>> GetDecksByUserAsync(Guid Id)
-    {
-        IQueryable<Deck> query = _context.Set<Deck>()
-            .Where(d => d.UserId == Id);
-        return await query.ToListAsync() ?? throw new BadHttpRequestException("No existe ese id") ;
-    }
-
     public async Task<Deck> DeleteDeckByIdAsync(Guid Id)
     {
         var deck = await GetDeckByIdAsync(Id);
@@ -39,8 +31,9 @@ public class DeckRepository : IDeckRepository
 
     public async Task<Deck> GetDeckByIdAsync(Guid Id)
     {
-        IQueryable<Deck> query = _context.Set<Deck>()
-        .Where(m => m.Id == Id);
+        IQueryable<Deck> query = _context.Decks
+            .Include(a => a.Archetype)
+            .Where(m => m.Id == Id);
         return await query.FirstOrDefaultAsync() ?? throw new BadHttpRequestException("No existe ese id") ;
     }
 

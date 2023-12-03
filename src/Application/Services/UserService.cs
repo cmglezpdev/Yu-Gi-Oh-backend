@@ -13,27 +13,39 @@ public class UserService
     private readonly AppDbContext _context;
     private readonly IDeckRepository _deckRepository;
     private readonly RoleService _roleService;
+    private readonly IUserRepository _userRepository;
 
-    public UserService(AppDbContext context,IDeckRepository deckRepository, RoleService roleService)
+    public UserService(AppDbContext context, IDeckRepository deckRepository, RoleService roleService, IUserRepository userRepository)
     {
         _context = context;
         _deckRepository = deckRepository;
         _roleService = roleService;
-    }
-    public async Task<IEnumerable<Deck>> GetDecksByUserAsync(Guid id)
-    {
-        return await _deckRepository.GetDecksByUserAsync(id);
+        _userRepository = userRepository;
     }
 
-    public async Task<McResult<List<Tournament>>> GetTournamentsByUserAsync(Guid id)
+    public async Task<McResult<IEnumerable<Deck>>> GetDecksByUserAsync(Guid id)
     {
-        var query = _context.Tournaments
-            .Include(m => m.Municipality)
-            .Where(t => t.UserId == id)
-            .AsQueryable();
+        return await _userRepository.GetDecksByUserAsync(id);
+    }
 
-        var tournaments = await query.ToListAsync();
-        return McResult<List<Tournament>>.Succeed(tournaments);
+    public async Task<McResult<IEnumerable<Tournament>>> GetTournamentsByUserAsync(Guid id)
+    {
+        return await _userRepository.GetTournamentsByUserAsync(id);
+    }
+
+    public async Task<McResult<IEnumerable<User>>> GetAllUserAsync()
+    {
+        return await _userRepository.GetAllUserAsync();
+    }
+    
+    public async Task<McResult<int>> GetWinsByUserAsync(Guid id)
+    {
+        return await _userRepository.GetWinsByUserAsync(id);
+    }
+
+    public async Task<McResult<int>> GetLosesByUserAsync(Guid id)
+    {
+        return await _userRepository.GetLosesByUserAsync(id);
     }
 
     public async Task<McResult<User>> GetUserByIdAsync(Guid id)
@@ -70,7 +82,6 @@ public class UserService
 
         if (user is null)
         {
-            Console.WriteLine("Llegó al error");
             return McResult<List<string>>.Failure("User not found");
         }
         

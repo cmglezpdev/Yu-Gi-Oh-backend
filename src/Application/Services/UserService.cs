@@ -31,4 +31,9 @@ public class UserService
     {
         return await userRepository.GetAllUserAsync();
     }
+
+    public async Task<McResult<User>> GetUserByIdAsync(Guid id)
+    {
+        return await userRepository.GetUserByIdAsync(id);
+    }
 }

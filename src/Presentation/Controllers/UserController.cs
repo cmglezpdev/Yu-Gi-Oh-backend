@@ -26,6 +26,15 @@ public class UserController : ControllerBase
         if(users.IsFailure) return BadRequest(users);
         return Ok(users);
     }
+
+    [HttpGet("{id:Guid}")]
+    public async Task<ActionResult> GetUserById(Guid id)
+    {
+        var user = await _service.GetUserByIdAsync(id);
+        if(user.IsFailure) return BadRequest(user);
+        return Ok(user);
+    }
+
     [HttpGet("decks/{id:Guid}")]
     public async Task<ActionResult> GetDeckByUser(Guid id)
     {

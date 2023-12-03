@@ -31,8 +31,9 @@ public class DeckRepository : IDeckRepository
 
     public async Task<Deck> GetDeckByIdAsync(Guid Id)
     {
-        IQueryable<Deck> query = _context.Set<Deck>()
-        .Where(m => m.Id == Id);
+        IQueryable<Deck> query = _context.Decks
+            .Include(a => a.Archetype)
+            .Where(m => m.Id == Id);
         return await query.FirstOrDefaultAsync() ?? throw new BadHttpRequestException("No existe ese id") ;
     }
 

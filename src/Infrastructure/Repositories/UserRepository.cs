@@ -21,7 +21,10 @@ public class UserRepository : IUserRepository
     {
         try
         {
-            var user = await _context.Users.FirstOrDefaultAsync(u => u.Id == id);
+            var user = await _context.Users
+                .Include(m => m.Municipality)
+                .Include(p => p.Municipality.Province)
+                .FirstOrDefaultAsync(u => u.Id == id);
             return user is not null 
                 ? McResult<User>.Succeed(user) 
                 : McResult<User>.Failure($"User with id {id} not found", ErrorCodes.NotFound);

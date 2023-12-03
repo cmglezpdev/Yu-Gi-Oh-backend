@@ -1,6 +1,7 @@
 using backend.Common.Enums;
 using backend.Infrastructure;
 using backend.Infrastructure.Common;
+using backend.Infrastructure.Common.Enums;
 using backend.Infrastructure.Entities;
 using backend.Presentation.DTOs.Tournament;
 using Microsoft.EntityFrameworkCore;
@@ -75,5 +76,14 @@ public class TournamentsService
         
         var user = await _context.Users.FirstAsync(u => u.Id == duels[0].PlayerWinnerId);
         return McResult<User>.Succeed(user);
+    }
+
+    public async Task<McResult<int>> GetManyParticipantsInTorunament(Guid tournamentId)
+    {
+        var tournaments = await _context.TournamentInscriptions
+            .Where(t => (t.TournamentId == tournamentId && t.Status == InscriptionStatus.APPROVED))
+            .ToListAsync();
+
+        return McResult<int>.Succeed(tournaments.Count);
     }
 }

@@ -10,26 +10,25 @@ namespace backend.Application.Services;
 public class UserService
 {
     private readonly AppDbContext _context;
-    private readonly IDeckRepository deckRepository;
+    private readonly IUserRepository userRepository;
 
-    public UserService(AppDbContext context,IMapper _mapper,IDeckRepository deckRepository)
+    public UserService(AppDbContext context,IMapper _mapper,IUserRepository userRepository)
     {
         _context = context;
-        this.deckRepository = deckRepository;
+        this.userRepository = userRepository;
     }
-    public async Task<IEnumerable<Deck>> GetDecksByUserAsync(Guid id)
+    public async Task<McResult<IEnumerable<Deck>>> GetDecksByUserAsync(Guid id)
     {
-        return await deckRepository.GetDecksByUserAsync(id);
+        return await userRepository.GetDecksByUserAsync(id);
     }
 
-    public async Task<McResult<List<Tournament>>> GetTournamentsByUserAsync(Guid id)
+    public async Task<McResult<IEnumerable<Tournament>>> GetTournamentsByUserAsync(Guid id)
     {
-        var query = _context.Tournaments
-            .Include(m => m.Municipality)
-            .Where(t => t.UserId == id)
-            .AsQueryable();
+        return await userRepository.GetTournamentsByUserAsync(id);
+    }
 
-        var tournaments = await query.ToListAsync();
-        return McResult<List<Tournament>>.Succeed(tournaments);
+    public async Task<McResult<IEnumerable<User>>> GetAllUserAsync()
+    {
+        return await userRepository.GetAllUserAsync();
     }
 }

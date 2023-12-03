@@ -96,4 +96,33 @@ public class UserRepository : IUserRepository
         var userPersistent = await _context.Users.FirstAsync(u => u.Id == user.Id);
         return McResult<User>.Succeed(userPersistent);
     }
+
+    public async Task<McResult<IEnumerable<Deck>>> GetDecksByUserAsync(Guid id)
+    {
+        IQueryable<Deck> query = _context.Set<Deck>()
+            .Where(d => d.UserId == id);
+        
+        var decks = await query.ToListAsync();
+        return McResult<IEnumerable<Deck>>.Succeed(decks);
+    }
+
+    public async Task<McResult<IEnumerable<Tournament>>> GetTournamentsByUserAsync(Guid id)
+    {
+        var query = _context.Tournaments
+            .Include(m => m.Municipality)
+            .Where(t => t.UserId == id)
+            .AsQueryable();
+
+        var tournaments = await query.ToListAsync();
+        return McResult<IEnumerable<Tournament>>.Succeed(tournaments);
+    }
+
+    public async Task<McResult<IEnumerable<User>>> GetAllUserAsync()
+    {
+        var query = _context.Users
+            .Include(m => m.Municipality);
+
+        var users = await query.ToListAsync();
+        return McResult<IEnumerable<User>>.Succeed(users);
+    }
 }

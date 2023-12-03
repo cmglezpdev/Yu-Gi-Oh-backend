@@ -18,13 +18,20 @@ public class UserController : ControllerBase
         _service = userService;
         _mapper = mapper;
     }
+
+    [HttpGet]
+    public async Task<ActionResult> GetAllUser()
+    {
+        var users = await _service.GetAllUserAsync();
+        if(users.IsFailure) return BadRequest(users);
+        return Ok(users);
+    }
     [HttpGet("decks/{id:Guid}")]
     public async Task<ActionResult> GetDeckByUser(Guid id)
     {
         var decks = await _service.GetDecksByUserAsync(id);
-        return Ok(McResult<IEnumerable<DeckOutputDto>>.Succeed(
-        _mapper.Map<IEnumerable<DeckOutputDto>>(decks))
-        );
+        if(decks.IsFailure) return BadRequest(decks);
+        return Ok((decks));
     }
 
     [HttpGet("tournaments/{id:Guid}")]

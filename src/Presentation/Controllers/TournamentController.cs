@@ -46,6 +46,14 @@ public class TournamentController : ControllerBase
         if(response.IsFailure) return BadRequest(response);
         return Ok(response);
     }
+
+    [HttpGet("participants/{id:Guid}")]
+    public async Task<ActionResult> GetManyParticipantsInTorunament(Guid id)
+    {
+        var response = await _tournamentsService.GetManyParticipantsInTorunament(id);
+        if(response.IsFailure) return BadRequest(response);
+        return Ok(response);
+    }
     
     [HttpPost]
     public async Task<ActionResult> CreateTournament([FromBody] TournamentInputDto input)

@@ -3,6 +3,6 @@ namespace backend.Common.Enums;
 public enum RolesType
 {
     Admin, // administrator
-    User, // normal user
+    Player, // player
     Creator, // creator of tournament
 }

@@ -1,4 +1,5 @@
 using backend.Application.Repositories;
+using backend.Application.Services;
 using backend.Common.Enums;
 using backend.Infrastructure.Common;
 using backend.Infrastructure.Entities;
@@ -10,10 +11,12 @@ namespace backend.Infrastructure.Repositories;
 public class UserRepository : IUserRepository
 {
     private readonly AppDbContext _context;
+    private readonly RoleService _roleService;
 
-    public UserRepository(AppDbContext context)
+    public UserRepository(AppDbContext context, RoleService roleService)
     {
         _context = context;
+        _roleService = roleService;
     }
     
     public async Task<McResult<User>> GetUserByIdAsync(Guid id)
@@ -72,6 +75,9 @@ public class UserRepository : IUserRepository
 
     public async Task<McResult<User>> CreateUserAsync(UserInputDto user)
     {
+        var role = await _roleService.GetRoleByNameAsync(RolesType.Player.ToString());
+        if (role.IsFailure) return McResult<User>.Failure(role.ErrorMessage, role.ErrorCode);
+        
         try
         {
             await _context.Users.AddAsync(new User()
@@ -81,12 +87,14 @@ public class UserRepository : IUserRepository
                 UserName = user.UserName,
                 Password = user.Password,
                 Name = user.Name,
-                MunicipalityId = user.MunicipalityId
+                MunicipalityId = user.MunicipalityId,
+                Roles = new List<RoleEntity>(){ role.Result }
             });
             await _context.SaveChangesAsync();
             var userPersistent = await _context.Users
                 .Include(u => u.Municipality)
                 .Include(u => u.Roles)
+                .ThenInclude(u => u.Claims)
                 .FirstAsync(u => u.Id == user.Id);
             return McResult<User>.Succeed(userPersistent);
         }

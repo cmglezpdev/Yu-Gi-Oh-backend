@@ -35,7 +35,19 @@ public class RoleService
             ? McResult<RoleEntity>.Failure("Role not found") 
             : McResult<RoleEntity>.Succeed(role);
     }
-
+    
+    public async Task<McResult<RoleEntity>> GetRoleByNameAsync(string name)
+    {
+        var role = await _context.Roles
+            .Include(r => r.Claims)
+            .Where(r => r.Name == name)
+            .FirstOrDefaultAsync();
+        
+        return role is null 
+            ? McResult<RoleEntity>.Failure("Role not found") 
+            : McResult<RoleEntity>.Succeed(role);
+    }
+    
     public async Task<McResult<string>> UpdateRolePermissionsAsync(Guid roleId, UpdateRolePermissionDto dto)
     {
         var roleResponse = await GetRoleByIdAsync(roleId);
@@ -66,4 +78,5 @@ public class RoleService
         await _context.SaveChangesAsync();
         return McResult<string>.Succeed("Role permissions updated");
     }
+
 }

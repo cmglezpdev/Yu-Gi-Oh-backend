@@ -65,7 +65,7 @@ public class AuthController : ControllerBase
               UserName = userPersistent.Result.UserName,
               Name = userPersistent.Result.Name,
               Municipality = _mapper.Map<MunicipalityOutputDto>(userPersistent.Result.Municipality),
-              Token = _jwtProvider.Generate(userPersistent.Result)
+              Token = await _jwtProvider.Generate(userPersistent.Result)
           }));
     }
     
@@ -90,7 +90,7 @@ public class AuthController : ControllerBase
               UserName = user.Result.UserName,
               Name = user.Result.Name,
               Municipality = _mapper.Map<MunicipalityOutputDto>(user.Result.Municipality),
-              Token = _jwtProvider.Generate(user.Result)
+              Token = await _jwtProvider.Generate(user.Result)
           }));
     }
 }

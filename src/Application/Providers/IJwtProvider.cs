@@ -4,5 +4,5 @@ namespace backend.Application.Providers;
 
 public interface IJwtProvider
 {
-    public string Generate(User user);
+    public Task<string> Generate(User user);
 }

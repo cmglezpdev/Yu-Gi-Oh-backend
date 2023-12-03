@@ -50,4 +50,20 @@ public class UserController : ControllerBase
         if(tournaments.IsFailure) return BadRequest(tournaments);
         return Ok(tournaments);
     }
+
+    [HttpGet("wins/{id:Guid}")]
+    public async Task<ActionResult> GetWinsByUser(Guid id)
+    {
+        var wins = await _service.GetWinsByUserAsync(id);
+        if(wins.IsFailure) return BadRequest(wins);
+        return Ok(wins);
+    }
+
+    [HttpGet("loses/{id:Guid}")]
+    public async Task<ActionResult> GetLosesByUser(Guid id)
+    {
+        var loses = await _service.GetLosesByUserAsync(id);
+        if(loses.IsFailure) return BadRequest(loses);
+        return Ok(loses);
+    }
 }

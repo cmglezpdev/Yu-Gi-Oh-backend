@@ -36,4 +36,14 @@ public class UserService
     {
         return await userRepository.GetUserByIdAsync(id);
     }
+
+    public async Task<McResult<int>> GetWinsByUserAsync(Guid id)
+    {
+        return await userRepository.GetWinsByUserAsync(id);
+    }
+
+    public async Task<McResult<int>> GetLosesByUserAsync(Guid id)
+    {
+        return await userRepository.GetLosesByUserAsync(id);
+    }
 }

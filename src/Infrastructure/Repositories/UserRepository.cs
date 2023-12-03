@@ -128,4 +128,22 @@ public class UserRepository : IUserRepository
         var users = await query.ToListAsync();
         return McResult<IEnumerable<User>>.Succeed(users);
     }
+
+    public async Task<McResult<int>> GetWinsByUserAsync(Guid id)
+    {
+        var query = _context.Duels
+            .Where(w => w.PlayerWinnerId == id)
+            .Count();
+
+        return McResult<int>.Succeed(query);
+    }
+
+    public async Task<McResult<int>> GetLosesByUserAsync(Guid id)
+    {
+        var query = _context.Duels
+            .Where(w => (w.PlayerAId == id || w.PlayerBId == id) && (w.PlayerWinnerId != id))
+            .Count();
+
+        return McResult<int>.Succeed(query);
+    }
 }

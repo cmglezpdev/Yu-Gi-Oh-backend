@@ -14,5 +14,7 @@ public interface IUserRepository
     public Task<McResult<User>> CreateUserAsync(UserInputDto user);
     public Task<McResult<User>> UpdateUserAsync(UserUpdateDto user);
     public Task<McResult<IEnumerable<Deck>>> GetDecksByUserAsync(Guid id);
-    public Task<McResult<IEnumerable<Tournament>>> GetTournamentsByUserAsync(Guid id);    
+    public Task<McResult<IEnumerable<Tournament>>> GetTournamentsByUserAsync(Guid id);
+    public Task<McResult<int>> GetWinsByUserAsync(Guid id);
+    public Task<McResult<int>> GetLosesByUserAsync(Guid id);
 }

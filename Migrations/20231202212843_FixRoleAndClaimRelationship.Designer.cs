@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using backend.Infrastructure;
@@ -11,9 +12,11 @@ using backend.Infrastructure;
 namespace backend.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20231202212843_FixRoleAndClaimRelationship")]
+    partial class FixRoleAndClaimRelationship
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -35,21 +38,6 @@ namespace backend.Migrations
                     b.HasIndex("RolesId");
 
                     b.ToTable("ClaimsEntityRoleEntity");
-                });
-
-            modelBuilder.Entity("RoleEntityUser", b =>
-                {
-                    b.Property<Guid>("RolesId")
-                        .HasColumnType("uuid");
-
-                    b.Property<Guid>("UsersId")
-                        .HasColumnType("uuid");
-
-                    b.HasKey("RolesId", "UsersId");
-
-                    b.HasIndex("UsersId");
-
-                    b.ToTable("RoleEntityUser");
                 });
 
             modelBuilder.Entity("backend.Infrastructure.Entities.Archetype", b =>
@@ -376,10 +364,15 @@ namespace backend.Migrations
                         .HasColumnType("timestamp with time zone")
                         .HasDefaultValueSql("NOW()");
 
+                    b.Property<Guid?>("UserId")
+                        .HasColumnType("uuid");
+
                     b.HasKey("Id");
 
                     b.HasIndex("Name")
                         .IsUnique();
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("Roles");
                 });
@@ -583,21 +576,6 @@ namespace backend.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("RoleEntityUser", b =>
-                {
-                    b.HasOne("backend.Infrastructure.Entities.RoleEntity", null)
-                        .WithMany()
-                        .HasForeignKey("RolesId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("backend.Infrastructure.Entities.User", null)
-                        .WithMany()
-                        .HasForeignKey("UsersId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
             modelBuilder.Entity("backend.Infrastructure.Entities.Card", b =>
                 {
                     b.HasOne("backend.Infrastructure.Entities.Archetype", "Archetype")
@@ -677,6 +655,13 @@ namespace backend.Migrations
                         .IsRequired();
 
                     b.Navigation("Province");
+                });
+
+            modelBuilder.Entity("backend.Infrastructure.Entities.RoleEntity", b =>
+                {
+                    b.HasOne("backend.Infrastructure.Entities.User", null)
+                        .WithMany("Roles")
+                        .HasForeignKey("UserId");
                 });
 
             modelBuilder.Entity("backend.Infrastructure.Entities.SpellCard", b =>
@@ -759,6 +744,11 @@ namespace backend.Migrations
             modelBuilder.Entity("backend.Infrastructure.Entities.Province", b =>
                 {
                     b.Navigation("Municipalities");
+                });
+
+            modelBuilder.Entity("backend.Infrastructure.Entities.User", b =>
+                {
+                    b.Navigation("Roles");
                 });
 #pragma warning restore 612, 618
         }

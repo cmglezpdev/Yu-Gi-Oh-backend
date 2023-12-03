@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using backend.Infrastructure;
@@ -11,9 +12,11 @@ using backend.Infrastructure;
 namespace backend.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20231202210515_AddRolesAndClaims")]
+    partial class AddRolesAndClaims
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -21,36 +24,6 @@ namespace backend.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
-
-            modelBuilder.Entity("ClaimsEntityRoleEntity", b =>
-                {
-                    b.Property<Guid>("ClaimsId")
-                        .HasColumnType("uuid");
-
-                    b.Property<Guid>("RolesId")
-                        .HasColumnType("uuid");
-
-                    b.HasKey("ClaimsId", "RolesId");
-
-                    b.HasIndex("RolesId");
-
-                    b.ToTable("ClaimsEntityRoleEntity");
-                });
-
-            modelBuilder.Entity("RoleEntityUser", b =>
-                {
-                    b.Property<Guid>("RolesId")
-                        .HasColumnType("uuid");
-
-                    b.Property<Guid>("UsersId")
-                        .HasColumnType("uuid");
-
-                    b.HasKey("RolesId", "UsersId");
-
-                    b.HasIndex("UsersId");
-
-                    b.ToTable("RoleEntityUser");
-                });
 
             modelBuilder.Entity("backend.Infrastructure.Entities.Archetype", b =>
                 {
@@ -149,6 +122,9 @@ namespace backend.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
+                    b.Property<Guid?>("RoleEntityId")
+                        .HasColumnType("uuid");
+
                     b.Property<DateTime>("UpdatedAt")
                         .ValueGeneratedOnAddOrUpdate()
                         .HasColumnType("timestamp with time zone")
@@ -158,6 +134,8 @@ namespace backend.Migrations
 
                     b.HasIndex("Name")
                         .IsUnique();
+
+                    b.HasIndex("RoleEntityId");
 
                     b.ToTable("Claims");
                 });
@@ -376,10 +354,15 @@ namespace backend.Migrations
                         .HasColumnType("timestamp with time zone")
                         .HasDefaultValueSql("NOW()");
 
+                    b.Property<Guid?>("UserId")
+                        .HasColumnType("uuid");
+
                     b.HasKey("Id");
 
                     b.HasIndex("Name")
                         .IsUnique();
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("Roles");
                 });
@@ -568,36 +551,6 @@ namespace backend.Migrations
                     b.ToTable("users");
                 });
 
-            modelBuilder.Entity("ClaimsEntityRoleEntity", b =>
-                {
-                    b.HasOne("backend.Infrastructure.Entities.ClaimsEntity", null)
-                        .WithMany()
-                        .HasForeignKey("ClaimsId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("backend.Infrastructure.Entities.RoleEntity", null)
-                        .WithMany()
-                        .HasForeignKey("RolesId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("RoleEntityUser", b =>
-                {
-                    b.HasOne("backend.Infrastructure.Entities.RoleEntity", null)
-                        .WithMany()
-                        .HasForeignKey("RolesId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("backend.Infrastructure.Entities.User", null)
-                        .WithMany()
-                        .HasForeignKey("UsersId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
             modelBuilder.Entity("backend.Infrastructure.Entities.Card", b =>
                 {
                     b.HasOne("backend.Infrastructure.Entities.Archetype", "Archetype")
@@ -605,6 +558,13 @@ namespace backend.Migrations
                         .HasForeignKey("ArchetypeId");
 
                     b.Navigation("Archetype");
+                });
+
+            modelBuilder.Entity("backend.Infrastructure.Entities.ClaimsEntity", b =>
+                {
+                    b.HasOne("backend.Infrastructure.Entities.RoleEntity", null)
+                        .WithMany("Claims")
+                        .HasForeignKey("RoleEntityId");
                 });
 
             modelBuilder.Entity("backend.Infrastructure.Entities.Deck", b =>
@@ -677,6 +637,13 @@ namespace backend.Migrations
                         .IsRequired();
 
                     b.Navigation("Province");
+                });
+
+            modelBuilder.Entity("backend.Infrastructure.Entities.RoleEntity", b =>
+                {
+                    b.HasOne("backend.Infrastructure.Entities.User", null)
+                        .WithMany("Roles")
+                        .HasForeignKey("UserId");
                 });
 
             modelBuilder.Entity("backend.Infrastructure.Entities.SpellCard", b =>
@@ -759,6 +726,16 @@ namespace backend.Migrations
             modelBuilder.Entity("backend.Infrastructure.Entities.Province", b =>
                 {
                     b.Navigation("Municipalities");
+                });
+
+            modelBuilder.Entity("backend.Infrastructure.Entities.RoleEntity", b =>
+                {
+                    b.Navigation("Claims");
+                });
+
+            modelBuilder.Entity("backend.Infrastructure.Entities.User", b =>
+                {
+                    b.Navigation("Roles");
                 });
 #pragma warning restore 612, 618
         }

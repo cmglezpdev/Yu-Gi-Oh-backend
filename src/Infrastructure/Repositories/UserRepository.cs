@@ -2,7 +2,6 @@ using backend.Application.Repositories;
 using backend.Common.Enums;
 using backend.Infrastructure.Common;
 using backend.Infrastructure.Entities;
-using backend.Presentation.DTOs;
 using backend.Presentation.DTOs.User;
 using Microsoft.EntityFrameworkCore;
 
@@ -21,7 +20,10 @@ public class UserRepository : IUserRepository
     {
         try
         {
-            var user = await _context.Users.FirstOrDefaultAsync(u => u.Id == id);
+            var user = await _context.Users
+                .Include(u => u.Municipality)
+                .Include(u => u.Roles)
+                .FirstOrDefaultAsync(u => u.Id == id);
             return user is not null 
                 ? McResult<User>.Succeed(user) 
                 : McResult<User>.Failure($"User with id {id} not found", ErrorCodes.NotFound);
@@ -36,7 +38,10 @@ public class UserRepository : IUserRepository
     {
         try
         {
-            var user = await _context.Users.FirstOrDefaultAsync(u => u.Email == email);
+            var user = await _context.Users
+                .Include(u => u.Municipality)
+                .Include(u => u.Roles)
+                .FirstOrDefaultAsync(u => u.Email == email);
             return user is not null 
                 ? McResult<User>.Succeed(user) 
                 : McResult<User>.Failure($"User with email {email} not found", ErrorCodes.NotFound);
@@ -51,7 +56,10 @@ public class UserRepository : IUserRepository
     {
         try
         {
-            var user = await _context.Users.FirstOrDefaultAsync(u => u.UserName == userName);
+            var user = await _context.Users
+                .Include(u => u.Municipality)
+                .Include(u => u.Roles)
+                .FirstOrDefaultAsync(u => u.UserName == userName);
             return user is not null 
                 ? McResult<User>.Succeed(user) 
                 : McResult<User>.Failure($"User with username {userName} not found", ErrorCodes.NotFound);
@@ -76,7 +84,10 @@ public class UserRepository : IUserRepository
                 MunicipalityId = user.MunicipalityId
             });
             await _context.SaveChangesAsync();
-            var userPersistent = await _context.Users.FirstAsync(u => u.Id == user.Id);
+            var userPersistent = await _context.Users
+                .Include(u => u.Municipality)
+                .Include(u => u.Roles)
+                .FirstAsync(u => u.Id == user.Id);
             return McResult<User>.Succeed(userPersistent);
         }
         catch (Exception e)
@@ -93,7 +104,10 @@ public class UserRepository : IUserRepository
         //     Name = user.Name,
         // });
         // await _context.SaveChangesAsync();
-        var userPersistent = await _context.Users.FirstAsync(u => u.Id == user.Id);
+        var userPersistent = await _context.Users
+            .Include(u => u.Municipality)
+            .Include(u => u.Roles)
+            .FirstAsync(u => u.Id == user.Id);
         return McResult<User>.Succeed(userPersistent);
     }
 }

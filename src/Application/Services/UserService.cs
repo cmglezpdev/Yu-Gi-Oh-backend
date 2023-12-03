@@ -1,9 +1,10 @@
 using AutoMapper;
 using backend.Application.Repositories;
+using backend.Common.Enums;
 using backend.Infrastructure;
 using backend.Infrastructure.Common;
 using backend.Infrastructure.Entities;
-using backend.Presentation.DTOs.Deck;
+using backend.Presentation.DTOs.User;
 using Microsoft.EntityFrameworkCore;
 
 namespace backend.Application.Services;
@@ -11,11 +12,13 @@ public class UserService
 {
     private readonly AppDbContext _context;
     private readonly IDeckRepository _deckRepository;
+    private readonly RoleService _roleService;
 
-    public UserService(AppDbContext context,IDeckRepository deckRepository)
+    public UserService(AppDbContext context,IDeckRepository deckRepository, RoleService roleService)
     {
         _context = context;
         _deckRepository = deckRepository;
+        _roleService = roleService;
     }
     public async Task<IEnumerable<Deck>> GetDecksByUserAsync(Guid id)
     {
@@ -79,5 +82,37 @@ public class UserService
 
         permissions = permissions.Distinct().ToList();
         return McResult<List<string>>.Succeed(permissions);
+    }
+
+    public async Task<McResult<string>> UpdateUserRole(Guid userId, UpdateUserRoleDto dto)
+    {
+        var userResponse = await GetUserByIdAsync(userId);
+        if (userResponse.IsFailure)
+        {
+            return McResult<string>.Failure(userResponse.ErrorMessage, userResponse.ErrorCode);
+        };
+        var roleResponse = await _roleService.GetRoleByIdAsync(dto.RoleId);
+        if (roleResponse.IsFailure)
+        {
+            return McResult<string>.Failure(roleResponse.ErrorMessage, roleResponse.ErrorCode);
+        }
+        
+        var user = userResponse.Result;
+        var role = roleResponse.Result;
+
+        var userAlreadyHasRole = user.Roles.Any(r => r.Id == role.Id);
+        if (dto.ToAdd)
+        {
+            if(userAlreadyHasRole) return McResult<string>.Failure("User already has this role", ErrorCodes.InvalidInput);
+            user.Roles.Add(role);
+        }
+        else
+        {
+            if(!userAlreadyHasRole) return McResult<string>.Failure("User does not have this role", ErrorCodes.InvalidInput);
+            user.Roles.Remove(role);
+        }
+
+        await _context.SaveChangesAsync();
+        return McResult<string>.Succeed("Roles of user updated successfully");
     }
 }

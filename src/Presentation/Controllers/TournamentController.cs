@@ -1,4 +1,6 @@
 using backend.Application.Services;
+using backend.Common.Authorization;
+using backend.Infrastructure.Authentication;
 using backend.Infrastructure.Entities;
 using backend.Presentation.DTOs.Tournament;
 using Microsoft.AspNetCore.Mvc;
@@ -23,6 +25,7 @@ public class TournamentController : ControllerBase
     }
     
     [HttpGet]
+    [HasPermission(Permission.ReadTournament)]
     public async Task<ActionResult> FindAllTournaments()
     {
         var response = await _tournamentsService.FindAllTournaments();
@@ -32,6 +35,7 @@ public class TournamentController : ControllerBase
     
     
     [HttpGet("{id:Guid}/winner")]
+    [HasPermission(Permission.ReadTournament)]
     public async Task<ActionResult> FindTournamentWinner(Guid id)
     {   
         var response = await _tournamentsService.FindTournamentWinner(id);
@@ -40,6 +44,7 @@ public class TournamentController : ControllerBase
     }
     
     [HttpGet("{id:Guid}")]
+    [HasPermission(Permission.ReadTournament)]
     public async Task<ActionResult> FindTournamentById(Guid id)
     {
         var response = await _tournamentsService.FindTournamentById(id);
@@ -48,6 +53,7 @@ public class TournamentController : ControllerBase
     }
     
     [HttpPost]
+    [HasPermission(Permission.WriteTournament)]
     public async Task<ActionResult> CreateTournament([FromBody] TournamentInputDto input)
     {
         var response = await _tournamentsService.CreateTournament(input);

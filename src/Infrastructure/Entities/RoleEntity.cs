@@ -19,6 +19,7 @@ public sealed class RoleEntity: PlatformModel
         Name = name;
         Description = description;
         Claims = new List<ClaimsEntity>();
+        Users = new List<User>();
     }
 
     private bool HasClaim(ClaimsEntity claim)

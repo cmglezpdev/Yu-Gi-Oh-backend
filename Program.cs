@@ -81,7 +81,9 @@ builder.Services.AddScoped<TournamentsService>();
 builder.Services.AddScoped<InscriptionService>();
 builder.Services.AddScoped<DuelsService>();
 builder.Services.AddScoped<UserService>();
-
+builder.Services.AddScoped<RoleService>();
+builder.Services.AddScoped<ClaimService>();
+ 
 // repositories
 builder.Services.AddScoped<DbContext,AppDbContext>();
 builder.Services.AddScoped<IProvinceRepository, ProvinceRepository>();

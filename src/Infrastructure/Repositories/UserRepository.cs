@@ -142,7 +142,8 @@ public class UserRepository : IUserRepository
     public async Task<McResult<IEnumerable<User>>> GetAllUserAsync()
     {
         var query = _context.Users
-            .Include(m => m.Municipality);
+            .Include(m => m.Municipality)
+            .ThenInclude(m => m.Province);
 
         var users = await query.ToListAsync();
         return McResult<IEnumerable<User>>.Succeed(users);

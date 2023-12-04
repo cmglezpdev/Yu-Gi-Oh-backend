@@ -52,6 +52,7 @@ public class UserService
     {
         var user = await _context.Users
             .Include(u => u.Municipality)
+            .ThenInclude(m => m.Province)
             .Include(u => u.Roles)
             .ThenInclude(r => r.Claims)
             .Where(u => u.Id == id)
@@ -65,6 +66,7 @@ public class UserService
     {
         var users = await _context.Users
             .Include(u => u.Municipality)
+            .ThenInclude(m => m.Province)
             .Include(u => u.Roles)
             .ThenInclude(r => r.Claims)
             .ToListAsync();

@@ -51,6 +51,7 @@ builder.Services.AddScoped<TournamentsService>();
 builder.Services.AddScoped<InscriptionService>();
 builder.Services.AddScoped<DuelsService>();
 builder.Services.AddScoped<UserService>();
+builder.Services.AddScoped<StatService>();
 
 // repositories
 builder.Services.AddScoped<DbContext,AppDbContext>();
@@ -60,6 +61,7 @@ builder.Services.AddScoped<ICardRepository,CardRepository>();
 builder.Services.AddScoped<IArchetypeRepository, ArchetypeRepository>();
 builder.Services.AddScoped<IDeckRepository, DeckRepository>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
+builder.Services.AddScoped<IStatRepository, StatRepository>();
 
 var app = builder.Build();
 

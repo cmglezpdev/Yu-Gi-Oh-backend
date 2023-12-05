@@ -1,3 +1,4 @@
+using backend.Infrastructure.Entities;
 using backend.Presentation.DTOs.Municipality;
 
 #pragma warning disable CS8618
@@ -11,5 +12,6 @@ public class UserOutputDto
     public string Name { get; set; }
     public MunicipalityOutputDto Municipality { get; set; }
     public string Token { get; set; }
+    public List<string> Roles { get; set; }
     
 }

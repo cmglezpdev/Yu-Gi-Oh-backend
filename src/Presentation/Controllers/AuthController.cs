@@ -56,7 +56,11 @@ public class AuthController : ControllerBase
             Name = userDomain.Name,
             MunicipalityId = userDomain.Municipality.Id,
         });
-        
+        var roles = new List<string>();
+        foreach(var rol in userPersistent.Result.Roles)
+        {
+            roles.Add(rol.Name);
+        }
         return Ok(McResult<UserOutputDto>.Succeed(new UserOutputDto()
           {
               Id = userPersistent.Result.Id,
@@ -64,7 +68,8 @@ public class AuthController : ControllerBase
               UserName = userPersistent.Result.UserName,
               Name = userPersistent.Result.Name,
               Municipality = _mapper.Map<MunicipalityOutputDto>(userPersistent.Result.Municipality),
-              Token = await _jwtProvider.Generate(userPersistent.Result)
+              Token = await _jwtProvider.Generate(userPersistent.Result),
+              Roles = roles
           }));
     }
     
@@ -82,6 +87,11 @@ public class AuthController : ControllerBase
         if (BCrypt.Net.BCrypt.Verify(input.Password, user.Result.Password) == false) 
             return BadRequest(McResult<string>.Failure("Invalid password", ErrorCodes.InvalidInput));
 
+        var roles = new List<string>();
+        foreach(var rol in user.Result.Roles)
+        {
+            roles.Add(rol.Name);
+        }
         return Ok(McResult<UserOutputDto>.Succeed(new UserOutputDto()
           {
               Id = user.Result.Id,
@@ -89,7 +99,8 @@ public class AuthController : ControllerBase
               UserName = user.Result.UserName,
               Name = user.Result.Name,
               Municipality = _mapper.Map<MunicipalityOutputDto>(user.Result.Municipality),
-              Token = await _jwtProvider.Generate(user.Result)
+              Token = await _jwtProvider.Generate(user.Result),
+              Roles = roles
           }));
     }
 }

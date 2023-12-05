@@ -21,6 +21,8 @@ public class AppDbContext : DbContext
   public DbSet<Deck> Decks { get; set; }
   public DbSet<Tournament> Tournaments { get; set; }
   public DbSet<DuelsEntity> Duels { get; set; }
+  public DbSet<ClaimsEntity> Claims { get; set; }
+  public DbSet<RoleEntity> Roles { get; set; }
   
   public DbSet<TournamentInscriptions> TournamentInscriptions { get; set; }
 

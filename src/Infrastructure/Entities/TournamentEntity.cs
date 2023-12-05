@@ -13,7 +13,8 @@ public class Tournament: PlatformModel
     public DateTime EndDate { get; set; }
     public Guid MunicipalityId { get; set; }
     public Municipality Municipality { get; set; }
-
     public Guid? UserId { get; set; }
     public User? User { get; set; }
+    public int NumberOfPlayers { get; set; } = 0;
+    public int NumberOfInscriptions { get; set; } = 0;
 }

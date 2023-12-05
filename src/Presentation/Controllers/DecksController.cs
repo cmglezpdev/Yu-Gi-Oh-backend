@@ -1,5 +1,7 @@
 using AutoMapper;
 using backend.Application.Services;
+using backend.Common.Authorization;
+using backend.Infrastructure.Authentication;
 using backend.Infrastructure.Common;
 using backend.Infrastructure.Entities;
 using backend.Presentation.DTOs.Deck;
@@ -22,6 +24,7 @@ public class DecksController : ControllerBase
   }
   
   [HttpGet("{id:Guid}")]
+  [HasPermission(Permission.ReadDeck)]
   public async Task<ActionResult> GetDeckByIdAsync(Guid id)
   {
     var deck = await _service.GetDeckByIdAsync(id);
@@ -29,6 +32,7 @@ public class DecksController : ControllerBase
   }
 
   [HttpPost]
+  [HasPermission(Permission.WriteDeck)]
   public async Task<ActionResult<Deck>> CreateDeckAsync(DeckInputDto dto)
   {
     var deck = await _service.CreateDeckAsync(dto);
@@ -36,6 +40,7 @@ public class DecksController : ControllerBase
   }
 
   [HttpPut("{id:Guid}")]
+  [HasPermission(Permission.WriteDeck)]
   public async Task<ActionResult<Deck>> UpdateDeckAsync(Guid id, DeckInputDto dto)
   {
       var deck = await _service.UpdateDeckAsync(id, dto);
@@ -43,6 +48,7 @@ public class DecksController : ControllerBase
   }
 
   [HttpDelete("{id:Guid}")]
+  [HasPermission(Permission.WriteDeck)]
   public async Task<ActionResult<Deck>> DeleteDeck(Guid id)
   {
     var deck = await _service.DeleteDeckById(id);

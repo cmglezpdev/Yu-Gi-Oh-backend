@@ -1,0 +1,46 @@
+[
+  {
+    "Name": "Admin",
+    "Claims": [
+      "ReadArchetype",
+      "ReadCard",
+      "ReadDeck",
+      "WriteDeck",
+      "ReadDuel",
+      "WriteDuel",
+      "ReadInscription",
+      "WriteInscription",
+      "RejectOrAcceptInscription",
+      "ReadTournament",
+      "WriteTournament",
+      "ReadUser",
+      "WriteUser",
+      "ReadRole",
+      "WriteRole",
+      "ReadPermission"
+    ]
+  },
+  {
+    "Name": "Player",
+    "Claims": [
+      "ReadArchetype",
+      "ReadCard",
+      "ReadDeck",
+      "WriteDeck",
+      "ReadDuel",
+      "ReadInscription",
+      "WriteInscription",
+      "ReadTournament",
+      "ReadUser",
+      "WriteUser"
+    ]
+  },
+  {
+    "Name": "Creator",
+    "Claims": [
+      "RejectOrAcceptInscription",
+      "ReadTournament",
+      "WriteTournament"
+    ]
+  }
+]

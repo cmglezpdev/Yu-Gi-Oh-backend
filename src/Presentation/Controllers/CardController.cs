@@ -3,6 +3,8 @@ using Microsoft.AspNetCore.Mvc;
 
 using backend.Infrastructure.Entities;
 using backend.Application.Services;
+using backend.Common.Authorization;
+using backend.Infrastructure.Authentication;
 using backend.Presentation.DTOs;
 using backend.Presentation.DTOs.Card;
 
@@ -19,7 +21,9 @@ public class CardController : ControllerBase
         _service = service;
         _mapper = mapper;
     }
+    
     [HttpGet("{id:Guid}")]
+    [HasPermission(Permission.ReadCard)]
     public async Task<ActionResult<Card>> GetByID(Guid Id)
     {
         var card = await _service.GetCardByIdAsync(Id);

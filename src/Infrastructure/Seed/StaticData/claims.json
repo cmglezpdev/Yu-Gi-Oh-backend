@@ -1,0 +1,18 @@
+[
+  "ReadArchetype",
+  "ReadCard",
+  "ReadDeck",
+  "WriteDeck",
+  "ReadDuel",
+  "WriteDuel",
+  "ReadInscription",
+  "WriteInscription",
+  "RejectOrAcceptInscription",
+  "ReadTournament",
+  "WriteTournament",
+  "ReadUser",
+  "WriteUser",
+  "ReadRole",
+  "WriteRole",
+  "ReadPermission"
+]

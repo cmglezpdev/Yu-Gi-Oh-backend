@@ -14,6 +14,6 @@
     }
   },
   "ConnectionStrings": {
-    "yu-gi-oh-postgres-database": "User Id=postgres; Password=YD2LFI3ez7IHJRbK; Host=db.ewlzulqmylmfkgyybabd.supabase.co; Port=5432; Database=postgres"
+    "yu-gi-oh-postgres-database": "Host=localhost; Port=5487; Database=yu-gi-oh; Username=postgres; Password=postgres;"
   }
 }

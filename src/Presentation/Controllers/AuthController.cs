@@ -1,14 +1,13 @@
 using AutoMapper;
 using backend.Application.Providers;
 using backend.Application.Repositories;
+using backend.Application.Services;
 using backend.Common.Enums;
 using backend.Domain;
 using backend.Infrastructure.Common;
-using backend.Infrastructure.Entities;
 using backend.Presentation.DTOs.Auth;
 using backend.Presentation.DTOs.Municipality;
 using backend.Presentation.DTOs.User;
-using backend.Presentation.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
 namespace backend.Presentation.Controllers;
@@ -46,7 +45,7 @@ public class AuthController : ControllerBase
         var municipality = await _municipalityRepository.GetMunicipalityByIdAsync(input.MunicipalityId);
         if(municipality is null) 
             return BadRequest(McResult<string>.Failure($"Municipality with id {input.MunicipalityId} not found", ErrorCodes.NotFound));
-
+        
         var userDomain = new UserDomain(input.Email, input.UserName, input.Password, input.Name, new MunicipalityDomain(municipality.Name, municipality.Id));
         var userPersistent = await _userRepository.CreateUserAsync(new UserInputDto()
         {
@@ -55,7 +54,7 @@ public class AuthController : ControllerBase
             UserName = userDomain.UserName,
             Password = userDomain.Password,
             Name = userDomain.Name,
-            MunicipalityId = userDomain.Municipality.Id
+            MunicipalityId = userDomain.Municipality.Id,
         });
         
         return Ok(McResult<UserOutputDto>.Succeed(new UserOutputDto()
@@ -65,7 +64,7 @@ public class AuthController : ControllerBase
               UserName = userPersistent.Result.UserName,
               Name = userPersistent.Result.Name,
               Municipality = _mapper.Map<MunicipalityOutputDto>(userPersistent.Result.Municipality),
-              Token = _jwtProvider.Generate(userPersistent.Result)
+              Token = await _jwtProvider.Generate(userPersistent.Result)
           }));
     }
     
@@ -90,7 +89,8 @@ public class AuthController : ControllerBase
               UserName = user.Result.UserName,
               Name = user.Result.Name,
               Municipality = _mapper.Map<MunicipalityOutputDto>(user.Result.Municipality),
-              Token = _jwtProvider.Generate(user.Result)
+              Token = await _jwtProvider.Generate(user.Result)
           }));
     }
 }
+

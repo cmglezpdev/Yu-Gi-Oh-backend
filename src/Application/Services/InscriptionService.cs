@@ -75,6 +75,8 @@ public class InscriptionService
             DeckId = input.DeckId,
             TournamentId = input.TournamentId,
         });
+
+        tournament.NumberOfInscriptions++;
         
         await _context.SaveChangesAsync();
 
@@ -101,6 +103,8 @@ public class InscriptionService
         if(DateTime.UtcNow >= tournament.StartDate) return McResult<string>.Failure("The tournament has already started", ErrorCodes.OperationError);
         
         inscription.Status = InscriptionStatus.APPROVED;
+        tournament.NumberOfPlayers++;
+        
         await _context.SaveChangesAsync();
         return McResult<string>.Succeed("The inscription was successfully accepted");
     }

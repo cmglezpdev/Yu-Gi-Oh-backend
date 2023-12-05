@@ -23,6 +23,6 @@ public class User : PlatformModel
 
   [ForeignKey("MunicipalityId")]
   public Municipality Municipality { get; set; }
-  
   public required Guid MunicipalityId { get; set; }
+  public List<RoleEntity> Roles { get; set; }
 }

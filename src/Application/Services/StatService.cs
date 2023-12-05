@@ -97,7 +97,7 @@ public class StatService
     public async Task<McResult<Archetype>> GetMostPopularArchetypeByTournamentAndRound(Guid tournamentId, int round)
     {
         var query = await _context.Duels
-            .Where(d => d.TournamentId == tournamentId)
+            .Where(d => d.TournamentId == tournamentId && d.Round == round)
             .Join(_context.TournamentInscriptions,
                     a => a.Tournament,
                     b => b.Tournament,

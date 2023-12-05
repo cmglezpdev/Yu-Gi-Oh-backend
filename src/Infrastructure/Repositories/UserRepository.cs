@@ -122,6 +122,7 @@ public class UserRepository : IUserRepository
     public async Task<McResult<IEnumerable<Deck>>> GetDecksByUserAsync(Guid id)
     {
         IQueryable<Deck> query = _context.Set<Deck>()
+            .Include(a => a.Archetype)
             .Where(d => d.UserId == id);
         
         var decks = await query.ToListAsync();

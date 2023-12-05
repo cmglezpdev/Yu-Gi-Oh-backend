@@ -31,6 +31,7 @@ public class DuelsService
             .Include(d => d.PlayerA)
             .Include(d => d.PlayerB)
             .Include(d => d.PlayerWinner)
+            .OrderByDescending(d => d.Round)
             .AsQueryable();
 
         if (filter.TournamentId is not null) query = query.Where(d => d.TournamentId == filter.TournamentId);
@@ -42,6 +43,11 @@ public class DuelsService
     
     public async Task<McResult<string>> SetInitialDuels(Guid tournamentId)
     {
+        var query = await _context.Duels
+            .Where(t => t.TournamentId == tournamentId)
+            .ToListAsync();
+        if(query.Count() != 0 ) return McResult<string>.Failure("Duels was created");
+
         var playersResponse = await _inscriptionService.FindAllInscriptions(new InscriptionFilterDto()
         {
             TournamentId = tournamentId,

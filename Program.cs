@@ -81,6 +81,7 @@ builder.Services.AddScoped<TournamentsService>();
 builder.Services.AddScoped<InscriptionService>();
 builder.Services.AddScoped<DuelsService>();
 builder.Services.AddScoped<UserService>();
+builder.Services.AddScoped<StatService>();
 builder.Services.AddScoped<RoleService>();
 builder.Services.AddScoped<ClaimService>();
  

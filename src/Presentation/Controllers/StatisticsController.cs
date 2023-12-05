@@ -15,18 +15,18 @@ public class StatisticsController : ControllerBase
         _service = service;
     }
 
-    [HttpGet("decks")]
-    public async Task<ActionResult> GetUserWithMoreDecks()
+    [HttpGet("decks/{take:int}")]
+    public async Task<ActionResult> GetUserWithMoreDecks(int take)
     {
-        var request = await _service.GetUserWithMoreDecks();
+        var request = await _service.GetUserWithMoreDecks(take);
         if(request.IsFailure) return BadRequest(request);
         return Ok(request);
     }
 
-    [HttpGet("archetype")]
-    public async Task<ActionResult> GetMostPopularArchetype()
+    [HttpGet("archetype/popular/{take:int}")]
+    public async Task<ActionResult> GetMostPopularArchetype(int take)
     {
-        var request = await _service.GetMostPopularArchetype();
+        var request = await _service.GetMostPopularArchetype(take);
         if(request.IsFailure) return BadRequest(request);
         return Ok(request);
     }
@@ -47,10 +47,42 @@ public class StatisticsController : ControllerBase
         return Ok(request);
     }
 
-    [HttpGet("archetype/{count:int}")]
-    public async Task<ActionResult> GetArchetypeMoreUses(int count)
+    [HttpGet("archetype/{take:int}")]
+    public async Task<ActionResult> GetArchetypeMoreUses(int take)
     {
-        var request = await _service.GetArchetypeMoreUses(count);
+        var request = await _service.GetArchetypeMoreUses(take);
+        if(request.IsFailure) return BadRequest(request);
+        return Ok(request);
+    }
+
+    [HttpGet("archetype/{tournamentId:Guid}/{round:int}")]
+    public async Task<ActionResult> GetMostPopularArchetypeByTournamentAndRound(Guid tournamentId, int round)
+    {
+        var request = await _service.GetMostPopularArchetypeByTournamentAndRound(tournamentId, round);
+        if(request.IsFailure) return BadRequest(request);
+        return Ok(request);
+    }
+
+    [HttpGet("user/{startDate:DateTime}/{endDate:DateTime}/{take:int}")]
+    public async Task<ActionResult> GetUserWithMostWins(DateTime startDate, DateTime endDate, int take)
+    {  
+        var request = await _service.GetUserWithMostWins(DateTime.SpecifyKind(startDate, DateTimeKind.Utc), DateTime.SpecifyKind(endDate, DateTimeKind.Utc), take);
+        if(request.IsFailure) return BadRequest(request);
+        return Ok(request);
+    }
+
+    [HttpGet("archetype/winner/{startDate:DateTime}/{endDate:DateTime}")]
+    public async Task<ActionResult> GetManyArchetypeWinner(DateTime startDate, DateTime endDate)
+    {
+        var request = await _service.GetManyArchetypeWinner(DateTime.SpecifyKind(startDate, DateTimeKind.Utc), DateTime.SpecifyKind(endDate, DateTimeKind.Utc));
+        if(request.IsFailure) return BadRequest(request);
+        return Ok(request);
+    }
+
+    [HttpGet("municipality/{startDate:DateTime}/{endDate:DateTime}/")]
+    public async Task<ActionResult> GetMunicipalityWithMoreWinners(DateTime startDate, DateTime endDate)
+    {  
+        var request = await _service.GetMunicipalityWithMoreWinners(DateTime.SpecifyKind(startDate, DateTimeKind.Utc), DateTime.SpecifyKind(endDate, DateTimeKind.Utc));
         if(request.IsFailure) return BadRequest(request);
         return Ok(request);
     }

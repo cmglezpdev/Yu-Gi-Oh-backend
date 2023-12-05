@@ -61,7 +61,6 @@ builder.Services.AddScoped<ICardRepository,CardRepository>();
 builder.Services.AddScoped<IArchetypeRepository, ArchetypeRepository>();
 builder.Services.AddScoped<IDeckRepository, DeckRepository>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
-builder.Services.AddScoped<IStatRepository, StatRepository>();
 
 var app = builder.Build();
 

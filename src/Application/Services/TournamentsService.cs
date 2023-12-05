@@ -63,6 +63,11 @@ public class TournamentsService
         if(exitsTournament == false) return McResult<User>.Failure("The tournament not exits");
         
         // Get current round
+        var currentRoundIf = await _context.Duels
+            .Where(d => d.TournamentId == tournamentId)
+            .ToListAsync();
+        if(currentRoundIf.Count() == 0) return McResult<User>.Failure("The tournament not began");
+
         var currentRound = await _context.Duels
             .Where(d => d.TournamentId == tournamentId)
             .MaxAsync(d => d.Round);
